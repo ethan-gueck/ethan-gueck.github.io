@@ -1,0 +1,46 @@
+/* Design tokens: single source of truth for color, type, and spacing. */
+:root {
+  /* Brand */
+  --green-900: #072A20;
+  --green-800: #0B3D2E;   /* primary */
+  --green-700: #125A43;
+  --green-600: #1B6E53;
+  --sand-300:  #D8C3A5;   /* accent */
+  --sand-200:  #E6D7C2;
+  --sand-500:  #9C8261;   /* accent, dark enough for text on white */
+
+  /* Neutrals (cool, slightly green-tinted paper) */
+  --paper:     #FFFFFF;
+  --canvas:    #EEF1EF;
+  --ink:       #17211D;
+  --ink-soft:  #45524C;
+  --rule:      #CFD6D2;
+
+  --gradient-primary: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 45%, var(--green-700) 100%);
+
+  /* Type */
+  --font-serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans:  "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --fs-sm:   0.875rem;
+  --fs-base: 1.125rem;
+  --fs-md:   1.3125rem;
+  --fs-lg:   1.625rem;
+  --fs-xl:   clamp(2.5rem, 6vw, 4.25rem);
+
+  /* Space and shape */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --container: 1180px;
+  --tabbar-h: 3.35rem;   /* height of the sticky tab bar */
+  --measure: 70ch;
+
+  --shadow-paper: 0 1px 2px rgba(7, 42, 32, 0.06), 0 8px 24px rgba(7, 42, 32, 0.06);
+  --focus: 0 0 0 3px var(--sand-300), 0 0 0 5px var(--green-800);
+}
