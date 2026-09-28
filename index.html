@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ethan Gueck | Data Scientist</title>
+  <meta name="description" content="Ethan Gueck is a data scientist building operational and risk-based data pipelines, models, and dashboards for the telecom and utility industries.">
+  <meta name="author" content="Ethan Gueck">
+  <meta name="theme-color" content="#0B3D2E">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ethan Gueck | Data Scientist">
+  <meta property="og:description" content="Data pipelines, models, and dashboards for telecom and utility operations.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/profile/headshot.webp">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles: tokens -> base -> layout -> components -->
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components/header.css">
+  <link rel="stylesheet" href="assets/css/components/article.css">
+  <link rel="stylesheet" href="assets/css/components/gallery.css">
+  <link rel="stylesheet" href="assets/css/components/lightbox.css">
+  <link rel="stylesheet" href="assets/css/components/modal.css">
+  <link rel="stylesheet" href="assets/css/components/ampacity.css">
+  <link rel="stylesheet" href="assets/css/components/solver.css">
+  <link rel="stylesheet" href="assets/css/components/arcade.css">
+  <link rel="stylesheet" href="assets/css/components/flashcards.css">
+  <link rel="stylesheet" href="assets/css/components/cta.css">
+  <link rel="stylesheet" href="assets/css/components/footer.css">
+  <link rel="stylesheet" href="assets/css/components/contact-bar.css">
+
+  <!-- Scripts: plain (non-module) so the page also works when opened straight from disk -->
+  <script src="assets/js/data/site.js" defer></script>
+  <script src="assets/js/data/dashboards.js" defer></script>
+  <script src="assets/js/data/books.js" defer></script>
+  <script src="assets/js/data/flashcards.js" defer></script>
+  <script src="assets/js/modules/tabs.js" defer></script>
+  <script src="assets/js/modules/toc.js" defer></script>
+  <script src="assets/js/modules/gallery.js" defer></script>
+  <script src="assets/js/modules/lightbox.js" defer></script>
+  <script src="assets/js/modules/ieee738.js" defer></script>
+  <script src="assets/js/modules/cobyla.js" defer></script>
+  <script src="assets/js/modules/ampacity.js" defer></script>
+  <script src="assets/js/modules/convergence.js" defer></script>
+  <script src="assets/js/modules/arcade.js" defer></script>
+  <script src="assets/js/modules/contact.js" defer></script>
+  <script src="assets/js/modules/modal.js" defer></script>
+  <script src="assets/js/modules/booklist.js" defer></script>
+  <script src="assets/js/modules/gitgraph.js" defer></script>
+  <script src="assets/js/modules/flashcards.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ================= HEADER ================= -->
+  <header class="masthead">
+    <div class="masthead__bar container">
+      <span class="masthead__journal">Portfolio of Ethan Gueck</span>
+      <nav class="masthead__links" aria-label="Contact">
+        <a data-link="linkedin" href="#" rel="noopener">LinkedIn</a>
+        <a data-link="github" href="#" rel="noopener">GitHub</a>
+        <a data-link="email" href="#">Email</a>
+      </nav>
+    </div>
+
+    <div class="masthead__title container">
+      <div class="masthead__text">
+      <h1 class="masthead__name">Ethan Gueck</h1>
+      <p class="masthead__roles"><span class="masthead__role">Data Scientist<span class="masthead__sep" aria-hidden="true">|</span></span><span class="masthead__role">ML<span class="masthead__sep" aria-hidden="true">|</span></span><span class="masthead__role">AI<span class="masthead__sep" aria-hidden="true">|</span></span><span class="masthead__role">Optimization<span class="masthead__sep" aria-hidden="true">|</span></span><span class="masthead__role">Operations Research</span></p>
+      <p class="masthead__subtitle">Data science for critical infrastructure: ETL pipelines, models, advanced mathematics, machine learning, and dashboards for operations and finance.</p>
+      <p class="masthead__affiliation">Data Scientist, Data Society <span class="masthead__sep">|</span> Richmond, Virginia</p>
+      </div>
+      <figure class="masthead__portrait">
+        <img src="assets/img/profile/headshot.webp" alt="Portrait of Ethan Gueck" width="720" height="720">
+      </figure>
+    </div>
+
+  </header>
+
+  <!-- Sticky section tabs -->
+  <nav class="tabs" aria-label="Sections">
+  <div class="container">
+    <ul class="tabs__list" role="tablist">
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#summary" data-tab="summary" id="tab-summary" aria-controls="panel-summary">Summary</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#portfolio" data-tab="portfolio" id="tab-portfolio" aria-controls="panel-portfolio">Portfolio</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#fun" data-tab="fun" id="tab-fun" aria-controls="panel-fun">Fun and Games</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#technical" data-tab="technical" id="tab-technical" aria-controls="panel-technical">The Technical Stuff</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#flashcards" data-tab="flashcards" id="tab-flashcards" aria-controls="panel-flashcards">My Flashcards</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#about" data-tab="about" id="tab-about" aria-controls="panel-about">About Me</a></li>
+    </ul>
+  </div>
+</nav>
+
+  <!-- ================= BODY ================= -->
+  <div class="page container">
+    <aside class="toc" aria-label="On this page">
+      <p class="toc__heading">Contents</p>
+      <ol class="toc__list" id="toc"></ol>
+    </aside>
+
+    <main id="main" class="page__main" tabindex="-1">
+
+      <!-- ---------- SUMMARY ---------- -->
+      <section class="panel article" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary" data-panel="summary">
+        <div class="abstract">
+          <h2 class="abstract__label">Introduction</h2>
+          <p>
+            Ethan Gueck is a data scientist at Data Society who holds a B.S. in Network Engineering and Security
+            and an M.S. in Data Science. His recent work focuses on the telecom and utility industries, where he
+            has built operational, financial, and risk-based data pipelines and analyses. His approach pairs complex
+            analytics with modeling, ML, and mathematical solutions, from implementing IEEE Std 738 (2023) thermal
+            ratings across more than nine billion records to building AI tools that interpret engineering diagrams.
+          </p>
+        </div>
+
+        <h2 id="s-current"><span class="sec-num">1</span>Current work</h2>
+        <h3 class="subsec">Data Society</h3>
+        <p class="project__meta">Data Scientist, Richmond, Virginia. Aug 2024 to present.</p>
+        <ul class="prose-list">
+          <li>Implemented IEEE Std-738 into an ETL Pipeline that calculates network-wide thermal conditions for 5 years of data. Managed big data loads (over 9 billion records) using advanced optimization techniques and models. | 2024 - Present</li>
+          <li>Assisted in the development of an object detection to engineering diagram AI prototype for a conference white-paper initiative. | 2026 - Present</li>
+          <li>Supported initialization of Under Frequency Load Shedding (UFLS) analytics initiative using Seeq and PI Asset Framework (PI AF) data environments. | 2026</li>
+          <li>Developed and delivered custom Seeq curriculum for in-person courses. | 2026</li>
+          <li>Client: Library of Congress | Built Prototype Dashboards in Power BI for solution testing. | 2025</li>
+          <li>Completed Seeq Instructor Certification and instructed over a dozen Foundations and Batch Foundations courses. | 2025</li>
+        </ul>
+
+        <h2 id="s-previous"><span class="sec-num">2</span>Previous work</h2>
+        <h3 class="subsec">All Points Broadband</h3>
+        <p class="project__meta">Data Analyst, Richmond, Virginia. May 2022 to Jul 2024.</p>
+        <ul class="prose-list">
+          <li>Delivered operational and financial analytics supporting $300M+ in broadband infrastructure deployment and capital resource planning initiatives.</li>
+          <li>Assessed and reported on contractor operational and financial performance.</li>
+          <li>Assisted in identifying over $100K in vendor waste by identifying overcharging to a traffic billing code.</li>
+          <li>Transformed and visualized data using Python and Power BI; building maps, project dashboards, financial analytics dashboards, an MRP, etc.</li>
+          <li>Regularly presented findings to C-suite executives and in departmental stand-ups.</li>
+          <li>Developed Python application to query GIS SQL database and generated multi-layer HTML map.</li>
+          <li>Developed organizational and departmental dashboards using Power BI (Largest report containing a data model consisting of greater than 35 data tables.)</li>
+          <li>Awarded employee of the quarter in 2022.</li>
+        </ul>
+        <h3 class="subsec">U.S. House of Representatives</h3>
+        <p class="project__meta">Intern, Washington, DC. Jul 2018 to Jan 2019.</p>
+        <ul class="prose-list">
+          <li>Attended briefings on various topics and delivered key information to policy experts.</li>
+          <li>Performed data entry and represented the office to constituents.</li>
+        </ul>
+        <h3 class="subsec">Commonwealth EMS and PWC Buckhall VFD</h3>
+        <p class="project__meta">EMT, Prince William County and Fredericksburg, Virginia. Dec 2016 to Jan 2019.</p>
+        <ul class="prose-list">
+          <li>Responded to emergent and non-emergent calls, providing care to patients suffering trauma and illness.</li>
+          <li>Served as both an OIC (officer in charge) and an assisting EMT.</li>
+        </ul>
+
+        <h2 id="s-outcomes"><span class="sec-num">3</span>Selected outcomes</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption><span class="caption-label">Table 1.</span> Scale and impact of selected work.</caption>
+            <thead>
+              <tr><th scope="col">Measure</th><th scope="col" class="num">Value</th><th scope="col">Context</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Records processed</td><td class="num">9B+</td><td>IEEE 738 thermal pipeline, five years of data</td></tr>
+              <tr><td>Pipeline runtime</td><td class="num">5 years → 18 days</td><td>IEEE 738 thermal pipeline</td></tr>
+              <tr><td>Accuracy</td><td class="num">68% → 97%</td><td>IEEE 738 thermal pipeline</td></tr>
+              <tr><td>Infrastructure supported</td><td class="num">$300M+</td><td>Broadband deployment and capital planning analytics</td></tr>
+              <tr><td>Vendor waste identified</td><td class="num">$100K+</td><td>Overcharges to a traffic billing code</td></tr>
+              <tr><td>Courses instructed</td><td class="num">12+</td><td>Seeq Foundations and Batch Foundations</td></tr>
+              <tr><td>Largest data model</td><td class="num">35+ tables</td><td>Organizational Power BI reporting</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ---------- PORTFOLIO ---------- -->
+      <section class="panel article" id="panel-portfolio" role="tabpanel" aria-labelledby="tab-portfolio" data-panel="portfolio" hidden>
+        <h2 id="p-ieee"><span class="sec-num">1</span>Network-wide conductor thermal ratings</h2>
+        <p class="project__meta">Data Society, 2024 to present. ETL, numerical optimization, IEEE Std 738.</p>
+        <p>
+          Ethan's longest-running project, now more than two years in, is an ETL pipeline that implements IEEE
+          Std 738 <a class="cite" href="#p-ref-1">[1]</a> to calculate the thermal condition of every conductor across an entire network,
+          for five years of history.
+        </p>
+        <ul class="prose-list">
+          <li>Rolls <strong>more than 35 separate calculations</strong> from the standard into one production pipeline, from air properties and convection regimes to solar geometry and conductor resistance.</li>
+          <li><strong>Cut runtime from 5 years to 18 days</strong> and <strong>improved accuracy from 68% to 97%</strong>.</li>
+          <li>Tested a range of optimizers for the conductor temperature solve, including Nelder–Mead, Powell, BFGS, simulated annealing, bounded scalar, and TNC.</li>
+          <li>Manages big data loads of <strong>more than 9 billion records</strong> using advanced optimization techniques and models, <strong>multicore processing, multithreading, njit wrappers</strong>, distributed computing, and cloud computing.</li>
+        </ul>
+        <p>See it in action, or read how it works.</p>
+        <p class="resource-links">
+          <a href="#fun">Try the solver in Fun and Games</a>
+          <a href="#t-ieee738">Read the method in The Technical Stuff</a>
+        </p>
+
+        <h2 id="p-power"><span class="sec-num">2</span>Power Project: predicting lagging power factor</h2>
+        <figure class="figure">
+          <button class="figure__zoom" type="button" data-lightbox
+            data-src="assets/img/projects/power-model-comparison.webp"
+            data-title="Model performance, predicted and actual"
+            data-caption="Lagging power factor by hours since midnight and load type, colored by active power.">
+            <img src="assets/img/projects/power-model-comparison.webp" width="1187" height="545" loading="lazy"
+              alt="Two 3D scatter plots of lagging power factor against hours since midnight and load type. The predicted plot on the left closely matches the actual plot on the right.">
+          </button>
+          <figcaption><span class="caption-label">Figure 1.</span> Final model predictions (left) against actual values (right) on the test set, plotted by hours since midnight, lagging power factor, and load type, and colored by active power. Select to enlarge.</figcaption>
+        </figure>
+
+        <p class="project__meta">Independent project, April 2024. Python, pandas, scikit-learn, Power BI.
+          <a href="https://github.com/ethan-gueck/power_project" rel="noopener">View the repository</a></p>
+        <ul class="prose-list">
+          <li>Lagging power factor measures how far a system drifts from delivering power efficiently, and it is subject to federal power factor requirements.</li>
+          <li>Models lagging power factor from a year of meter-style readings at a steel plant and identifies what drives it.</li>
+          <li>Carries the work <strong>from exploratory analysis through model selection, tuning, and a Power BI report</strong>.</li>
+        </ul>
+
+        <h3 class="subsec">2.1 Data</h3>
+        <ul class="prose-list">
+          <li>The <em>Steel Industry Data</em> set holds <strong>35,040 readings</strong> taken at 15-minute intervals throughout 2018.</li>
+          <li>Each reading records energy usage, lagging and leading reactive power, CO&#8322;, both power factors, seconds since midnight, and the day and load type.</li>
+          <li>No null handling was needed, and outliers were kept because they carry the inefficiency events the model needs to learn.</li>
+          <li>Derived active power in watts for each interval, label encoded the categorical fields, and split the date into day, month, and year.</li>
+          <li>Split the data 64/16/20 into training, validation, and test sets.</li>
+        </ul>
+
+        <h3 class="subsec">2.2 Methods</h3>
+        <ul class="prose-list">
+          <li>Compared three regression models chosen for their tolerance of outliers, multicollinearity, and unscaled data: ridge regression, random forest, and gradient boosting.</li>
+          <li>Tuned each with a <strong>grid search using three-fold cross-validation</strong> and scored it by RMSE on the validation set.</li>
+          <li>Selected random forest and tuned it again with five-fold cross-validation around its best parameters: maximum depth 19, 150 estimators, and a minimum split of 2.</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption><span class="caption-label">Table 1.</span> Model comparison. RMSE is in power factor percentage points; the miss count is predictions above 90% where the actual value fell below 90%.</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Evaluation set</th><th scope="col" class="num">RMSE</th><th scope="col" class="num">Missed low-PF readings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ridge regression</td><td>Validation</td><td class="num">9.13</td><td class="num">97</td></tr>
+              <tr><td>Gradient boosting</td><td>Validation</td><td class="num">0.60</td><td class="num">14</td></tr>
+              <tr><td>Random forest</td><td>Validation</td><td class="num">0.54</td><td class="num">6</td></tr>
+              <tr class="is-final"><td>Random forest, final</td><td>Test</td><td class="num">0.55</td><td class="num">6</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="subsec">2.3 Results</h3>
+        <ul class="prose-list">
+          <li>The final random forest predicted lagging power factor on unseen test data with an <strong>RMSE of 0.55 percentage points</strong>.</li>
+          <li>It was chosen over gradient boosting because it scored slightly better, is lighter to run and maintain, and exposes feature importances that make the result explainable.</li>
+          <li>The strongest predictors were time of day, lagging reactive power, active power, usage, leading reactive power, and month.</li>
+          <li>Power factor had a non-linear relationship with time of day, dropping lowest in the early morning and at night.</li>
+        </ul>
+
+        <h3 class="subsec">2.4 Limitations and next steps</h3>
+        <ul class="prose-list">
+          <li>Lagging reactive power is part of how power factor is calculated, so including it as a feature inflates performance.</li>
+          <li>A next iteration would retrain without it, add polynomial features before revisiting ridge regression, and move to time series models for usage and power factor.</li>
+          <li>Unit-level metering would help locate where in the system the inefficiencies occur.</li>
+        </ul>
+        <p class="resource-links">
+          <a href="https://github.com/ethan-gueck/power_project/blob/main/power_modeling_April2024.ipynb" rel="noopener">Modeling notebook</a>
+          <a href="https://github.com/ethan-gueck/power_project/blob/main/power_modeling_April2024.pdf" rel="noopener">Notebook as PDF</a>
+          <a href="https://github.com/ethan-gueck/power_project/blob/main/power_data_query_April2024.ipynb" rel="noopener">Query notebook</a>
+          <a href="https://github.com/ethan-gueck/power_project/blob/main/Analysis%20of%20Electrical%20Consumption.pptx" rel="noopener">Presentation</a>
+          <a href="https://github.com/ethan-gueck/power_project/blob/main/Steel_industry_data_report.pbix" rel="noopener">Power BI report</a>
+        </p>
+
+        <h2 id="p-dashboards"><span class="sec-num">3</span>Power BI dashboards</h2>
+        <p>
+          These reports tracked a multi-county fiber build from pole fielding through make-ready, construction,
+          and customer install. Identifying details are redacted. Select an image to view it full size.
+        </p>
+        <p class="note">
+          <strong>Disclosure.</strong> None of these dashboards represent the financial dashboarding Ethan
+          conducted, which is withheld for disclosure reasons.
+        </p>
+
+        <figure class="gallery" id="dashboard-gallery" data-figure-offset="1" aria-roledescription="carousel" aria-label="Power BI dashboards">
+          <div class="gallery__viewport">
+            <ul class="gallery__track" aria-live="off"></ul>
+            <button class="gallery__arrow gallery__arrow--prev" type="button" aria-label="Previous dashboard">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button class="gallery__arrow gallery__arrow--next" type="button" aria-label="Next dashboard">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <div class="gallery__controls">
+            <button class="gallery__toggle" type="button" aria-label="Pause slideshow">
+              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>
+            </button>
+            <div class="gallery__dots" role="group" aria-label="Choose dashboard"></div>
+            <span class="gallery__count" aria-hidden="true"></span>
+          </div>
+          <figcaption class="gallery__caption"></figcaption>
+        </figure>
+
+        <h2 id="p-projects"><span class="sec-num">4</span>Selected projects</h2>
+
+        <article class="project">
+          <h3>4.1 Object detection for engineering diagrams</h3>
+          <p class="project__meta">Data Society, 2026 to present. Computer vision prototype.</p>
+          <p>
+            A prototype that applies object detection to engineering diagrams, developed as part of a white paper
+            initiative for conference presentation.
+          </p>
+        </article>
+
+        <article class="project">
+          <h3>4.2 Under-frequency load shedding analytics</h3>
+          <p class="project__meta">Data Society, 2026. Seeq, PI Asset Framework.</p>
+          <p>
+            Supported the initialization of an under-frequency load shedding analytics initiative, working within
+            Seeq and PI Asset Framework data environments.
+          </p>
+        </article>
+
+        <article class="project">
+          <h3>4.3 GIS mapping application</h3>
+          <p class="project__meta">All Points Broadband, 2022 to 2024. Python, SQL, GIS.</p>
+          <p>
+            A Python application that queried the company's GIS SQL database and generated multi-layer HTML maps
+            of the network build.
+          </p>
+        </article>
+
+        <h2 id="p-refs"><span class="sec-num">5</span>References</h2>
+        <ol class="references">
+          <li id="p-ref-1"><span class="ref__num">[1]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
+        </ol>
+      </section>
+
+      <!-- ---------- MORE ABOUT ---------- -->
+      <section class="panel article" id="panel-about" role="tabpanel" aria-labelledby="tab-about" data-panel="about" hidden>
+        <h2 id="a-background"><span class="sec-num">1</span>Background</h2>
+        <p>
+          Ethan Gueck grew up in a military household where integrity and work ethic were core values. He brings a
+          multifarious background spanning medicine, security, and sales having propelled him into a technical
+          career as an analytics engineer and ultimately as a data scientist.
+        </p>
+
+        <h2 id="a-experience"><span class="sec-num">2</span>Experience and education</h2>
+        <p>Work and education as a git graph, most recent at the top. Education branches off from work and merges back in.</p>
+        <p class="note"><strong>A note on tracks.</strong> Skills development isn't always on the same track. Sales, public service, and emergency medicine built the communication and leadership that carry into technical work, and each degree branched off and merged back in along the way.</p>
+        <div class="gg">
+          <div class="gg__heads" aria-hidden="true"><span>Soft skills work</span><span>Technical work</span><span>Education</span></div>
+          <div class="gg__body">
+            <svg class="gg__edges" aria-hidden="true"></svg>
+            <ol class="gg__grid">
+          <li class="gg__card gg__card--tech" data-node="ds" style="grid-column: 2; grid-row: 1; order: 10">
+            <p class="ptl__lane">Technical work</p>
+            <p class="timeline__when">Aug 2024 to present</p>
+            <h3 class="timeline__role">Data Scientist, Data Society</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--technical">Technical</span>Optimization and advanced algorithms</li><li><span class="skill-tag skill-tag--technical">Technical</span>Machine learning and computer vision</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Professional training and instruction of working professionals</li></ul>
+          </li>
+          <li class="gg__card gg__card--edu" data-node="ms" style="grid-column: 3; grid-row: 2 / 4; order: 25">
+            <p class="ptl__lane">Education</p>
+            <p class="timeline__when">2023 to 2024</p>
+            <h3 class="timeline__role">M.S., Data Science, Eastern University</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--technical">Technical</span>Machine Learning</li><li><span class="skill-tag skill-tag--technical">Technical</span>Data Science</li><li><span class="skill-tag skill-tag--technical">Technical</span>Statistics</li></ul>
+          </li>
+          <li class="gg__card gg__card--tech" data-node="apb" style="grid-column: 2; grid-row: 3; order: 30">
+            <p class="ptl__lane">Technical work</p>
+            <p class="timeline__when">May 2022 to Jul 2024</p>
+            <h3 class="timeline__role">Data Analyst, All Points Broadband</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--technical">Technical</span>Operational and financial analytics</li><li><span class="skill-tag skill-tag--technical">Technical</span>Prediction and forecasting</li><li><span class="skill-tag skill-tag--technical">Technical</span>GIS and GIS transformations</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Presenting findings to departments and executive leadership</li></ul>
+          </li>
+          <li class="gg__card gg__card--tech" data-node="tso" style="grid-column: 2; grid-row: 4; order: 40">
+            <p class="ptl__lane">Technical work</p>
+            <p class="timeline__when">Mar 2021 to May 2022</p>
+            <h3 class="timeline__role">Transportation Security Officer, DHS</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--technical">Technical</span>Satellite internet and joint network communications recovery</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Securing the traveling public</li></ul>
+          </li>
+          <li class="gg__card gg__card--edu" data-node="bs" style="grid-column: 3; grid-row: 4 / 8; order: 45">
+            <p class="ptl__lane">Education</p>
+            <p class="timeline__when">2018 to 2022</p>
+            <h3 class="timeline__role">B.S., IT: Network Engineering and Security, Liberty University</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--technical">Technical</span>Network Engineering</li><li><span class="skill-tag skill-tag--technical">Technical</span>Programming</li><li><span class="skill-tag skill-tag--technical">Technical</span>Cyber Security</li></ul>
+          </li>
+          <li class="gg__card gg__card--soft" data-node="sales" style="grid-column: 1; grid-row: 5; order: 50">
+            <p class="ptl__lane">Soft skills work</p>
+            <p class="timeline__when">Jan 2020 to Sep 2020</p>
+            <h3 class="timeline__role">Car Salesperson, Nissan and Honda</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--soft">Soft skills</span>Marketing</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Value and insight sales</li></ul>
+          </li>
+          <li class="gg__card gg__card--soft" data-node="ail" style="grid-column: 1; grid-row: 6; order: 60">
+            <p class="ptl__lane">Soft skills work</p>
+            <p class="timeline__when">Jan 2019 to Dec 2019</p>
+            <h3 class="timeline__role">Insurance Sales, AIL</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--soft">Soft skills</span>Business-to-business sales</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Lead generation</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>How to talk to anyone</li></ul>
+          </li>
+          <li class="gg__card gg__card--soft" data-node="congress" style="grid-column: 1; grid-row: 7; order: 70">
+            <p class="ptl__lane">Soft skills work</p>
+            <p class="timeline__when">Jul 2018 to Jan 2019</p>
+            <h3 class="timeline__role">Intern, U.S. House of Representatives</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--soft">Soft skills</span>Administration</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Constituent communications</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Fundamentals of policy and legislation</li></ul>
+          </li>
+          <li class="gg__card gg__card--soft" data-node="emt" style="grid-column: 1; grid-row: 8; order: 80">
+            <p class="ptl__lane">Soft skills work</p>
+            <p class="timeline__when">Dec 2016 to Jan 2019</p>
+            <h3 class="timeline__role">EMT, Commonwealth EMS and PWC Buckhall VFD</h3>
+            <ul class="gg__skills"><li><span class="skill-tag skill-tag--soft">Soft skills</span>Emergency patient care</li><li><span class="skill-tag skill-tag--soft">Soft skills</span>Leading calls as officer in charge</li></ul>
+          </li>
+            </ol>
+          </div>
+        </div>
+
+        <h2 id="a-education"><span class="sec-num">3</span>Education and credentials</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption><span class="caption-label">Table 1.</span> Degrees, certifications, and licenses.</caption>
+            <thead><tr><th scope="col">Credential</th><th scope="col">Institution</th></tr></thead>
+            <tbody>
+              <tr><td>M.S., Data Science</td><td>Eastern University</td></tr>
+              <tr><td>B.S., IT: Network Engineering and Security</td><td>Liberty University</td></tr>
+              <tr><td>Seeq Instructor Certification</td><td>Seeq</td></tr>
+              <tr><td>CCNAv7: Switching, Routing and Wireless Essentials</td><td>Cisco (instructor-facilitated)</td></tr>
+              <tr><td>EMT-Basic</td><td>NREMT</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="a-fun"><span class="sec-num">4</span>What I like to do for fun</h2>
+        <ul class="prose-list hobbies">
+          <li>Blacksmithing</li>
+          <li>Carpentry</li>
+          <li>Skeet and trap shooting</li>
+          <li>Board games</li>
+          <li>Non-fiction reading <button class="text-btn text-btn--small" type="button" data-modal-open="book-modal">Book list</button></li>
+          <li>Writing <a class="text-btn text-btn--small" href="https://onceveiled.substack.com/" rel="noopener" target="_blank">Read on Substack</a></li>
+          <li>Family</li>
+        </ul>
+
+        <h2 id="a-values"><span class="sec-num">5</span>Core values</h2>
+        <ul class="values">
+          <li>Commitment</li>
+          <li>Excellence</li>
+          <li>Integrity</li>
+          <li>Service</li>
+          <li>Selflessness</li>
+          <li>Leadership</li>
+        </ul>
+
+        <h2 id="a-priorities"><span class="sec-num">6</span>Priorities</h2>
+        <ol class="steps steps--compact">
+          <li class="steps__item"><p class="steps__title">My faith in Jesus Christ</p></li>
+          <li class="steps__item"><p class="steps__title">My family and their growth</p></li>
+          <li class="steps__item"><p class="steps__title">Serving my community</p></li>
+        </ol>
+      </section>
+
+      <!-- ---------- THE TECHNICAL STUFF ---------- -->
+      <section class="panel article" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical" data-panel="technical" hidden>
+        <h2 id="t-stack"><span class="sec-num">1</span>Technical stack</h2>
+        <p>The languages, platforms, and methods Ethan works with, and where each one has been applied.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption><span class="caption-label">Table 1.</span> Tools and methods by area.</caption>
+            <thead><tr><th scope="col">Area</th><th scope="col">Tools and methods</th><th scope="col">Applied in</th></tr></thead>
+            <tbody>
+              <tr><td>Languages</td><td>Python, SQL, R, HTML/CSS/JS</td><td>IEEE 738 ETL pipeline, GIS mapping application, Power Project</td></tr>
+              <tr><td>Python data stack</td><td>pandas, polars, FastAPI, scikit-learn, PyTorch, Manim, matplotlib, seaborn, and much more</td><td>N/A</td></tr>
+              <tr><td>Machine learning</td><td>Supervised and unsupervised learning</td><td>Data Society, All Points Broadband, Power Project, Eastern University</td></tr>
+              <tr><td>Computer vision</td><td>ML development, OCR, classifiers, object detection</td><td>Photo-to-diagram machine learning pipeline (engineering diagram AI prototype)</td></tr>
+              <tr><td>Optimization</td><td>Linear programming (LP), mixed-integer programming (MIP), nonlinear programming (NLP)</td><td>IEEE 738 thermal conditions pipeline</td></tr>
+              <tr><td>Industrial analytics</td><td>Seeq, PI Asset Framework</td><td>UFLS analytics initiative, Seeq courses and curriculum</td></tr>
+              <tr><td>Business intelligence</td><td>Power BI</td><td>All Points Broadband reporting, Library of Congress prototypes, Power Project report</td></tr>
+              <tr><td>Geospatial</td><td>GIS SQL databases, k-d trees, QGIS, Esri, multi-layer HTML maps</td><td>All Points Broadband network build maps</td></tr>
+              <tr><td>Data engineering</td><td>ETL design, optimization for large data loads, multiprocessing, multithreading, distributed computing, cloud computing, batch processing</td><td>Thermal conditions pipeline, 9 billion+ records</td></tr>
+              <tr><td>Networking</td><td>Switching, routing, and wireless; satellite and emergency communications</td><td>B.S. in Network Engineering and Security, CCNAv7, TSA forward team</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="t-ieee738"><span class="sec-num">2</span>IEEE Std 738 in brief</h2>
+        <p>
+          IEEE Std 738 <a class="cite" href="#t-ref-1">[1]</a> calculates the relationship between current and temperature in bare overhead conductors.
+          At steady state, the heat a conductor gains from its own resistance and from the sun equals the heat it
+          loses to the surrounding air:
+        </p>
+        <div class="equation" role="math" aria-label="I squared times R of T c, plus q s, equals q c plus q r">
+          <span class="equation__body"><i>I</i><sup>2</sup>&thinsp;<i>R</i>(<i>T</i><sub>c</sub>) + <i>q</i><sub>s</sub> = <i>q</i><sub>c</sub> + <i>q</i><sub>r</sub></span>
+          <span class="equation__num">(1)</span>
+        </div>
+        <p>
+          Here <i>I</i> is current, <i>R</i>(<i>T</i><sub>c</sub>) is the conductor's resistance at temperature
+          <i>T</i><sub>c</sub>, <i>q</i><sub>s</sub> is solar heat gain, <i>q</i><sub>c</sub> is convective cooling
+          from wind or rising air, and <i>q</i><sub>r</sub> is radiative cooling, all per unit length. Solving
+          for <i>I</i> at the conductor's maximum allowable temperature gives its thermal rating; solving for
+          <i>T</i><sub>c</sub> at a known current gives its operating temperature.
+        </p>
+        <p>
+          That one line hides a lot. The standard rolls more than 35 separate calculations into the balance,
+          covering air properties, three convection regimes, solar geometry and heat flux, conductor resistance,
+          heat capacity, and transient response.
+        </p>
+        <p><button class="text-btn" type="button" data-modal-open="calc-modal">View all the calculations</button></p>
+        <p>
+          Ethan's pipeline applies this network-wide across five years of data, more than 9 billion records. For
+          each recorded amperage it calculates conductor temperature by minimizing the heat-balance residual, the
+          same kind of search shown with COBYLA on the Fun and Games tab.
+        </p>
+
+        <h2 id="t-code"><span class="sec-num">3</span>Code and repositories</h2>
+        <p class="resource-links">
+          <a data-link="github" href="#" rel="noopener">GitHub profile</a>
+          <a href="https://github.com/ethan-gueck/power_project" rel="noopener">power_project</a>
+        </p>
+
+        <h2 id="t-refs"><span class="sec-num">4</span>References</h2>
+        <ol class="references">
+          <li id="t-ref-1"><span class="ref__num">[1]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
+        </ol>
+      </section>
+
+      <!-- ---------- MY FLASHCARDS ---------- -->
+      <section class="panel article" id="panel-flashcards" role="tabpanel" aria-labelledby="tab-flashcards" data-panel="flashcards" hidden>
+        <p class="lede">Ethan's study flashcards from <em>Mathematics: A Comprehensive Review</em>, one deck for each section of the guide: <span data-total></span>. Select a card to flip it, then use the arrows to move through the deck.</p>
+        <fieldset class="segmented fc-side">
+          <legend>Show first</legend>
+          <label><input type="radio" name="fc-side" value="front" checked><span>Prompt</span></label>
+          <label><input type="radio" name="fc-side" value="back"><span>Answer</span></label>
+        </fieldset>
+        <div data-decks></div>
+      </section>
+
+      <!-- ---------- FUN ---------- -->
+      <section class="panel article" id="panel-fun" role="tabpanel" aria-labelledby="tab-fun" data-panel="fun" hidden>
+        <h2 id="f-cobyla"><span class="sec-num">S1</span>Solving for conductor temperature with COBYLA</h2>
+        <p>
+          Given a current, how hot does the line run? There is no closed-form answer,
+          so an optimizer searches for the temperature where heat in equals heat out. COBYLA (Constrained
+          Optimization BY Linear Approximation) <a class="cite" href="#f-ref-1">[1]</a> does this using only function values, fitting a straight-line
+          model inside a trust region and shrinking that region as it closes in. Here it adjusts the conductor
+          temperature until the current that temperature implies matches the line's recorded current. Set the conditions, then press
+          Run to watch it converge.
+        </p>
+
+        <figure class="solver" id="solver">
+          <div class="solver__inputs">
+            <svg class="solver__scene" viewBox="0 0 640 230" role="img" aria-label="Conditions: sun position, clouds, wind, and conductor temperature">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0E4A38"/><stop offset="1" stop-color="#072A20"/>
+                </linearGradient>
+              </defs>
+              <rect width="640" height="230" rx="10" fill="url(#sky)"/>
+              <path class="scene__arc" d="M70 190 A250 150 0 0 1 570 190" fill="none" stroke="rgba(216,195,165,0.3)" stroke-width="1.5" stroke-dasharray="4 7"/>
+              <g data-scene="sun" class="scene__sun" transform="translate(320 40)">
+                <circle r="18" fill="#F2C14E"/>
+                <circle r="27" fill="none" stroke="rgba(242,193,78,0.35)" stroke-width="3"/>
+              </g>
+              <rect data-scene="night" class="scene__night" width="640" height="230" rx="10" fill="#02110C"/>
+              <g data-scene="clouds" class="scene__clouds">
+                <g class="cloud cloud--left"><g class="cloud__drift">
+                  <g transform="translate(34 34) scale(1.8)" fill="#8A8F8C"><path d="M0 22 a12 12 0 0 1 14 -12 a16 16 0 0 1 30 -2 a13 13 0 0 1 22 8 a10 10 0 0 1 2 20 h-62 a10 10 0 0 1 -6 -14z"/></g>
+                  <g transform="translate(136 96) scale(1.3)" fill="#6F7672"><path d="M0 22 a12 12 0 0 1 14 -12 a16 16 0 0 1 30 -2 a13 13 0 0 1 22 8 a10 10 0 0 1 2 20 h-62 a10 10 0 0 1 -6 -14z"/></g>
+                </g></g>
+                <g class="cloud cloud--right"><g class="cloud__drift">
+                  <g transform="translate(470 44) scale(1.75)" fill="#8A8F8C"><path d="M0 22 a12 12 0 0 1 14 -12 a16 16 0 0 1 30 -2 a13 13 0 0 1 22 8 a10 10 0 0 1 2 20 h-62 a10 10 0 0 1 -6 -14z"/></g>
+                  <g transform="translate(392 104) scale(1.25)" fill="#6F7672"><path d="M0 22 a12 12 0 0 1 14 -12 a16 16 0 0 1 30 -2 a13 13 0 0 1 22 8 a10 10 0 0 1 2 20 h-62 a10 10 0 0 1 -6 -14z"/></g>
+                </g></g>
+              </g>
+              <g data-scene="wind" class="scene__wind" stroke="rgba(243,238,230,0.7)" stroke-width="2" stroke-linecap="round">
+                <line x1="0" y1="62" x2="44" y2="62"/><line x1="0" y1="98" x2="30" y2="98"/>
+                <line x1="0" y1="132" x2="50" y2="132"/><line x1="0" y1="162" x2="26" y2="162"/>
+              </g>
+              <g stroke="#B9C4BE" stroke-width="2.5" fill="none">
+                <path d="M58 230 L80 150 L102 230 M68 192 H92"/><path d="M538 230 L560 150 L582 230 M548 192 H572"/>
+              </g>
+              <path data-scene="line" class="scene__line" d="M80 152 Q320 230 560 152" fill="none" stroke-width="5" stroke-linecap="round"/>
+              <text data-scene="alt" x="320" y="221" text-anchor="middle" class="scene__label"></text>
+            </svg>
+            <div class="solver__controls">
+              <label class="ampacity__field">
+                <span>Line current <output data-out="current"></output></span>
+                <input type="range" name="current" min="200" max="2000" step="10" value="1000">
+              </label>
+              <label class="ampacity__field">
+                <span>Air temperature <output data-out="air"></output></span>
+                <input type="range" name="air" min="-10" max="45" step="1" value="30">
+              </label>
+              <label class="ampacity__field">
+                <span>Wind speed <output data-out="wind"></output></span>
+                <input type="range" name="wind" min="0" max="10" step="0.1" value="0.6">
+              </label>
+              <label class="ampacity__field">
+                <span>Time of day, Eastern <output data-out="time"></output></span>
+                <input type="range" name="time" min="0" max="23.75" step="0.25" value="13">
+              </label>
+              <label class="ampacity__field solver__date">
+                <span>Date</span>
+                <input type="date" name="date">
+              </label>
+              <fieldset class="segmented solver__atmos">
+                <legend>Atmosphere</legend>
+                <label><input type="radio" name="atmosphere" value="clear" checked><span>Clear</span></label>
+                <label><input type="radio" name="atmosphere" value="industrial"><span>Industrial</span></label>
+              </fieldset>
+            </div>
+
+          </div>
+
+          <div class="solver__stage">
+            <canvas aria-hidden="true"></canvas>
+            <button class="solver__run" type="button">Run COBYLA</button>
+            <button class="solver__pause" type="button" aria-label="Pause animation">
+              <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+              <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>
+            </button>
+          </div>
+          <p class="sr-only" data-live aria-live="polite"></p>
+
+          <figcaption><span class="caption-label">Figure S1.</span> COBYLA iterating conductor temperature until the amperage residual, the current the IEEE 738 heat balance supports at that temperature minus the recorded current, is minimized. Search space: −75 °C to 750 °C, normalized to [0, 1] and starting from the midpoint. Settings: rhobeg = 0.09, xtol = 1e-6, ftol = 1e-7. Points are compared with a penalized merit, φ = |amperage residual| + σ × violation with σ = 1000, so stepping outside the search space is penalized. RMSE is reported in amps. Solid dots are accepted steps, hollow dots are rejected, and the green band is the trust region. Resistance is recalculated at every candidate temperature. Sunlight is computed for Richmond, Virginia, from the date and time, converted to solar time. Time to solve is measured live in your browser.</figcaption>
+        </figure>
+
+        <h3 class="subsec">Steps to converge</h3>
+        <ol class="steps">
+          <li class="steps__item">
+            <p class="steps__title">Make the initial guess</p>
+            <p class="steps__text">Start at the midpoint of the normalized search space.</p>
+            <p class="steps__note"><strong>In production:</strong> the initial guess would be a temperature approximation, estimated from the line's real loading, rather than the midpoint.</p>
+            <p class="steps__math"><i>x</i><sub>0</sub> = 0.5, &nbsp; <i>T</i>(<i>x</i>) = <i>T</i><sub>a</sub> + <i>x</i>(<i>T</i><sub>max</sub> − <i>T</i><sub>a</sub>)</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Establish the trust region</p>
+            <p class="steps__text">Set the starting radius and evaluate a second point one radius away to form the first simplex.</p>
+            <p class="steps__math">ρ = ρ<sub>beg</sub> = 0.09, &nbsp; <i>x</i><sub>1</sub> = <i>x</i><sub>0</sub> + ρ</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Evaluate the amperage residual</p>
+            <p class="steps__text">At a candidate temperature, compute the current the heat balance supports and compare it with the recorded current.</p>
+            <p class="steps__math"><i>r</i>(<i>x</i>) = √[(<i>q</i><sub>c</sub> + <i>q</i><sub>r</sub> − <i>q</i><sub>s</sub>) / <i>R</i>(<i>T</i>)] − <i>I</i><sub>rec</sub></p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Build the linear model</p>
+            <p class="steps__text">Fit a straight line through the best point and the most recent other point.</p>
+            <p class="steps__math"><i>r̂</i>(<i>x</i><sub>b</sub> + <i>d</i>) = <i>r</i>(<i>x</i><sub>b</sub>) + <i>g d</i>, &nbsp; <i>g</i> = [<i>r</i>(<i>x</i><sub>o</sub>) − <i>r</i>(<i>x</i><sub>b</sub>)] / (<i>x</i><sub>o</sub> − <i>x</i><sub>b</sub>)</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Solve the trust-region step</p>
+            <p class="steps__text">Step to where the model reaches zero, limited to the trust region and to the linearized bounds of the search space.</p>
+            <p class="steps__math"><i>d</i> = clip(−<i>r</i>(<i>x</i><sub>b</sub>) / <i>g</i>, −ρ, ρ), &nbsp; 0 ≤ <i>x</i><sub>b</sub> + <i>d</i> ≤ 1</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Compare with the penalized merit</p>
+            <p class="steps__text">Accept the trial point only if it improves the merit, which penalizes leaving the search space.</p>
+            <p class="steps__math">φ(<i>x</i>) = |<i>r</i>(<i>x</i>)| + σ Σ max(0, −<i>c</i><sub><i>i</i></sub>(<i>x</i>)), &nbsp; accept if φ(<i>x</i><sub>b</sub> + <i>d</i>) &lt; φ(<i>x</i><sub>b</sub>)</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Update the trust region</p>
+            <p class="steps__text">Shrink the radius when the model predicted poorly or the step was short. It never grows.</p>
+            <p class="steps__math">ratio = Δφ<sub>actual</sub> / Δφ<sub>predicted</sub>; &nbsp; if ratio &lt; 0.1 or |<i>d</i>| &lt; ρ/2: &nbsp; ρ ← ρ/2</p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Check convergence</p>
+            <p class="steps__text">Stop when an accepted step barely improves the merit, or the trust region becomes tiny.</p>
+            <p class="steps__math">Δφ &lt; ftol = 10<sup>−7</sup> &nbsp; or &nbsp; ρ &lt; xtol = 10<sup>−6</sup></p>
+          </li>
+          <li class="steps__item">
+            <p class="steps__title">Report the result</p>
+            <p class="steps__text">Convert back to temperature and report the residual, iteration count, and solve time.</p>
+            <p class="steps__math"><i>T</i>* = <i>T</i>(<i>x</i><sub>b</sub>), &nbsp; RMSE = |<i>r</i>(<i>x</i><sub>b</sub>)| (A)</p>
+          </li>
+        </ol>
+
+        <h2 id="f-ampacity"><span class="sec-num">S2</span>How much current can a power line carry?</h2>
+        <p>
+          A conductor's rating depends on the weather. Wind cools it, sun heats it, and hot air limits how much
+          heat it can shed. Move the sliders to see how the steady-state rating of a common conductor changes.
+          This is a simplified version of the IEEE 738 calculation <a class="cite" href="#f-ref-2">[2]</a> used in the thermal ratings pipeline.
+        </p>
+        <p class="note">
+          <strong>Is this a dynamic line rating?</strong> Not on its own. This is the steady-state IEEE 738 rating for
+          the weather you set. The same calculation run with fixed, conservative assumptions gives a static rating;
+          updated with forecast air temperature it gives an ambient-adjusted rating (AAR); and fed continuously
+          with measured or forecast wind, temperature, and sunlight it becomes a dynamic line rating (DLR).
+        </p>
+
+        <figure class="ampacity" id="ampacity">
+          <div class="ampacity__controls">
+            <label class="ampacity__field">
+              <span>Air temperature <output data-out="ta"></output></span>
+              <input type="range" name="ta" min="-10" max="45" step="1" value="35">
+            </label>
+            <label class="ampacity__field">
+              <span>Wind speed <output data-out="vw"></output></span>
+              <input type="range" name="vw" min="0" max="10" step="0.1" value="0.6">
+            </label>
+            <label class="ampacity__field">
+              <span>Sunlight <output data-out="qs"></output></span>
+              <input type="range" name="qs" min="0" max="1050" step="10" value="1000">
+            </label>
+            <label class="ampacity__field">
+              <span>Max conductor temperature <output data-out="tc"></output></span>
+              <input type="range" name="tc" min="50" max="125" step="1" value="100">
+            </label>
+          </div>
+          <div class="ampacity__result" aria-live="polite">
+            <p class="ampacity__value"><span data-out="amps">0</span> A</p>
+            <p class="ampacity__desc">Steady-state rating for 795 kcmil Drake ACSR</p>
+            <div class="ampacity__bars" aria-hidden="true">
+              <div class="bar"><span class="bar__label">Convective cooling</span><span class="bar__fill bar__fill--cool" data-bar="qc"></span></div>
+              <div class="bar"><span class="bar__label">Radiative cooling</span><span class="bar__fill bar__fill--rad" data-bar="qr"></span></div>
+              <div class="bar"><span class="bar__label">Solar heating</span><span class="bar__fill bar__fill--sun" data-bar="qsun"></span></div>
+            </div>
+          </div>
+          <figcaption><span class="caption-label">Figure S2.</span> Heat balance per meter of conductor. Assumes wind perpendicular to the line, sea-level elevation, and emissivity and absorptivity of 0.8. A what-if steady-state rating, not a DLR. For illustration only, not for operational use.</figcaption>
+        </figure>
+
+        <h2 id="f-arcade"><span class="sec-num">S3</span>Arcade: Conduit Carl</h2>
+        <p>
+          Conduit Carl is a switching cabinet wiring game. Press Play to launch it in its own window.
+        </p>
+
+        <figure class="arcade" id="arcade" data-src="games/conduit-carl/conduit-carl.html">
+          <div class="arcade__cabinet">
+            <div class="arcade__marquee" aria-hidden="true">Conduit Carl</div>
+            <div class="arcade__bezel">
+              <div class="arcade__screen">
+                <iframe class="arcade__preview" title="Conduit Carl preview" tabindex="-1" aria-hidden="true"></iframe>
+                <div class="arcade__glass"></div>
+                <button class="arcade__launch" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+                  Play Conduit Carl
+                </button>
+              </div>
+            </div>
+          </div>
+          <figcaption><span class="caption-label">Figure S3.</span> Conduit Carl opens in a new window. Progress and high scores are saved in your browser.</figcaption>
+        </figure>
+
+        <h2 id="f-refs"><span class="sec-num">S4</span>References</h2>
+        <ol class="references">
+          <li id="f-ref-1"><span class="ref__num">[1]</span> <span class="ref__body">M. J. D. Powell, "A direct search optimization method that models the objective and constraint functions by linear interpolation," in <em>Advances in Optimization and Numerical Analysis</em>, S. Gomez and J.-P. Hennart, Eds. Dordrecht: Kluwer Academic, 1994, pp. 51–67.</span></li>
+          <li id="f-ref-2"><span class="ref__num">[2]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
+        </ol>
+      </section>
+    </main>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <p class="site-footer__heading">Suggested citation</p>
+        <p class="site-footer__cite">Gueck, E. (<span data-year></span>). <em>Portfolio of Ethan Gueck.</em> github.com/ethan-gueck</p>
+      </div>
+      <div>
+        <p class="site-footer__heading">Correspondence</p>
+        <p><a data-link="email" href="#" data-label="address">Email</a></p>
+        <p><a data-link="linkedin" href="#" rel="noopener">LinkedIn</a></p>
+        <p><a data-link="github" href="#" rel="noopener" data-label="address">GitHub</a></p>
+      </div>
+    </div>
+    <p class="container site-footer__fine">&copy; <span data-year></span> Ethan Gueck. Dashboard images redacted for confidentiality.</p>
+  </footer>
+
+
+  <!-- Sticky contact bar -->
+  <aside class="contact-bar" aria-label="Contact Ethan">
+    <div class="container contact-bar__inner">
+      <p class="contact-bar__text">Have a project in mind? <span class="contact-bar__more">Reach out to me or connect with me on LinkedIn.</span></p>
+      <div class="contact-bar__actions">
+        <a class="cta__btn cta__btn--primary" data-link="email" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Email me</a>
+        <a class="cta__btn cta__btn--secondary" data-link="linkedin" href="#" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>LinkedIn</a>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- IEEE 738 calculations (opened from The Technical Stuff) -->
+  <dialog class="modal" id="calc-modal" aria-labelledby="calc-modal-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="calc-modal-title">Calculations in IEEE Std 738</h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__intro">37 calculations roll up into the standard's heat balance, shown in SI units: temperatures in °C, lengths in m, heat in W/m. Symbols follow the standard: <i>T</i><sub>s</sub> surface, <i>T</i><sub>a</sub> air, <i>D</i><sub>0</sub> conductor diameter, <i>V</i><sub>w</sub> wind speed, <i>H</i><sub>e</sub> elevation, <i>N</i> day of year. See IEEE Std 738-2023 for the authoritative formulations and coefficient tables before any engineering use.</p>
+      <h3 class="calcs__group">Heat balance and ratings</h3>
+      <ol class="calcs__list" start="1">
+        <li>Steady-state heat balance<span class="calcs__eq"><i>q</i><sub>c</sub> + <i>q</i><sub>r</sub> = <i>q</i><sub>s</sub> + <i>I</i><sup>2</sup><i>R</i>(<i>T</i><sub>avg</sub>)</span></li>
+        <li>Steady-state thermal rating (current at the maximum conductor temperature)<span class="calcs__eq"><i>I</i> = √[(<i>q</i><sub>c</sub> + <i>q</i><sub>r</sub> − <i>q</i><sub>s</sub>) / <i>R</i>(<i>T</i><sub>avg</sub>)]</span></li>
+        <li>Conductor temperature for a known current (iterative solution)<span class="calcs__eq">solve <i>q</i><sub>c</sub>(<i>T</i>) + <i>q</i><sub>r</sub>(<i>T</i>) − <i>q</i><sub>s</sub> − <i>I</i><sup>2</sup><i>R</i>(<i>T</i>) = 0 for <i>T</i></span></li>
+        <li>Transient heat balance for time-varying current and weather<span class="calcs__eq">d<i>T</i><sub>avg</sub>/d<i>t</i> = [<i>R</i>(<i>T</i><sub>avg</sub>)<i>I</i><sup>2</sup> + <i>q</i><sub>s</sub> − <i>q</i><sub>c</sub> − <i>q</i><sub>r</sub>] / (<i>m</i><i>C</i><sub>p</sub>)</span></li>
+        <li>Conductor temperature stepped through time<span class="calcs__eq"><i>T</i><sub>avg</sub>(<i>t</i> + Δ<i>t</i>) = <i>T</i><sub>avg</sub>(<i>t</i>) + (d<i>T</i><sub>avg</sub>/d<i>t</i>) Δ<i>t</i></span></li>
+        <li>Transient thermal rating<span class="calcs__eq">find <i>I</i><sub>f</sub> such that <i>T</i><sub>avg</sub>(<i>t</i><sub>f</sub>) = <i>T</i><sub>max</sub> after a step from <i>I</i><sub>i</sub></span></li>
+      </ol>
+      <h3 class="calcs__group">Convective cooling</h3>
+      <ol class="calcs__list" start="7">
+        <li>Forced convection at low wind speed<span class="calcs__eq"><i>q</i><sub>c1</sub> = <i>K</i><sub>angle</sub> [1.01 + 1.35 <i>N</i><sub>Re</sub><sup>0.52</sup>] <i>k</i><sub>f</sub> (<i>T</i><sub>s</sub> − <i>T</i><sub>a</sub>)</span></li>
+        <li>Forced convection at high wind speed<span class="calcs__eq"><i>q</i><sub>c2</sub> = <i>K</i><sub>angle</sub> · 0.754 <i>N</i><sub>Re</sub><sup>0.6</sup> <i>k</i><sub>f</sub> (<i>T</i><sub>s</sub> − <i>T</i><sub>a</sub>)</span></li>
+        <li>Natural convection with no wind<span class="calcs__eq"><i>q</i><sub>cn</sub> = 3.645 ρ<sub>f</sub><sup>0.5</sup> <i>D</i><sub>0</sub><sup>0.75</sup> (<i>T</i><sub>s</sub> − <i>T</i><sub>a</sub>)<sup>1.25</sup></span></li>
+        <li>Selection of the governing convection term<span class="calcs__eq"><i>q</i><sub>c</sub> = max[<i>q</i><sub>cn</sub>, <i>q</i><sub>c</sub>(<i>V</i><sub>w</sub>)], &nbsp; <i>q</i><sub>c</sub>(<i>V</i><sub>w</sub>) = max(<i>q</i><sub>c1</sub>, <i>q</i><sub>c2</sub>)</span></li>
+        <li>Reynolds number<span class="calcs__eq"><i>N</i><sub>Re</sub> = <i>D</i><sub>0</sub> ρ<sub>f</sub> <i>V</i><sub>w</sub> / μ<sub>f</sub></span></li>
+        <li>Wind direction factor<span class="calcs__eq"><i>K</i><sub>angle</sub> = 1.194 − cos(φ) + 0.194 cos(2φ) + 0.368 sin(2φ)</span></li>
+        <li>Air film temperature<span class="calcs__eq"><i>T</i><sub>film</sub> = (<i>T</i><sub>s</sub> + <i>T</i><sub>a</sub>) / 2</span></li>
+        <li>Dynamic viscosity of air<span class="calcs__eq">μ<sub>f</sub> = 1.458 × 10<sup>−6</sup> (<i>T</i><sub>film</sub> + 273)<sup>1.5</sup> / (<i>T</i><sub>film</sub> + 383.4)</span></li>
+        <li>Air density with elevation<span class="calcs__eq">ρ<sub>f</sub> = (1.293 − 1.525 × 10<sup>−4</sup> <i>H</i><sub>e</sub> + 6.379 × 10<sup>−9</sup> <i>H</i><sub>e</sub><sup>2</sup>) / (1 + 0.00367 <i>T</i><sub>film</sub>)</span></li>
+        <li>Thermal conductivity of air<span class="calcs__eq"><i>k</i><sub>f</sub> = 2.424 × 10<sup>−2</sup> + 7.477 × 10<sup>−5</sup> <i>T</i><sub>film</sub> − 4.407 × 10<sup>−9</sup> <i>T</i><sub>film</sub><sup>2</sup></span></li>
+      </ol>
+      <h3 class="calcs__group">Radiative cooling</h3>
+      <ol class="calcs__list" start="17">
+        <li>Radiated heat loss<span class="calcs__eq"><i>q</i><sub>r</sub> = 17.8 <i>D</i><sub>0</sub> ε [((<i>T</i><sub>s</sub> + 273) / 100)<sup>4</sup> − ((<i>T</i><sub>a</sub> + 273) / 100)<sup>4</sup>]</span></li>
+      </ol>
+      <h3 class="calcs__group">Solar heating</h3>
+      <ol class="calcs__list" start="18">
+        <li>Solar heat gain<span class="calcs__eq"><i>q</i><sub>s</sub> = α <i>Q</i><sub>se</sub> sin(θ) <i>A</i>′</span></li>
+        <li>Effective angle of incidence of the sun's rays<span class="calcs__eq">θ = arccos[cos(<i>H</i><sub>c</sub>) cos(<i>Z</i><sub>c</sub> − <i>Z</i><sub>l</sub>)]</span></li>
+        <li>Solar altitude<span class="calcs__eq"><i>H</i><sub>c</sub> = arcsin[cos(Lat) cos(δ) cos(ω) + sin(Lat) sin(δ)]</span></li>
+        <li>Solar azimuth<span class="calcs__eq"><i>Z</i><sub>c</sub> = <i>C</i> + arctan(χ)</span></li>
+        <li>Solar azimuth variable<span class="calcs__eq">χ = sin(ω) / [sin(Lat) cos(ω) − cos(Lat) tan(δ)]</span></li>
+        <li>Solar azimuth constant<span class="calcs__eq"><i>C</i> = 0°, 180°, or 360°, selected from the hour angle ω and the sign of χ</span></li>
+        <li>Solar declination<span class="calcs__eq">δ = 23.46 sin[(284 + <i>N</i>) / 365 × 360°]</span></li>
+        <li>Hour angle<span class="calcs__eq">ω = (solar hour − 12) × 15°</span></li>
+        <li>Total solar and sky heat flux, clear atmosphere<span class="calcs__eq"><i>Q</i><sub>s</sub> = <i>A</i> + <i>B</i><i>H</i><sub>c</sub> + <i>C</i><i>H</i><sub>c</sub><sup>2</sup> + <i>D</i><i>H</i><sub>c</sub><sup>3</sup> + <i>E</i><i>H</i><sub>c</sub><sup>4</sup> + <i>F</i><i>H</i><sub>c</sub><sup>5</sup> + <i>G</i><i>H</i><sub>c</sub><sup>6</sup> (clear coefficients)</span></li>
+        <li>Total solar and sky heat flux, industrial atmosphere<span class="calcs__eq"><i>Q</i><sub>s</sub> = <i>A</i> + <i>B</i><i>H</i><sub>c</sub> + … + <i>G</i><i>H</i><sub>c</sub><sup>6</sup> (industrial coefficients)</span></li>
+        <li>Solar heat flux elevation correction<span class="calcs__eq"><i>Q</i><sub>se</sub> = <i>K</i><sub>solar</sub> <i>Q</i><sub>s</sub>, &nbsp; <i>K</i><sub>solar</sub> = 1 + 1.148 × 10<sup>−4</sup> <i>H</i><sub>e</sub> − 1.108 × 10<sup>−8</sup> <i>H</i><sub>e</sub><sup>2</sup></span></li>
+        <li>Projected area of the conductor<span class="calcs__eq"><i>A</i>′ = <i>D</i><sub>0</sub> (per unit length)</span></li>
+      </ol>
+      <h3 class="calcs__group">Conductor properties</h3>
+      <ol class="calcs__list" start="30">
+        <li>AC resistance at conductor temperature (linear interpolation)<span class="calcs__eq"><i>R</i>(<i>T</i>) = [(<i>R</i><sub>high</sub> − <i>R</i><sub>low</sub>) / (<i>T</i><sub>high</sub> − <i>T</i><sub>low</sub>)] (<i>T</i> − <i>T</i><sub>low</sub>) + <i>R</i><sub>low</sub></span></li>
+        <li>Resistance extrapolation above the highest tabulated temperature<span class="calcs__eq">the same linear form, extended beyond <i>T</i><sub>high</sub></span></li>
+        <li>Heat capacity of the conductor as the sum of its materials<span class="calcs__eq"><i>m</i><i>C</i><sub>p</sub> = Σ <i>m</i><sub><i>i</i></sub> <i>C</i><sub>p<i>i</i></sub></span></li>
+        <li>Specific heat of each material at temperature<span class="calcs__eq"><i>C</i><sub>p</sub>(<i>T</i>) = <i>C</i><sub>p</sub>(20 °C) [1 + β(<i>T</i> − 20)]</span></li>
+      </ol>
+      <h3 class="calcs__group">Temperature distribution</h3>
+      <ol class="calcs__list" start="34">
+        <li>Radial temperature difference between core and surface<span class="calcs__eq"><i>T</i><sub>core</sub> − <i>T</i><sub>s</sub> = [<i>P</i><sub>T</sub> / (2π <i>k</i><sub>th</sub>)] [½ − (<i>D</i><sub>core</sub><sup>2</sup> / (<i>D</i><sub>0</sub><sup>2</sup> − <i>D</i><sub>core</sub><sup>2</sup>)) ln(<i>D</i><sub>0</sub> / <i>D</i><sub>core</sub>)]</span></li>
+        <li>Average conductor temperature from core and surface<span class="calcs__eq"><i>T</i><sub>avg</sub> = (<i>T</i><sub>core</sub> + <i>T</i><sub>s</sub>) / 2</span></li>
+        <li>Effective radial thermal conductivity<span class="calcs__eq"><i>k</i><sub>th</sub>, an empirical value for the stranded conductor used in the radial difference above</span></li>
+        <li>Thermal time constant<span class="calcs__eq">τ = <i>m</i><i>C</i><sub>p</sub> (<i>T</i><sub>f</sub> − <i>T</i><sub>i</sub>) / [<i>R</i>(<i>T</i><sub>f</sub>)<i>I</i><sub>f</sub><sup>2</sup> − <i>R</i>(<i>T</i><sub>i</sub>)<i>I</i><sub>i</sub><sup>2</sup>]</span></li>
+      </ol>
+    </div>
+  </dialog>
+
+
+  <!-- Book list (opened from Field notes). Content comes from assets/js/data/books.js -->
+  <dialog class="modal" id="book-modal" aria-labelledby="book-modal-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="book-modal-title">Book list</h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <h3 class="calcs__group">Favorite books</h3>
+      <ol class="books" data-books></ol>
+      <h3 class="calcs__group">Favorite quotes</h3>
+      <div class="quotes" data-quotes></div>
+    </div>
+  </dialog>
+
+  <!-- Lightbox (shared) -->
+  <dialog class="lightbox" id="lightbox" aria-label="Full-size image">
+    <button class="lightbox__close" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img class="lightbox__img" alt="">
+    <p class="lightbox__caption"></p>
+  </dialog>
+</body>
+</html>
