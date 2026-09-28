@@ -1,0 +1,56 @@
+/* Flashcard decks (My Flashcards tab). */
+.deck { margin-bottom: var(--space-5); }
+.deck__count { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 400; color: var(--ink-soft); margin-left: 0.4em; }
+.deck__viewer { display: flex; align-items: center; justify-content: center; gap: var(--space-3); margin: var(--space-3) 0 var(--space-2); }
+.deck__nav {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--green-800);
+}
+.deck__nav:hover { background: var(--green-800); color: var(--sand-300); border-color: var(--green-800); }
+.deck__nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.deck__bar { display: flex; align-items: center; justify-content: center; gap: var(--space-2); font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+.deck__pos { font-variant-numeric: tabular-nums; margin-right: var(--space-2); }
+
+/* The card flips in 3D; each face is a square like the printed 2.5 in card. */
+.fcard { width: min(420px, 100%); aspect-ratio: 1; container-type: inline-size; padding: 0; border: 0; background: none; perspective: 1400px; cursor: pointer; }
+.fcard__inner { position: relative; display: block; width: 100%; height: 100%; transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1); transform-style: preserve-3d; }
+.fcard.is-flipped .fcard__inner { transform: rotateY(180deg); }
+.fcard__face {
+  position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden;
+  background: #FFFFFF; border: 1px solid var(--rule); border-radius: var(--radius-md);
+  box-shadow: 0 10px 26px rgba(7,42,32,0.14); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.fcard__back { transform: rotateY(180deg); }
+.fcard__face img { width: 100%; height: 100%; object-fit: contain; }
+.fcard__face--pic { padding: 0; }
+.fcard__bar { height: 8px; flex-shrink: 0; background: linear-gradient(90deg, var(--green-800), var(--sand-300)); }
+.fcard__bar--bottom { margin: 0 4cqw 4cqw; height: 1.8cqw; border-radius: 1px; }
+.fcard__top { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0.9rem; }
+.fcard__id { font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; color: var(--sand-300); background: var(--green-800); padding: 0.1rem 0.45rem; border-radius: 3px; }
+.fcard__sec { font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); }
+.fcard__title--glyphs { font-family: var(--font-serif); font-weight: 400; font-size: 4.5rem; letter-spacing: 0.35em; }
+.fcard__title { flex: 1; display: grid; place-items: center; padding: 0 1.4rem; text-align: center; font-family: var(--font-sans); font-weight: 600; font-size: 1.35rem; line-height: 1.3; color: var(--ink); }
+.fcard__prompt { padding: 0.8rem; text-align: center; font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); }
+.fcard:focus-visible { outline: none; }
+.fcard:focus-visible .fcard__face { box-shadow: var(--focus); }
+@media (prefers-reduced-motion: reduce) { .fcard__inner { transition: none; } }
+@media (max-width: 560px) { .deck__nav { width: 36px; height: 36px; } .deck__viewer { gap: var(--space-2); } }
+
+/* Back: formulas centered, study note in italics, label and bar at the bottom */
+.fcard__back { color: var(--ink); }
+.fcard__body {
+  flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem;
+  padding: 5cqw 4cqw 2cqw; text-align: center; font-family: var(--font-serif); font-size: 5.2cqw; line-height: 1.35; overflow: hidden;
+}
+.fcard__line { display: inline-block; white-space: nowrap; }
+.fcard__line.is-wrap { white-space: normal; max-width: 100%; }
+.fcard__body math { font-size: 1em; }
+.fcard__note { padding: 0 6cqw 1.5cqw; text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 3.9cqw; line-height: 1.3; color: var(--ink-soft); }
+.fcard__label { padding: 0 4cqw 1.2cqw; text-align: center; font-family: var(--font-sans); font-size: 2.8cqw; color: var(--ink-soft); }
+.fcard__name { display: block; font-family: var(--font-sans); font-weight: 600; font-size: 0.9em; margin-bottom: 0.4em; }
+/* MathML Core has no table rules; draw the value table lines (e.g. unit-circle table) with CSS */
+.fcard math mtable[columnlines^="solid"] > mtr > mtd:first-child { border-right: 1px solid currentColor; }
+.fcard math mtable[rowlines^="solid"] > mtr:first-child > mtd { border-bottom: 1px solid currentColor; }
+.fcard math mtable mtd { padding: 0.12em 0.35em; }
+.fcard math .ovl { border-top: 0.06em solid currentColor; padding-top: 0.08em; }
+.fc-side { margin: 0 0 var(--space-2); }

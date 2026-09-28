@@ -1,0 +1,60 @@
+/* Dialog used for the IEEE 738 calculations list. */
+.modal {
+  width: min(720px, calc(100vw - 2rem)); max-height: min(86vh, 900px);
+  padding: 0; border: 0; border-radius: var(--radius-md);
+  background: var(--paper); color: var(--ink);
+  box-shadow: 0 24px 60px rgba(7,42,32,0.35);
+}
+.modal::backdrop { background: rgba(7,42,32,0.72); }
+.modal__head {
+  position: sticky; top: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--gradient-primary); color: #FFFFFF; border-bottom: 3px solid var(--sand-300);
+}
+.modal__title { font-size: var(--fs-md); color: #FFFFFF; }
+.modal__close {
+  width: 36px; height: 36px; border-radius: 50%; border: 0; flex-shrink: 0;
+  display: grid; place-items: center; background: var(--sand-300); color: var(--green-900);
+}
+.modal__close svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; }
+.modal__body { padding: var(--space-3) var(--space-4) var(--space-4); overflow-y: auto; }
+.modal__intro { font-size: 1rem; color: var(--ink-soft); }
+.calcs__group {
+  font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800);
+  margin: var(--space-4) 0 var(--space-2); padding-bottom: var(--space-1); border-bottom: 1px solid var(--rule);
+}
+.calcs__list { margin: 0; padding-left: 2.2em; font-size: 1rem; }
+.calcs__list li { padding: 0.2rem 0 0.2rem 0.3rem; }
+.calcs__list li::marker { color: var(--sand-500); font-family: var(--font-sans); font-size: 0.85em; font-variant-numeric: tabular-nums; }
+.calcs__tag {
+  display: inline-block; margin-left: 0.4em; padding: 0.05rem 0.45rem; border-radius: 999px;
+  font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500; vertical-align: 0.1em;
+  background: rgba(216,195,165,0.3); color: var(--green-800);
+}
+
+/* Inline text-style button that opens a dialog */
+.text-btn {
+  font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600;
+  padding: 0.55rem 1rem; border-radius: var(--radius-md);
+  border: 1px solid var(--green-800); background: var(--paper); color: var(--green-800);
+}
+.text-btn:hover { background: var(--green-800); color: #FFFFFF; }
+.text-btn--small { padding: 0.2rem 0.65rem; font-size: 0.8rem; margin-left: 0.5rem; vertical-align: 0.1em; }
+
+/* Book list */
+.books { margin: 0; padding-left: 1.6em; }
+.books li { margin-bottom: var(--space-2); }
+.books__note { display: block; font-size: 0.95rem; color: var(--ink-soft); }
+.quote { margin: 0 0 var(--space-3); padding-left: var(--space-3); border-left: 3px solid var(--sand-300); }
+.quote blockquote { margin: 0; font-style: italic; }
+.quote figcaption { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); margin-top: var(--space-1); }
+.empty-note { color: var(--ink-soft); font-style: italic; }
+
+/* IEEE 738 equation shown under each calculation */
+.calcs__eq {
+  display: block; margin-top: 0.2rem; padding: 0.35rem 0.6rem;
+  background: rgba(216,195,165,0.16); border-left: 2px solid var(--sand-300);
+  font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; overflow-x: auto;
+}
+.calcs__list li { padding: 0.35rem 0 0.35rem 0.3rem; }
