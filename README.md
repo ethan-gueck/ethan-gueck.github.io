@@ -72,8 +72,4 @@ python3 -m http.server 8000
 
 ## Deploy
 
-1. Create a repository named `ethan-gueck.github.io` under the `ethan-gueck` account.
-2. Push these files to the `main` branch.
-3. In **Settings > Pages**, set the source to **Deploy from a branch**, branch `main`, folder `/ (root)`.
-
-The site will be live at `https://ethan-gueck.github.io`.
+The site will be live at `https://ethan-gueck.github.io/`.
