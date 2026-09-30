@@ -5,7 +5,7 @@
 (function (Site) {
   Site.config = {
     name: 'Ethan Gueck',
-    email: 'ethan.gueck@datasociety.com',
+    email: 'e.gueck1@gmail.com',
     github: 'https://github.com/ethan-gueck',
     // Paste the full profile URL, e.g. https://www.linkedin.com/in/your-handle/
     // Until then, LinkedIn links open a LinkedIn search for Ethan's name.
