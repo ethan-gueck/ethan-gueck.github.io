@@ -40,13 +40,13 @@ Site.initTabs = function initTabs(options) {
     var label = tabs.filter(function (t) { return t.dataset.tab === name; })[0].textContent;
     document.title = label + ' | Ethan Gueck';
 
-    // Open each tab at its top, with the tab bar pinned and the full header scrolled away,
-    // rather than at the previous tab's scroll position.
+    // If the reader has scrolled into the page, open the new tab at its top with the tab bar pinned.
+    // If the header is still in view, leave the scroll position alone so the page doesn't jump.
     if (!first && bar) {
       // The bar is sticky, so measure where it sits in the flow: directly below the masthead.
       var head = document.querySelector('.masthead');
       var barTop = head ? head.getBoundingClientRect().bottom + window.scrollY : 0;
-      window.scrollTo({ top: barTop, behavior: 'instant' });
+      if (window.scrollY > barTop) window.scrollTo({ top: barTop, behavior: 'instant' });
     }
     onChange(name, panels[name]);
   }

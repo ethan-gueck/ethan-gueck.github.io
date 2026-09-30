@@ -101,8 +101,8 @@
   .masthead__title { grid-template-columns: 1fr; gap: 0; }
   .masthead__text { display: contents; }
   .masthead__name { order: 1; }
-  .masthead__portrait { order: 2; margin: var(--space-3) 0 var(--space-1); }
+  .masthead__portrait { order: 2; margin: var(--space-3) 0 var(--space-2); justify-self: center; }
   .masthead__roles, .masthead__subtitle, .masthead__affiliation { order: 3; }
-  .masthead__portrait img { width: 120px; border-width: 3px; }
+  .masthead__portrait img { width: 170px; border-width: 3px; }
   .tabs__tab { padding-inline: 0.85rem; }
 }

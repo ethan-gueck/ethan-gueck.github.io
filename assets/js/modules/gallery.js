@@ -61,7 +61,7 @@ Site.createGallery = function createGallery(root, slides, { interval = 6000, onO
     });
     dotEls.forEach((d, j) => d.setAttribute('aria-current', String(j === index)));
     const s = slides[index];
-    caption.innerHTML = `<span class="caption-label">Figure ${index + 1 + figOffset}.</span><strong></strong> <span></span>`;
+    caption.innerHTML = `<span class="caption-label">Dashboard ${index + 1}.</span><strong></strong> <span></span>`;
     caption.children[1].textContent = `${s.title}.`;
     caption.children[2].textContent = s.caption;
     count.textContent = `${index + 1} / ${slides.length}`;

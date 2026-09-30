@@ -54,3 +54,8 @@
 .fcard math mtable mtd { padding: 0.12em 0.35em; }
 .fcard math .ovl { border-top: 0.06em solid currentColor; padding-top: 0.08em; }
 .fc-side { margin: 0 0 var(--space-2); }
+.deck__divider {
+  margin: var(--space-5) 0 0; padding-top: var(--space-3); border-top: 2px solid var(--sand-300);
+  font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800);
+}
+.fcard__note { padding-bottom: 3cqw; }

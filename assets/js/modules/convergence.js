@@ -64,7 +64,7 @@ Site.initConvergence = function initConvergence(root) {
 
   var model = null;      // current problem + solution
   var anim = null;       // timeline for the current solution
-  var active = false, visible = true, paused = false, raf = null, clock = 0, last = 0;
+  var active = false, visible = true, paused = false, raf = null, clock = 0, last = 0, finished = false;
   var started = false;   // the animation waits for the Run button
 
   // ---------- Problem and solve ----------
@@ -288,10 +288,10 @@ Site.initConvergence = function initConvergence(root) {
     ctx.fillStyle = COLORS.text; ctx.textAlign = 'left';
     ctx.font = '600 13px "IBM Plex Sans", system-ui, sans-serif';
     var iterText = current >= 0 ? 'Iteration ' + (current + 1) + ' of ' + tl.steps.length : 'COBYLA search';
-    ctx.fillText(iterText, P.x, P.y - 22);
+    ctx.fillText(iterText, P.x, L.narrow ? P.y - 24 : P.y - 22);
     if (current >= 0) {
       ctx.font = '12px "IBM Plex Sans", system-ui, sans-serif'; ctx.fillStyle = COLORS.dim;
-      ctx.fillText('ρ = ' + m.res.history[current].rho.toExponential(2), P.x + 170, P.y - 22);
+      ctx.fillText('ρ = ' + m.res.history[current].rho.toExponential(2), L.narrow ? P.x + 130 : P.x + 170, L.narrow ? P.y - 8 : P.y - 22);
     }
 
     drawPanel(time, view, ymax, fade);
@@ -315,8 +315,8 @@ Site.initConvergence = function initConvergence(root) {
       ['RMSE (amperage)', m.res.rmse < 1e-12 ? '< 1e-12 A' : m.ok ? m.res.rmse.toExponential(2) + ' A' : m.res.rmse.toFixed(2) + ' A'],
       ['Iterations', String(m.res.iterations) + ' (' + m.res.reason + ')'],
       ['Time to solve', m.ms < 0.1 ? (m.ms * 1000).toFixed(1) + ' µs' : m.ms.toFixed(3) + ' ms'],
-      ['Resistance', (m.resistance * 1e6).toFixed(2) + ' µΩ/m (+' + ((m.resistance / m.r25 - 1) * 100).toFixed(1) + '%)'],
-      ['Convection', (m.conv.governs === 'natural' ? 'Natural' : 'Forced') + ' governs, ' + m.conv.qc.toFixed(1) + ' W/m'],
+      ['Resistance', (m.resistance * 1e6).toFixed(2) + ' µΩ/m'],
+      ['Convection', (m.conv.governs === 'natural' ? 'N' : 'F') + ', ' + m.conv.qc.toFixed(1) + ' W/m'],
     ];
 
     // Ring around the converged point, then the value travels to the panel.
@@ -348,13 +348,30 @@ Site.initConvergence = function initConvergence(root) {
         var k = smooth((time - tl.fillStart - i * 160) / 450);
         if (k <= 0) return;
         ctx.globalAlpha = fade * k;
-        var col = L.narrow ? (i % 2) : 0, line = L.narrow ? Math.floor(i / 2) : i;
-        var x = L.narrow ? B.x + 16 + col * (B.w / 2) : B.x + 16;
-        var y = L.narrow ? B.y + 96 + line * 40 : B.y + 108 + line * 38 + (1 - k) * 8;
-        ctx.fillStyle = COLORS.dim; ctx.fillText(row[0], x, y);
-        ctx.fillStyle = COLORS.text; ctx.font = '600 14px "IBM Plex Sans", system-ui, sans-serif';
-        ctx.fillText(row[1], x, y + 18);
-        ctx.font = '12px "IBM Plex Sans", system-ui, sans-serif';
+        if (L.narrow) {
+          // one row per value: label on the left, value on the right, shrunk to fit the panel
+          var y = B.y + 92 + i * 26;
+          var avail = B.w - 32;
+          ctx.font = '12px "IBM Plex Sans", system-ui, sans-serif';
+          var lw = ctx.measureText(row[0]).width;
+          var size = 14;
+          ctx.font = '600 ' + size + 'px "IBM Plex Sans", system-ui, sans-serif';
+          while (size > 9 && lw + 12 + ctx.measureText(row[1]).width > avail) {
+            size -= 0.5; ctx.font = '600 ' + size + 'px "IBM Plex Sans", system-ui, sans-serif';
+          }
+          ctx.fillStyle = COLORS.text; ctx.textAlign = 'right'; ctx.fillText(row[1], B.x + B.w - 16, y);
+          ctx.textAlign = 'left'; ctx.font = '12px "IBM Plex Sans", system-ui, sans-serif';
+          ctx.fillStyle = COLORS.dim; ctx.fillText(row[0], B.x + 16, y);
+        } else {
+          var x = B.x + 16;
+          var y2 = B.y + 108 + i * 38 + (1 - k) * 8;
+          ctx.textAlign = 'left';
+          ctx.font = '12px "IBM Plex Sans", system-ui, sans-serif';
+          ctx.fillStyle = COLORS.dim; ctx.fillText(row[0], x, y2);
+          ctx.font = '600 14px "IBM Plex Sans", system-ui, sans-serif';
+          var sz = 14; while (sz > 9 && ctx.measureText(row[1]).width > B.w - 32) { sz -= 0.5; ctx.font = '600 ' + sz + 'px "IBM Plex Sans", system-ui, sans-serif'; }
+          ctx.fillStyle = COLORS.text; ctx.fillText(row[1], x, y2 + 18);
+        }
       });
     }
   }
@@ -366,14 +383,15 @@ Site.initConvergence = function initConvergence(root) {
   }
 
   // ---------- Loop ----------
-  function running() { return started && active && visible && !paused && !document.hidden; }
+  function running() { return started && !finished && active && visible && !paused && !document.hidden; }
 
   function tick(now) {
     raf = null;
     var dt = last ? Math.min(now - last, 50) : 16;
     last = now;
     clock += dt;
-    if (clock > anim.end) clock = 0;
+    // Play once and hold on the result; the replay button starts it again.
+    if (clock >= anim.hold) { clock = anim.hold; drawFrame(clock); finished = true; kick(); return; }
     drawFrame(clock);
     if (running()) raf = requestAnimationFrame(tick);
   }
@@ -382,8 +400,7 @@ Site.initConvergence = function initConvergence(root) {
     if (running() && !raf) { last = 0; raf = requestAnimationFrame(tick); }
     if (!running() && !raf) drawFrame(started || shownResult ? clock : anim.intro - 1);   // idle: axes and curve only
     root.classList.toggle('is-idle', !started);
-    root.classList.toggle('is-paused', paused);
-    toggle.setAttribute('aria-label', paused ? 'Play animation' : 'Pause animation');
+    toggle.setAttribute('aria-label', 'Replay animation');
   }
 
   var shownResult = false;
@@ -395,7 +412,8 @@ Site.initConvergence = function initConvergence(root) {
       root.classList.add('is-static');
       drawFrame(clock); return;
     }
-    started = true; clock = anim.intro - 1;
+    started = true; finished = false; clock = anim.intro - 1;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
     kick();
   }
 
@@ -433,6 +451,31 @@ Site.initConvergence = function initConvergence(root) {
     if (!sunRaf) sunRaf = requestAnimationFrame(sunStep);
   }
 
+  // Wind streaks move by position each frame; speed eases toward the slider value, so dragging it
+  // changes the pace smoothly instead of restarting or jumping the streaks.
+  var streaks = Array.prototype.slice.call(scene.wind.querySelectorAll('line'));
+  var windX = streaks.map(function (_, i) { return i * 170; });
+  var windSpeed = 0, windTarget = 0, windRaf = null, windLast = 0, sceneVisible = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      sceneVisible = entries[0].isIntersecting; if (sceneVisible) startWind();
+    }, { threshold: 0 }).observe(root.querySelector('.solver__scene'));
+  }
+  function windStep(now) {
+    windRaf = null;
+    var dt = windLast ? Math.min(now - windLast, 50) / 1000 : 0; windLast = now;
+    windSpeed += (windTarget - windSpeed) * Math.min(1, dt * 3);
+    streaks.forEach(function (l, i) {
+      windX[i] = (windX[i] + windSpeed * dt) % 720;
+      l.setAttribute('transform', 'translate(' + (windX[i] - 60).toFixed(1) + ' 0)');
+    });
+    if (active && sceneVisible && !document.hidden && (windSpeed > 0.5 || windTarget > 0)) windRaf = requestAnimationFrame(windStep);
+  }
+  function startWind() {
+    if (reduceMotion) return;
+    if (!windRaf) { windLast = 0; windRaf = requestAnimationFrame(windStep); }
+  }
+
   function pulse(node) {
     if (!node || reduceMotion) return;
     node.classList.remove('is-changed'); void node.offsetWidth; node.classList.add('is-changed');
@@ -450,7 +493,8 @@ Site.initConvergence = function initConvergence(root) {
     root.classList.toggle('is-industrial', p.atmosphere === 'industrial');   // clouds slide in from both sides
     var speed = p.vw;
     scene.wind.style.opacity = speed < 0.05 ? '0' : String(Math.min(1, 0.35 + speed / 8));
-    scene.wind.style.setProperty('--wind-dur', (speed < 0.05 ? 10 : Math.max(0.35, 4 / (speed + 0.5))).toFixed(2) + 's');
+    windTarget = speed < 0.05 ? 0 : 75 + speed * 75;          // px per second in scene units
+    startWind();
     // Conductor color from cool teal to hot orange across 25–150 °C.
     var t = Math.max(0, Math.min(1, ((m.ok ? m.tc : 200) - 25) / 125));
     var cool = [143, 199, 177], hot = [233, 120, 60];
@@ -470,7 +514,7 @@ Site.initConvergence = function initConvergence(root) {
     model = solve(readInputs());
     anim = buildTimeline(model);
     // New conditions: stop and wait for Run.
-    started = false; shownResult = false; clock = 0;
+    started = false; shownResult = false; finished = false; clock = 0;
     if (raf) { cancelAnimationFrame(raf); raf = null; }
     runBtn.textContent = 'Run COBYLA';
     root.classList.remove('is-static');
@@ -499,11 +543,11 @@ Site.initConvergence = function initConvergence(root) {
     if (o) o.textContent = outputs[n](root.querySelector('[name="' + n + '"]').value);
   });
 
-  toggle.addEventListener('click', function () { paused = !paused; kick(); });
+  toggle.addEventListener('click', function () { run(); });
   runBtn.addEventListener('click', run);
 
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; kick(); }).observe(canvas);
+    new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; kick(); startWind(); }).observe(canvas);
   }
   document.addEventListener('visibilitychange', kick);
   if ('ResizeObserver' in window) new ResizeObserver(function () { layout(); if (model) drawFrame(clock); }).observe(canvas);
@@ -512,7 +556,7 @@ Site.initConvergence = function initConvergence(root) {
   recompute();
 
   return {
-    setActive: function (isActive) { active = isActive; if (isActive) layout(); kick(); },
+    setActive: function (isActive) { active = isActive; if (isActive) { layout(); startWind(); } kick(); },
   };
 };
 

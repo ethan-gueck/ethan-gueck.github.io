@@ -1,6 +1,8 @@
 /* Reset and element defaults. */
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+/* No rubber-band bounce past the header or footer */
+html, body { overscroll-behavior: none; }
 body {
   margin: 0;
   font-family: var(--font-serif);

@@ -33,7 +33,7 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     var sec = document.createElement('section');
     sec.className = 'deck';
     sec.innerHTML =
-      '<h2 id="' + id + '"><span class="sec-num">' + (di + 1) + '</span>' + deck.name +
+      '<h2 id="' + id + '"><span class="sec-num">' + (deck.num || di + 1) + '</span>' + deck.name +
         ' <span class="deck__count">' + deck.cards.length + ' cards</span></h2>' +
       '<div class="deck__viewer">' +
         '<button class="deck__nav deck__nav--prev" type="button" aria-label="Previous card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
@@ -45,6 +45,12 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       '<div class="deck__bar"><span class="deck__pos"></span>' +
         '<button class="text-btn text-btn--small" type="button" data-shuffle>Shuffle</button>' +
         '<button class="text-btn text-btn--small" type="button" data-reset>In order</button></div>';
+    if (deck.ref && !(decks[di - 1] || {}).ref) {
+      var div = document.createElement('p');
+      div.className = 'deck__divider';
+      div.textContent = 'Reference decks';
+      mount.append(div);
+    }
     mount.append(sec);
 
     var order = deck.cards.map(function (_, i) { return i; });
@@ -84,9 +90,8 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       // Back: the guide's formulas and text, rebuilt as HTML + MathML (generated, trusted content).
       back.innerHTML = '<span class="fcard__body">' + c.body.map(function (l) { return '<span class="fcard__line">' + l + '</span>'; }).join('') + '</span>' +
         (c.note ? '<span class="fcard__note"></span>' : '') +
-        '<span class="fcard__label"></span><span class="fcard__bar fcard__bar--bottom"></span>';
+        '<span class="fcard__bar fcard__bar--bottom"></span>';
       if (c.note) back.querySelector('.fcard__note').innerHTML = c.note;   // generated HTML + MathML
-      back.querySelector('.fcard__label').textContent = c.label;
       card.setAttribute('aria-label', 'Card ' + c.id + (c.title ? ', ' + c.title : '') + '. Select to flip.');
       pos.textContent = (idx + 1) + ' / ' + deck.cards.length;
       fit();
