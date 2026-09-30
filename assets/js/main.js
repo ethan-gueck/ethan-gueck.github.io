@@ -42,12 +42,18 @@ document.querySelectorAll('[data-lightbox]').forEach(function (el) {
 var arcade = safely('arcade', function () { return Site.initArcade(document.getElementById('arcade')); });
 safely('ampacity', function () { Site.initAmpacity(document.getElementById('ampacity')); });
 var solver = safely('solver', function () { return Site.initConvergence(document.getElementById('solver')); });
+var nn = safely('nn', function () {
+  return Site.initNN(document.getElementById('nn'), {
+    config: Site.config, decks: Site.flashcards, tracks: Site.neuronTracks, requires: Site.neuronRequires,
+  });
+});
 
 Site.initTabs({
   onChange: function (name, panel) {
     if (gallery) gallery.setActive(name === 'portfolio');
     if (arcade) arcade.setActive(name === 'fun');
     if (solver) solver.setActive(name === 'fun');
+    if (nn) nn.setActive(name === 'nn');
     if (gitgraph && name === 'about') requestAnimationFrame(gitgraph.redraw);
     safely('toc', function () { Site.buildToc(panel); });
   },

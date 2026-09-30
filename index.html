@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="assets/css/components/solver.css">
   <link rel="stylesheet" href="assets/css/components/arcade.css">
   <link rel="stylesheet" href="assets/css/components/flashcards.css">
+  <link rel="stylesheet" href="assets/css/components/nn.css">
   <link rel="stylesheet" href="assets/css/components/cta.css">
   <link rel="stylesheet" href="assets/css/components/footer.css">
   <link rel="stylesheet" href="assets/css/components/contact-bar.css">
@@ -43,6 +44,7 @@
   <script src="assets/js/data/dashboards.js" defer></script>
   <script src="assets/js/data/books.js" defer></script>
   <script src="assets/js/data/flashcards.js" defer></script>
+  <script src="assets/js/data/neurons.js" defer></script>
   <script src="assets/js/modules/tabs.js" defer></script>
   <script src="assets/js/modules/toc.js" defer></script>
   <script src="assets/js/modules/gallery.js" defer></script>
@@ -57,6 +59,7 @@
   <script src="assets/js/modules/booklist.js" defer></script>
   <script src="assets/js/modules/gitgraph.js" defer></script>
   <script src="assets/js/modules/flashcards.js" defer></script>
+  <script src="assets/js/modules/nn.js" defer></script>
   <script src="assets/js/modules/outcomes.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -97,6 +100,7 @@
       <li role="presentation"><a class="tabs__tab" role="tab" href="#portfolio" data-tab="portfolio" id="tab-portfolio" aria-controls="panel-portfolio">Portfolio</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#technical" data-tab="technical" id="tab-technical" aria-controls="panel-technical">The Technical Stuff</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#flashcards" data-tab="flashcards" id="tab-flashcards" aria-controls="panel-flashcards">My Flashcards</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#nn" data-tab="nn" id="tab-nn" aria-controls="panel-nn">Ethan's NN</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#about" data-tab="about" id="tab-about" aria-controls="panel-about">About Me</a></li>
     </ul>
   </div>
@@ -350,6 +354,31 @@
         <ol class="references">
           <li id="p-ref-1"><span class="ref__num">[1]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
         </ol>
+      </section>
+
+      <!-- ---------- ETHAN'S NN ---------- -->
+      <section class="panel article" id="panel-nn" role="tabpanel" aria-labelledby="tab-nn" data-panel="nn" hidden>
+        <h2 id="n-network"><span class="sec-num">1</span>The network</h2>
+        <div class="nn" id="nn">
+          <div class="nn__head">
+            <figure class="nn__brain">
+              <button class="nn__brain-open" type="button" data-modal-open="art-modal" aria-label="View the full drawing">
+                <img src="assets/img/profile/nn-brain.webp" alt="Pencil drawing of a brain with gears inside and flames rising from it" width="720" height="720" loading="lazy">
+              </button>
+              <span class="nn__stem" aria-hidden="true"></span>
+            </figure>
+            <div class="nn__intro">
+              <p class="lede">
+                Every flashcard is a neuron, and every deck is a track branching off the brain. An edge joins two
+                neurons when one uses or builds on the other. A neuron fills in once I have built out its formula as
+                real, interactive code. Open a track and select a neuron to see its card.
+              </p>
+              <p class="nn__legend"><span class="is-built"><i></i>Interactive page</span><span><i></i>Flashcard only</span></p>
+              <p class="nn__status" data-nn-status aria-live="polite"></p>
+            </div>
+          </div>
+          <ol class="nn__tracks" data-nn-tracks aria-label="Neuron tracks"></ol>
+        </div>
       </section>
 
       <!-- ---------- MORE ABOUT ---------- -->
@@ -883,6 +912,38 @@
       <h3 class="calcs__group">Favorite quotes</h3>
       <div class="quotes" data-quotes></div>
     </div>
+  </dialog>
+
+  <!-- Neuron details (opened from Ethan's NN) -->
+  <dialog class="modal nn-modal" id="nn-modal" aria-labelledby="nn-modal-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="nn-modal-title"><span class="nn-modal__code" data-nn-code></span><span data-nn-title></span></h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p class="nn-modal__track" data-nn-track></p>
+      <div class="calcs__eq nn-modal__card" data-nn-body></div>
+      <dl class="nn-modal__facts">
+        <dt>Builds on</dt><dd data-nn-requires></dd>
+        <dt>Used by</dt><dd data-nn-used></dd>
+      </dl>
+      <a class="cta__btn cta__btn--primary" data-nn-launch href="#" target="_blank" rel="noopener">See how it works
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
+      <span class="nn-modal__soon" data-nn-pending aria-disabled="true">Coming soon</span>
+    </div>
+  </dialog>
+
+  <!-- Full brain drawing (opened from the brain on Ethan's NN) -->
+  <dialog class="modal art-modal" id="art-modal" aria-label="Brain drawing by Ethan Gueck">
+    <figure class="art-modal__figure">
+      <img src="assets/img/profile/nn-brain-full.webp" alt="Pencil drawing of a brain with gears inside and flames rising from it" width="3024" height="4032" loading="lazy">
+      <figcaption class="art-modal__caption">Hand Drawn by Ethan Gueck · 2022</figcaption>
+    </figure>
+    <button class="modal__close art-modal__close" type="button" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
   </dialog>
 
   <!-- Lightbox (shared) -->

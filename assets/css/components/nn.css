@@ -1,0 +1,166 @@
+/* Ethan's NN: brain drawing, the axon rail, collapsible neuron tracks (js/modules/nn.js). */
+.nn { --nn-brain: clamp(150px, 20vw, 210px); --nn-rail: 4px; --nn-branch: var(--space-4); margin: var(--space-3) 0 var(--space-4); }
+
+/* Brain (circular, like the masthead portrait) with the axon running down from it */
+.nn__head { display: grid; grid-template-columns: var(--nn-brain) minmax(0, 1fr); gap: var(--space-4); }
+.nn__brain { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.nn__brain img {
+  width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%;
+  background: #FFFFFF;
+  border: 4px solid rgba(216,195,165,0.9);
+  box-shadow: 0 0 0 6px rgba(216,195,165,0.15), 0 14px 30px rgba(7,42,32,0.22);
+}
+.nn__brain-open { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: 50%; cursor: zoom-in; }
+.nn__brain-open:focus-visible { outline: none; box-shadow: var(--focus); }
+.nn__brain-open:hover img { box-shadow: 0 0 0 6px rgba(216,195,165,0.35), 0 14px 30px rgba(7,42,32,0.3); }
+.nn__stem { flex: 1; min-height: var(--space-4); width: var(--nn-rail); background: var(--green-800); }
+.nn__intro { align-self: center; padding-bottom: var(--space-4); }
+.nn__intro .lede { margin-top: 0; }
+.nn__legend {
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin: var(--space-2) 0;
+  font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft);
+}
+.nn__legend span { display: inline-flex; align-items: center; gap: 0.45em; }
+.nn__legend i { width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--green-800); background: var(--paper); }
+.nn__legend .is-built i { background: var(--green-800); border-color: var(--sand-300); box-shadow: 0 0 0 1px var(--green-800); }
+.nn__status { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); margin: 0; }
+
+/* Tracks branch off the rail, which continues from the brain's stem */
+.nn__tracks {
+  list-style: none; margin: 0; padding: 0 0 0 var(--nn-branch);
+  margin-left: calc(var(--nn-brain) / 2 - var(--nn-rail) / 2);
+  border-left: var(--nn-rail) solid var(--green-800);
+}
+.nn-track { position: relative; padding: var(--space-1) 0; }
+.nn-track::before {  /* branch from the rail */
+  content: ""; position: absolute; left: calc(-1 * var(--nn-branch)); top: 1.7rem;
+  width: var(--nn-branch); height: var(--nn-rail); background: var(--green-800);
+}
+.nn-track::after {   /* synapse where the branch leaves the rail */
+  content: ""; position: absolute; left: calc(-1 * var(--nn-branch) - 5px - var(--nn-rail) / 2); top: calc(1.7rem - 4px);
+  width: 8px; height: 8px; border-radius: 50%; background: var(--paper); border: 2px solid var(--green-800);
+}
+.nn-track.has-built::after { background: var(--sand-300); }
+
+.nn-track__head {
+  display: flex; align-items: baseline; gap: var(--space-3); width: 100%;
+  padding: 0.75rem var(--space-3); text-align: left;
+  border: 1px solid var(--rule); border-radius: var(--radius-md); background: var(--paper);
+  font-family: var(--font-sans); color: var(--ink); cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.nn-track__head:hover { border-color: var(--green-700); }
+.nn-track__head:focus-visible { outline: none; box-shadow: var(--focus); }
+.nn-track__name { font-weight: 600; font-size: 1rem; color: var(--green-800); }
+.nn-track__count { font-size: var(--fs-sm); color: var(--ink-soft); margin-left: auto; white-space: nowrap; }
+.nn-track__chevron {
+  width: 18px; height: 18px; align-self: center; flex-shrink: 0;
+  fill: none; stroke: var(--green-800); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+.nn-track.is-open .nn-track__head { background: var(--gradient-primary); border-color: var(--green-800); border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.nn-track.is-open .nn-track__name { color: #FFFFFF; }
+.nn-track.is-open .nn-track__count { color: var(--sand-200); }
+.nn-track.is-open .nn-track__chevron { stroke: var(--sand-300); transform: rotate(180deg); }
+.nn-track__body {
+  padding: var(--space-3); border: 1px solid var(--rule); border-top: 3px solid var(--sand-300);
+  border-radius: 0 0 var(--radius-md) var(--radius-md); background: var(--paper);
+}
+.nn__svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* Edges */
+.nn__edge { fill: none; stroke: var(--green-700); stroke-width: 2.5; stroke-linecap: round; transition: stroke 0.15s ease, opacity 0.15s ease; }
+.nn__pulse {
+  fill: none; stroke: var(--sand-300); stroke-width: 2.5; stroke-linecap: round;
+  stroke-dasharray: 3 36; animation: nn-signal 2.4s linear infinite; pointer-events: none;
+}
+@keyframes nn-signal { to { stroke-dashoffset: -39; } }
+.nn-track.is-focused .nn__edge:not(.is-lit), .nn-track.is-focused .nn__pulse { opacity: 0.3; }
+.nn__edge.is-lit { stroke: var(--sand-500); }
+
+/* Neurons: outlined until a page is built, then filled */
+.nn__neuron { cursor: pointer; outline: none; }
+.nn__dendrite { fill: none; stroke: var(--green-700); stroke-width: 2.2; stroke-linecap: round; }
+.nn__soma { fill: var(--paper); stroke: var(--green-800); stroke-width: 2.5; transition: fill 0.15s ease; }
+.nn__code { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--green-800); text-anchor: middle; pointer-events: none; }
+.nn__neuron.is-built .nn__soma { fill: var(--green-800); stroke: var(--sand-300); stroke-width: 3; }
+.nn__neuron.is-built .nn__code { fill: #FFFFFF; }
+.nn__halo { fill: var(--sand-300); opacity: 0; transition: opacity 0.15s ease; }
+.nn__label {
+  font-family: var(--font-sans); font-size: 12.5px; fill: var(--ink-soft); text-anchor: middle;
+  paint-order: stroke; stroke: var(--paper); stroke-width: 5px; stroke-linejoin: round;  /* edges pass behind labels */
+}
+.nn__neuron:hover .nn__soma, .nn__neuron.is-lit .nn__soma { fill: #F3EADC; }
+.nn__neuron.is-built:hover .nn__soma, .nn__neuron.is-built.is-lit .nn__soma { fill: var(--green-600); }
+.nn__neuron:hover .nn__halo, .nn__neuron.is-lit .nn__halo { opacity: 0.4; }
+.nn__neuron:focus-visible .nn__halo { opacity: 1; }
+
+/* Popup */
+.nn-modal { width: min(640px, calc(100vw - 2rem)); }
+.nn-modal__code {
+  display: inline-grid; place-items: center; min-width: 2.6em; height: 2.6em; padding: 0 0.45em; margin-right: 0.55em;
+  border-radius: 999px; background: var(--sand-300); color: var(--green-900);
+  font-family: var(--font-sans); font-size: 0.72em; font-weight: 600; vertical-align: 0.2em;
+}
+.nn-modal__track {
+  margin: var(--space-2) 0 0; font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--sand-500);
+}
+.nn-modal__card { margin: var(--space-2) 0 var(--space-3); overflow-x: auto; }
+.nn-modal__card p { margin: 0.3rem 0; }
+.nn-modal__card .fcard__name { font-family: var(--font-sans); color: var(--green-800); }
+.nn-modal__note { font-style: italic; color: var(--ink-soft); }
+.nn-modal__facts { margin: var(--space-3) 0; font-size: 1rem; }
+.nn-modal__facts dt { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800); }
+.nn-modal__facts dd { margin: 0.25rem 0 var(--space-3); display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.nn-modal__link {
+  font-family: var(--font-sans); font-size: 0.85rem; padding: 0.25rem 0.6rem; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--green-800); cursor: pointer;
+}
+.nn-modal__link:hover { border-color: var(--green-700); }
+.nn-modal__link.is-built { background: var(--green-800); border-color: var(--green-800); color: #FFFFFF; }
+.nn-modal__link:focus-visible { outline: none; box-shadow: var(--focus); }
+/* Stands where "See how it works" goes until the page exists; not a link. */
+.nn-modal__soon {
+  display: inline-flex; align-items: center; padding: 0.7rem 1.2rem; border-radius: var(--radius-md);
+  background: var(--sand-300); color: var(--green-900);
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem; cursor: default; user-select: none;
+}
+.nn-modal [hidden] { display: none; }  /* .cta__btn's display would otherwise override hidden */
+.nn-modal .cta__btn--primary { background: var(--green-800); color: #FFFFFF; }
+.nn-modal .cta__btn--primary:hover { background: var(--green-700); color: #FFFFFF; }
+.nn-modal .cta__btn:focus-visible { box-shadow: var(--focus); }
+
+/* Full drawing: rounded card, green caption bubble, close button in its top-right corner */
+.art-modal {
+  width: fit-content; max-width: calc(100vw - 2rem); max-height: calc(100vh - 2rem);
+  overflow: visible; background: transparent; box-shadow: none;
+}
+.art-modal__figure { position: relative; margin: 0; }
+.art-modal__figure img {
+  display: block; width: auto; height: auto; max-width: calc(100vw - 2rem); max-height: calc(100vh - 2rem);
+  border-radius: 18px; background: var(--paper);
+  box-shadow: 0 24px 60px rgba(7,42,32,0.45);
+}
+.art-modal__caption {
+  position: absolute; left: 50%; bottom: var(--space-3); transform: translateX(-50%);
+  padding: 0.5rem 1.1rem; border-radius: 999px; white-space: nowrap;
+  background: var(--green-800); color: #FFFFFF; border: 2px solid var(--sand-300);
+  font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
+  box-shadow: 0 6px 16px rgba(7,42,32,0.3);
+}
+.art-modal__close { position: absolute; top: var(--space-3); right: var(--space-3); box-shadow: 0 4px 12px rgba(7,42,32,0.3); }
+
+@media (max-width: 640px) {
+  .nn { --nn-brain: 96px; --nn-branch: var(--space-3); }
+  .nn__head { grid-template-columns: 1fr; gap: var(--space-2); }
+  .nn__brain { width: var(--nn-brain); }
+  .nn__intro { order: -1; padding-bottom: 0; }
+  .nn-track__head { gap: var(--space-2); padding-inline: var(--space-2); }
+  .nn-track__count { font-size: 0.78rem; }
+  .nn-track__body { padding: var(--space-2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nn__pulse { display: none; }
+  .nn-track__chevron { transition: none; }
+}

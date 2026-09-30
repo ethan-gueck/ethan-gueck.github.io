@@ -22,6 +22,7 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
     │       ├── gallery.css     # Dashboard carousel
     │       ├── lightbox.css    # Full-size image viewer
     │       ├── ampacity.css    # Fun and Games calculator
+    │       ├── nn.css          # Ethan's NN brain, branches, neurons and popup
 │       ├── solver.css      # COBYLA demo inputs, scene, and stage
 │       ├── arcade.css      # Conduit Carl cabinet
     │       └── footer.css
@@ -30,9 +31,10 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
     │   ├── data/
     │   │   ├── dashboards.js   # Gallery images and captions
     │   │   ├── books.js        # Book list and quotes (fill in)
-    │   │   └── flashcards.js   # 480 flashcards in 22 decks (text + MathML backs)
+    │   │   ├── flashcards.js   # 480 flashcards in 22 decks (text + MathML backs)
+    │   │   └── neurons.js      # Ethan's NN tracks (decks merged per track) and card-to-card edges
     │   └── modules/
-    │       ├── tabs.js         # Tab router (#summary, #portfolio, #fun, #about, #technical); #about is labeled "About Me"
+    │       ├── tabs.js         # Tab router (#summary, #portfolio, #fun, #technical, #flashcards, #nn, #about); #about is labeled "About Me"
     │       ├── toc.js          # Sidebar contents for the open tab
     │       ├── gallery.js      # Carousel: arrows, dots, autoplay, swipe
     │       ├── lightbox.js     # <dialog> image viewer
@@ -40,6 +42,7 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
 │       ├── booklist.js     # Fills the book list from data/books.js
 │       ├── gitgraph.js     # Experience and education git graph (About Me)
 │       ├── flashcards.js   # Flashcard decks (My Flashcards)
+│       ├── nn.js           # Ethan's NN: flashcard neuron tracks; filled from each domain site's manifest
     │       └── ampacity.js     # Simplified IEEE 738 heat balance
     └── img/
         ├── favicon.svg
@@ -56,6 +59,8 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
 | Edit page text | `index.html`, inside the matching `data-panel` section |
 | Add, remove, or reorder dashboards | `assets/js/data/dashboards.js` |
 | Add favorite books and quotes | `assets/js/data/books.js` |
+| Fill a neuron in Ethan's NN | In the track's domain repo (e.g. [algebra](https://github.com/ethan-gueck/algebra)), list the flashcard id in a topic's `api.py` `cards` (e.g. `cards=("A1.11",)`) and push |
+| Connect neurons or regroup tracks | `assets/js/data/neurons.js` |
 | Change slideshow speed | `interval` in `assets/js/main.js` (milliseconds) |
 | Add a tab | Add a link with `data-tab="name"` and a `<section data-panel="name">` in `index.html` |
 
