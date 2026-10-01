@@ -21,6 +21,10 @@
   font-family: var(--font-sans);
   font-size: var(--fs-sm);
   padding-top: var(--space-4);
+  /* Never taller than the gap between the tab bar and the contact bar; the list scrolls inside it. */
+  display: flex; flex-direction: column;
+  max-height: calc(100vh - var(--tabbar-h) - var(--space-3) - var(--contact-bar-h, 4.25rem) - var(--space-3));
+  max-height: calc(100dvh - var(--tabbar-h) - var(--space-3) - var(--contact-bar-h, 4.25rem) - var(--space-3));
 }
 .toc__heading {
   color: var(--ink-soft);
@@ -29,7 +33,18 @@
   padding-bottom: var(--space-2);
   border-bottom: 2px solid var(--sand-300);
 }
-.toc__list { list-style: none; margin: 0; padding: 0; }
+.toc__list {
+  list-style: none; margin: 0; padding: 0 var(--space-1) var(--space-2) 0;
+  min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  /* A thin sand scrollbar that matches the heading rule, and a soft fade where the list continues. */
+  scrollbar-width: thin; scrollbar-color: var(--sand-300) transparent;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
+}
+.toc__list::-webkit-scrollbar { width: 4px; }
+.toc__list::-webkit-scrollbar-track { background: transparent; }
+.toc__list::-webkit-scrollbar-thumb { background: var(--sand-300); border-radius: 999px; }
+.toc__list::-webkit-scrollbar-thumb:hover { background: var(--sand-500); }
+.toc__list.is-end { mask-image: none; }
 .toc__list li { margin: 0; }
 .toc__list a {
   display: flex; gap: var(--space-2);

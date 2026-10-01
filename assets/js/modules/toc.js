@@ -30,8 +30,21 @@ Site.buildToc = function buildToc(panel, listEl = document.getElementById('toc')
     return a;
   });
 
-  const setActive = i => links.forEach((a, j) => a.setAttribute('aria-current', String(i === j)));
+  // Highlight the section in view, and keep its link visible when the list scrolls.
+  const setActive = i => {
+    links.forEach((a, j) => a.setAttribute('aria-current', String(i === j)));
+    const a = links[i];
+    if (!a) return;
+    const top = a.offsetTop - listEl.offsetTop, bottom = top + a.offsetHeight;
+    if (top < listEl.scrollTop) listEl.scrollTop = top - 8;
+    else if (bottom > listEl.scrollTop + listEl.clientHeight) listEl.scrollTop = bottom - listEl.clientHeight + 24;
+  };
+  // Drop the bottom fade once the end of the list is in view.
+  const atEnd = () => listEl.classList.toggle('is-end', listEl.scrollTop + listEl.clientHeight >= listEl.scrollHeight - 2);
+  listEl.onscroll = atEnd;
+  listEl.scrollTop = 0;
   setActive(0);
+  requestAnimationFrame(atEnd);
 
   observer = new IntersectionObserver(entries => {
     const visible = entries.filter(e => e.isIntersecting);

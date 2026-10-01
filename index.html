@@ -59,6 +59,7 @@
   <script src="assets/js/modules/booklist.js" defer></script>
   <script src="assets/js/modules/gitgraph.js" defer></script>
   <script src="assets/js/modules/flashcards.js" defer></script>
+  <script src="assets/js/modules/stated.js" defer></script>
   <script src="assets/js/modules/nn.js" defer></script>
   <script src="assets/js/modules/outcomes.js" defer></script>
   <script src="assets/js/main.js" defer></script>
@@ -932,6 +933,28 @@
       <a class="cta__btn cta__btn--primary" data-nn-launch href="#" target="_blank" rel="noopener">See how it works
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
       <span class="nn-modal__soon" data-nn-pending aria-disabled="true">Coming soon</span>
+    </div>
+  </dialog>
+
+  <!-- Stated equation (opened from a flashcard's ? button; wording in data/stated.js) -->
+  <dialog class="modal stated-modal" id="stated-equation" aria-labelledby="stated-equation-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="stated-equation-title"><span class="stated-modal__code" data-stated-code></span><span data-stated-title></span></h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="stated-modal__tabs" role="tablist" aria-label="Stated equation">
+      <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="terms" aria-selected="true">Terms</button>
+      <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="spoken" aria-selected="false">Stated-equations</button>
+      <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="explanation" aria-selected="false">Explanation</button>
+      <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="implementations" aria-selected="false">Implementations</button>
+    </div>
+    <div class="modal__body">
+      <section data-stated-panel="terms" role="tabpanel" aria-label="What the terms mean"></section>
+      <section data-stated-panel="spoken" role="tabpanel" aria-label="Stated-equations: how each equation is said" hidden></section>
+      <section data-stated-panel="explanation" role="tabpanel" aria-label="Explanation and origin" hidden></section>
+      <section data-stated-panel="implementations" role="tabpanel" aria-label="Common implementations" hidden></section>
     </div>
   </dialog>
 

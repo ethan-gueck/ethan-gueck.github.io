@@ -32,7 +32,8 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
     │   │   ├── dashboards.js   # Gallery images and captions
     │   │   ├── books.js        # Book list and quotes (fill in)
     │   │   ├── flashcards.js   # 480 flashcards in 22 decks (text + MathML backs)
-    │   │   └── neurons.js      # Ethan's NN tracks (decks merged per track) and card-to-card edges
+    │   │   ├── neurons.js      # Ethan's NN tracks (decks merged per track) and card-to-card edges
+    │   │   └── stated.js       # Terms, stated equations, explanations and implementations per equation card (loaded on demand)
     │   └── modules/
     │       ├── tabs.js         # Tab router (#summary, #portfolio, #fun, #technical, #flashcards, #nn, #about); #about is labeled "About Me"
     │       ├── toc.js          # Sidebar contents for the open tab
@@ -42,6 +43,7 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
 │       ├── booklist.js     # Fills the book list from data/books.js
 │       ├── gitgraph.js     # Experience and education git graph (About Me)
 │       ├── flashcards.js   # Flashcard decks (My Flashcards)
+│       ├── stated.js       # Stated-equation popup (?): terms, stated equations, explanation, implementations
 │       ├── nn.js           # Ethan's NN: flashcard neuron tracks; filled from each domain site's manifest
     │       └── ampacity.js     # Simplified IEEE 738 heat balance
     └── img/

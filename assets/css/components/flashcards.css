@@ -40,12 +40,13 @@
 .fcard__back { color: var(--ink); }
 .fcard__body {
   flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0.5rem;
-  padding: 5cqw 4cqw 2cqw; text-align: center; font-family: var(--font-serif); font-size: 5.2cqw; line-height: 1.35; overflow: hidden;
+  padding: 5cqw 8cqw 2cqw; text-align: center; font-family: var(--font-serif); font-size: 5.2cqw; line-height: 1.35; overflow: hidden;
 }
 .fcard__line { display: inline-block; white-space: nowrap; }
-.fcard__line.is-wrap { white-space: normal; max-width: 100%; }
+.fcard__line.is-wrap, .fcard__line.is-phrased { white-space: normal; max-width: 100%; }
+.fcard__phrase { display: inline-block; white-space: nowrap; }
 .fcard__body math { font-size: 1em; }
-.fcard__note { padding: 0 6cqw 1.5cqw; text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 3.9cqw; line-height: 1.3; color: var(--ink-soft); }
+.fcard__note { padding: 0 8cqw 1.5cqw; text-align: center; font-family: var(--font-serif); font-style: italic; font-size: 3.9cqw; line-height: 1.3; color: var(--ink-soft); }
 .fcard__label { padding: 0 4cqw 1.2cqw; text-align: center; font-family: var(--font-sans); font-size: 2.8cqw; color: var(--ink-soft); }
 .fcard__name { display: block; font-family: var(--font-sans); font-weight: 600; font-size: 0.9em; margin-bottom: 0.4em; }
 /* MathML Core has no table rules; draw the value table lines (e.g. unit-circle table) with CSS */
@@ -59,3 +60,62 @@
   font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800);
 }
 .fcard__note { padding-bottom: 3cqw; }
+
+/* Stated-equation buttons (? terms, … read aloud) over the card's top-right corner, on the equation side */
+.fcard-wrap { position: relative; flex: 0 1 420px; min-width: 0; }
+.fcard-wrap .fcard { width: 100%; }
+.fcard.has-stated .fcard__back .fcard__body { padding-top: 12cqw; }
+.fcard__tools {
+  position: absolute; top: 3.2%; right: 3.2%; z-index: 2; display: flex; gap: 0.35rem;
+  animation: fc-tools-in 0.3s ease 0.3s both;
+}
+.fcard__tools[hidden] { display: none; }
+@keyframes fc-tools-in { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.fcard__tool {
+  width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--sand-500); background: var(--sand-300); color: var(--green-900);
+  font-family: var(--font-sans); font-size: 1rem; font-weight: 700; line-height: 1;
+  box-shadow: 0 2px 6px rgba(7,42,32,0.18);
+}
+.fcard__tool:hover { background: var(--green-800); border-color: var(--green-800); color: #FFFFFF; }
+.fcard__tool:focus-visible { outline: none; box-shadow: var(--focus); }
+@media (prefers-reduced-motion: reduce) { .fcard__tools { animation: none; } }
+
+/* Stated-equation popup */
+.stated-modal { width: min(680px, calc(100vw - 2rem)); }
+.stated-modal__code {
+  display: inline-grid; place-items: center; min-width: 2.6em; height: 2.6em; padding: 0 0.45em; margin-right: 0.55em;
+  border-radius: 999px; background: var(--sand-300); color: var(--green-900);
+  font-family: var(--font-sans); font-size: 0.72em; font-weight: 600; vertical-align: 0.2em;
+}
+.stated-modal__tabs { display: flex; gap: var(--space-1); padding: var(--space-2) var(--space-4) 0; border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--paper); }
+.stated-modal__tab {
+  display: inline-flex; align-items: center; gap: 0.45em; padding: 0.45rem 0.9rem;
+  border: 1px solid transparent; border-bottom: 0; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: none;
+  font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft);
+}
+.stated-modal__tab[aria-selected="true"] { border-color: var(--rule); background: var(--canvas); color: var(--green-800); font-weight: 600; margin-bottom: -1px; }
+.stated-modal .modal__body { background: var(--canvas); }
+.stated-terms { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0.55rem var(--space-3); font-size: 1rem; }
+.stated-terms dt { font-family: var(--font-serif); font-weight: 600; color: var(--green-800); white-space: nowrap; }
+.stated-terms dd { margin: 0; }
+.stated-terms .is-function { display: inline-block; margin-left: 0.4em; padding: 0.02rem 0.45rem; border-radius: 999px; background: rgba(27,110,83,0.12); color: var(--green-700); font-family: var(--font-sans); font-size: 0.72rem; font-weight: 600; vertical-align: 0.1em; }
+.stated-spoken { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.stated-spoken li { padding: var(--space-3); background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); }
+.stated-spoken__math { display: block; text-align: center; font-family: var(--font-serif); font-size: 1.15rem; overflow-x: auto; margin-bottom: var(--space-2); }
+.stated-spoken__text { margin: 0; font-style: italic; }
+.stated-modal__tab[hidden] { display: none; }
+.stated-modal__tabs { flex-wrap: wrap; }
+.stated-explain { margin: 0 0 var(--space-3); max-width: 62ch; }
+.stated-sub { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800); margin: var(--space-3) 0 var(--space-1); text-transform: uppercase; letter-spacing: 0.05em; }
+.stated-impl { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.stated-impl li { padding: var(--space-2) var(--space-3); background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--green-700); border-radius: var(--radius-sm); }
+.stated-impl__name { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 0.92rem; color: var(--green-900); font-weight: 600; }
+.stated-impl__lib { display: inline-block; margin-left: 0.6em; padding: 0.02rem 0.5rem; border-radius: 999px; background: rgba(216,195,165,0.35); font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; color: var(--green-800); }
+.stated-impl__note { margin: 0.25rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+.stated-empty { color: var(--ink-soft); font-style: italic; }
+@media (max-width: 560px) {
+  .stated-terms { grid-template-columns: minmax(0, 1fr); gap: 0 0; }
+  .stated-terms dd { margin-bottom: var(--space-2); }
+  .stated-modal__tabs { padding-inline: var(--space-3); }
+}

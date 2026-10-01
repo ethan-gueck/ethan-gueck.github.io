@@ -13,6 +13,7 @@ safely('contact', function () { Site.initContact(Site.config); });
 safely('modals', function () { Site.initModals(); });
 safely('books', function () { Site.initBookList(Site.books); });
 safely('outcomes', function () { Site.initOutcomeCards(); });
+safely('stated', function () { Site.initStated(); });
 safely('flashcards', function () { Site.initFlashcards(document.getElementById('panel-flashcards'), Site.flashcards); });
 var gitgraph = safely('gitgraph', function () { return Site.initGitGraph(document.querySelector('.gg')); });
 
