@@ -5,7 +5,7 @@
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
   background: linear-gradient(90deg, var(--green-900) 0%, var(--green-800) 45%, var(--green-700) 100%);
   border-top: 3px solid var(--sand-300);
-  box-shadow: 0 -6px 18px rgba(7,42,32,0.2);
+  box-shadow: 0 -6px 18px rgba(var(--shade-rgb), 0.2);
   padding-bottom: env(safe-area-inset-bottom, 0px);
   transition: transform 0.35s ease, opacity 0.35s ease;
 }

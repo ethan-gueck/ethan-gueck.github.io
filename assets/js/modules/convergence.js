@@ -18,11 +18,21 @@ var SETTINGS = { rhobeg: 0.09, xtol: 1e-6, ftol: 1e-7, x0: 0.5, sigma: 1000 };
 var T_MIN = -75, T_MAX = 750;            // search space, °C
 var SITE = { lat: 37.54, lon: -77.44, stdMeridian: -75 };   // Richmond, Virginia (Eastern time)
 
-var COLORS = {
+var LIGHT = {
   axis: 'rgba(243,238,230,0.45)', grid: 'rgba(243,238,230,0.08)', text: '#F3EEE6', dim: 'rgba(243,238,230,0.65)',
   curve: '#D8C3A5', accepted: '#FFFFFF', rejected: '#8FC7B1', band: 'rgba(143,199,177,0.16)',
   step: 'rgba(216,195,165,0.55)', ring: '#F2C14E', panel: 'rgba(7,42,32,0.55)', panelEdge: 'rgba(216,195,165,0.35)',
 };
+// Dark mode (dark.css): blue-grey stage, yellow scale for the curve and steps.
+var DARK = {
+  axis: 'rgba(240,244,248,0.45)', grid: 'rgba(240,244,248,0.08)', text: '#f0f4f8', dim: 'rgba(240,244,248,0.65)',
+  curve: '#e5a93c', accepted: '#FFFFFF', rejected: '#9fb3c8', band: 'rgba(159,179,200,0.16)',
+  step: 'rgba(229,169,60,0.55)', ring: '#edc378', panel: 'rgba(4,14,26,0.55)', panelEdge: 'rgba(229,169,60,0.35)',
+};
+var COLORS = {};
+function usePalette() { Object.assign(COLORS, document.documentElement.dataset.theme === 'dark' ? DARK : LIGHT); }
+usePalette();
+document.addEventListener('site:theme', usePalette);
 
 // Manim's default "smooth" rate function.
 function smooth(t) { t = Math.min(1, Math.max(0, t)); return t * t * t * (t * (t * 6 - 15) + 10); }

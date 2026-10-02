@@ -6,7 +6,7 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--green-900);
-  box-shadow: 0 0 0 1px var(--green-800), 0 12px 30px rgba(7,42,32,0.22);
+  box-shadow: 0 0 0 1px var(--ink-green-800), 0 12px 30px rgba(var(--shade-rgb), 0.22);
   aspect-ratio: 16 / 9;
   touch-action: pan-y;
 }
@@ -27,7 +27,7 @@
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 44px; height: 44px; border-radius: 50%;
   display: grid; place-items: center;
-  background: rgba(7,42,32,0.78); border: 1px solid rgba(216,195,165,0.55);
+  background: rgba(var(--shade-rgb), 0.78); border: 1px solid rgba(var(--sand-rgb), 0.55);
   color: var(--sand-300);
   transition: background-color 0.15s ease, color 0.15s ease;
 }
@@ -43,7 +43,7 @@
 .gallery__toggle {
   width: 32px; height: 32px; border-radius: 50%;
   display: grid; place-items: center;
-  border: 1px solid var(--rule); background: var(--paper); color: var(--green-800);
+  border: 1px solid var(--rule); background: var(--paper); color: var(--ink-green-800);
 }
 .gallery__toggle svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .gallery__toggle .icon-play { fill: currentColor; stroke-width: 1.5; }

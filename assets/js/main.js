@@ -9,6 +9,7 @@ function safely(name, fn) {
   try { return fn(); } catch (err) { console.error('[' + name + ']', err); return null; }
 }
 
+safely('theme', function () { Site.initTheme(); });
 safely('contact', function () { Site.initContact(Site.config); });
 safely('modals', function () { Site.initModals(); });
 safely('books', function () { Site.initBookList(Site.books); });

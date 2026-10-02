@@ -53,8 +53,8 @@
   border-left: 2px solid transparent;
   line-height: 1.35;
 }
-.toc__list a:hover { color: var(--green-800); border-left-color: var(--rule); }
-.toc__list a[aria-current="true"] { color: var(--green-800); border-left-color: var(--green-800); font-weight: 500; }
+.toc__list a:hover { color: var(--ink-green-800); border-left-color: var(--rule); }
+.toc__list a[aria-current="true"] { color: var(--ink-green-800); border-left-color: var(--ink-green-800); font-weight: 500; }
 .toc__num { color: var(--sand-500); min-width: 1.6em; font-variant-numeric: tabular-nums; }
 
 @media (max-width: 880px) {

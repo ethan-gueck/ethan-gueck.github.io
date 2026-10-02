@@ -21,7 +21,7 @@
 }
 .segmented label:first-of-type span { border-radius: var(--radius-md) 0 0 var(--radius-md); }
 .segmented label:last-of-type span { border-radius: 0 var(--radius-md) var(--radius-md) 0; border-left: 0; }
-.segmented input:checked + span { background: var(--green-800); border-color: var(--green-800); color: #FFFFFF; }
+.segmented input:checked + span { background: var(--green-800); border-color: var(--ink-green-800); color: #FFFFFF; }
 .segmented input:focus-visible + span { box-shadow: var(--focus); }
 
 .solver__date { display: grid; gap: var(--space-1); font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
@@ -32,7 +32,7 @@
 
 /* Output values pulse briefly when an input changes. */
 .ampacity__field output.is-changed { animation: value-pulse 0.45s ease-out; }
-@keyframes value-pulse { 0% { color: var(--sand-500); } 100% { color: var(--green-800); } }
+@keyframes value-pulse { 0% { color: var(--sand-500); } 100% { color: var(--ink-green-800); } }
 
 /* Conditions scene */
 .solver__scene { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
@@ -54,13 +54,13 @@
   position: relative;
   background: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 55%, var(--green-700) 100%);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
-  box-shadow: 0 12px 30px rgba(7,42,32,0.22);
+  box-shadow: 0 12px 30px rgba(var(--shade-rgb), 0.22);
 }
 .solver__stage canvas { display: block; width: 100%; height: 400px; }
 .solver__pause {
   position: absolute; top: 10px; right: 10px;
   width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
-  border: 1px solid rgba(216,195,165,0.5); background: rgba(7,42,32,0.6); color: var(--sand-300);
+  border: 1px solid rgba(var(--sand-rgb), 0.5); background: rgba(var(--shade-rgb), 0.6); color: var(--sand-300);
 }
 .solver__pause svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -85,11 +85,11 @@
   padding: 0.8rem 1.5rem; border-radius: 999px; border: 0;
   font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
   background: var(--sand-300); color: var(--green-900);
-  box-shadow: 0 0 0 5px rgba(216,195,165,0.2), 0 10px 24px rgba(0,0,0,0.35);
+  box-shadow: 0 0 0 5px rgba(var(--sand-rgb), 0.2), 0 10px 24px rgba(0,0,0,0.35);
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 .solver__run:hover { background: #FFFFFF; transform: translate(-50%, -50%) scale(1.04); }
-.solver__run:focus-visible { box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--green-800); }
+.solver__run:focus-visible { box-shadow: 0 0 0 3px #FFFFFF, 0 0 0 6px var(--ink-green-800); }
 .solver:not(.is-idle) .solver__run { display: none; }
 .solver.is-static .solver__run { display: block; top: auto; bottom: 14px; transform: translateX(-50%); }
 .solver.is-idle .solver__pause { display: none; }
@@ -109,24 +109,24 @@
   display: grid; place-items: center;
   background: var(--gradient-primary); color: var(--sand-300);
   font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
-  box-shadow: 0 0 0 3px rgba(216,195,165,0.35);
+  box-shadow: 0 0 0 3px rgba(var(--sand-rgb), 0.35);
 }
 .steps__item:not(:last-child)::after {
   content: ""; position: absolute; left: 1.1rem; top: 2.4rem; bottom: 0.2rem;
   width: 2px; background: var(--rule);
 }
-.steps__title { font-family: var(--font-sans); font-weight: 600; color: var(--green-800); margin: 0 0 0.15rem; font-size: 1rem; }
+.steps__title { font-family: var(--font-sans); font-weight: 600; color: var(--ink-green-800); margin: 0 0 0.15rem; font-size: 1rem; }
 .steps__text { margin: 0 0 var(--space-2); font-size: 1rem; }
 .steps__math {
   margin: 0; padding: 0.45rem 0.75rem; overflow-x: auto;
-  background: rgba(216,195,165,0.16); border-left: 3px solid var(--sand-300);
+  background: rgba(var(--tint-rgb), 0.16); border-left: 3px solid var(--sand-300);
   font-size: 1.05rem;
 }
 
 .steps--compact .steps__item { padding-bottom: var(--space-3); }
 .steps--compact .steps__title { font-size: 1.1rem; padding-top: 0.35rem; }
 .steps__note { font-size: 0.95rem; color: var(--ink-soft); margin: 0 0 var(--space-2); padding: 0.4rem 0.7rem; border: 1px dashed var(--sand-500); border-radius: var(--radius-md); }
-.steps__note strong { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--green-800); }
+.steps__note strong { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-green-800); }
 .solver__atmos { grid-column: 1 / -1; margin-top: var(--space-1); }
 .solver__date input { width: 100%; }
 .solver__date input { padding: 0.25rem 0.5rem; }

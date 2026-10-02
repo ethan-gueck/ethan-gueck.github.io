@@ -10,7 +10,7 @@
   content: "";
   position: absolute; inset: 0;
   background:
-    repeating-radial-gradient(circle at 88% 12%, transparent 0 38px, rgba(216,195,165,0.07) 38px 39px);
+    repeating-radial-gradient(circle at 88% 12%, transparent 0 38px, rgba(var(--tint-rgb), 0.07) 38px 39px);
   pointer-events: none;
 }
 .masthead > * { position: relative; }
@@ -19,7 +19,7 @@
   display: flex; justify-content: space-between; align-items: center;
   padding-block: var(--space-3);
   font-family: var(--font-sans); font-size: var(--fs-sm);
-  border-bottom: 1px solid rgba(216,195,165,0.28);
+  border-bottom: 1px solid rgba(var(--sand-rgb), 0.28);
 }
 .masthead__journal { color: var(--sand-300); letter-spacing: 0.02em; }
 .masthead__links { display: flex; gap: var(--space-4); }
@@ -34,8 +34,8 @@
 .masthead__portrait img {
   width: clamp(190px, 22vw, 280px); height: auto; aspect-ratio: 1; object-fit: cover;
   border-radius: 50%;
-  border: 4px solid rgba(216,195,165,0.9);
-  box-shadow: 0 0 0 6px rgba(216,195,165,0.15), 0 14px 30px rgba(0,0,0,0.3);
+  border: 4px solid rgba(var(--sand-rgb), 0.9);
+  box-shadow: 0 0 0 6px rgba(var(--sand-rgb), 0.15), 0 14px 30px rgba(0,0,0,0.3);
 }
 .masthead__name {
   font-size: var(--fs-xl);
@@ -70,7 +70,7 @@
 .tabs {
   position: sticky; top: 0; z-index: 40;
   background: linear-gradient(90deg, var(--green-900) 0%, var(--green-800) 40%, var(--green-700) 100%);
-  box-shadow: 0 1px 0 rgba(216,195,165,0.25), 0 6px 16px rgba(7,42,32,0.18);
+  box-shadow: 0 1px 0 rgba(var(--sand-rgb), 0.25), 0 6px 16px rgba(var(--shade-rgb), 0.18);
   padding-top: var(--space-2);
 }
 .tabs__list {
@@ -91,7 +91,7 @@
 .tabs__tab:hover { color: #FFFFFF; background: rgba(255,255,255,0.06); text-decoration: none; }
 .tabs__tab[aria-selected="true"] {
   background: var(--canvas);
-  color: var(--green-800);
+  color: var(--ink-green-800);
   border-top-color: var(--sand-300);
 }
 .tabs__tab:focus-visible { box-shadow: inset 0 0 0 2px var(--sand-300); }
@@ -106,3 +106,22 @@
   .masthead__portrait img { width: 170px; border-width: 3px; }
   .tabs__tab { padding-inline: 0.85rem; }
 }
+
+/* Light / dark toggle at the right end of the tab bar (modules/theme.js). Moon in light mode, sun in dark. */
+.tabs > .container { display: flex; align-items: flex-end; gap: var(--space-2); }
+.tabs__list { flex: 1; min-width: 0; }
+.theme-toggle {
+  flex-shrink: 0; align-self: center; width: 36px; height: 36px; margin-bottom: var(--space-1);
+  display: grid; place-items: center; padding: 0; border-radius: 50%;
+  border: 1px solid rgba(var(--sand-rgb), 0.55); background: rgba(255,255,255,0.06); color: var(--sand-300);
+  transition: background-color 0.15s ease, transform 0.2s ease;
+}
+.theme-toggle:hover { background: rgba(var(--tint-rgb), 0.18); }
+.theme-toggle:focus-visible { outline: none; box-shadow: var(--focus); }
+.theme-toggle svg { width: 18px; height: 18px; grid-area: 1 / 1; }
+.theme-toggle__moon { fill: currentColor; stroke: none; }
+.theme-toggle__sun { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; display: none; }
+.theme-toggle__sun circle { fill: currentColor; }
+[data-theme="dark"] .theme-toggle__moon { display: none; }
+[data-theme="dark"] .theme-toggle__sun { display: block; }
+@media (max-width: 560px) { .theme-toggle { width: 32px; height: 32px; } }

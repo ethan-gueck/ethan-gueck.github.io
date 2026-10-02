@@ -16,6 +16,9 @@
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
+  <!-- Dark mode before first paint (choice saved by modules/theme.js; shared with the topic sites) -->
+  <script>try { if (localStorage.getItem('pp-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +41,7 @@
   <link rel="stylesheet" href="assets/css/components/cta.css">
   <link rel="stylesheet" href="assets/css/components/footer.css">
   <link rel="stylesheet" href="assets/css/components/contact-bar.css">
+  <link rel="stylesheet" href="assets/css/dark.css">
 
   <!-- Scripts: plain (non-module) so the page also works when opened straight from disk -->
   <script src="assets/js/data/site.js" defer></script>
@@ -45,6 +49,7 @@
   <script src="assets/js/data/books.js" defer></script>
   <script src="assets/js/data/flashcards.js" defer></script>
   <script src="assets/js/data/neurons.js" defer></script>
+  <script src="assets/js/modules/theme.js" defer></script>
   <script src="assets/js/modules/tabs.js" defer></script>
   <script src="assets/js/modules/toc.js" defer></script>
   <script src="assets/js/modules/gallery.js" defer></script>
@@ -104,6 +109,10 @@
       <li role="presentation"><a class="tabs__tab" role="tab" href="#nn" data-tab="nn" id="tab-nn" aria-controls="panel-nn">Ethan's NN</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#about" data-tab="about" id="tab-about" aria-controls="panel-about">About Me</a></li>
     </ul>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Dark mode">
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    </button>
   </div>
 </nav>
 

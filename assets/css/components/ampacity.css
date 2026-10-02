@@ -11,8 +11,8 @@
 
 .ampacity__field { display: block; margin-bottom: var(--space-3); font-family: var(--font-sans); font-size: var(--fs-sm); }
 .ampacity__field span { display: flex; justify-content: space-between; margin-bottom: var(--space-1); color: var(--ink-soft); }
-.ampacity__field output { color: var(--green-800); font-weight: 600; font-variant-numeric: tabular-nums; }
-.ampacity__field input { width: 100%; accent-color: var(--green-800); }
+.ampacity__field output { color: var(--ink-green-800); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ampacity__field input { width: 100%; accent-color: var(--ink-green-800); }
 
 .ampacity__result {
   background: var(--gradient-primary); color: #F3EEE6;

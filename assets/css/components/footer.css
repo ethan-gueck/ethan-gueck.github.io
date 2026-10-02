@@ -14,7 +14,7 @@
 .site-footer__cite { max-width: 52ch; }
 .site-footer__fine {
   margin-top: var(--space-5); padding-top: var(--space-3);
-  border-top: 1px solid rgba(216,195,165,0.25);
+  border-top: 1px solid rgba(var(--sand-rgb), 0.25);
   font-family: var(--font-sans); font-size: 0.8rem; color: rgba(243,238,230,0.6);
 }
 @media (max-width: 720px) { .site-footer__inner { grid-template-columns: 1fr; gap: var(--space-4); } }

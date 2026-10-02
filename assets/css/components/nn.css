@@ -7,12 +7,12 @@
 .nn__brain img {
   width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%;
   background: #FFFFFF;
-  border: 4px solid rgba(216,195,165,0.9);
-  box-shadow: 0 0 0 6px rgba(216,195,165,0.15), 0 14px 30px rgba(7,42,32,0.22);
+  border: 4px solid rgba(var(--sand-rgb), 0.9);
+  box-shadow: 0 0 0 6px rgba(var(--sand-rgb), 0.15), 0 14px 30px rgba(var(--shade-rgb), 0.22);
 }
 .nn__brain-open { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: 50%; cursor: zoom-in; }
 .nn__brain-open:focus-visible { outline: none; box-shadow: var(--focus); }
-.nn__brain-open:hover img { box-shadow: 0 0 0 6px rgba(216,195,165,0.35), 0 14px 30px rgba(7,42,32,0.3); }
+.nn__brain-open:hover img { box-shadow: 0 0 0 6px rgba(var(--sand-rgb), 0.35), 0 14px 30px rgba(var(--shade-rgb), 0.3); }
 .nn__stem { flex: 1; min-height: var(--space-4); width: var(--nn-rail); background: var(--green-800); }
 .nn__intro { align-self: center; padding-bottom: var(--space-4); }
 .nn__intro .lede { margin-top: 0; }
@@ -21,15 +21,15 @@
   font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft);
 }
 .nn__legend span { display: inline-flex; align-items: center; gap: 0.45em; }
-.nn__legend i { width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--green-800); background: var(--paper); }
-.nn__legend .is-built i { background: var(--green-800); border-color: var(--sand-300); box-shadow: 0 0 0 1px var(--green-800); }
+.nn__legend i { width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--ink-green-800); background: var(--paper); }
+.nn__legend .is-built i { background: var(--green-800); border-color: var(--sand-300); box-shadow: 0 0 0 1px var(--ink-green-800); }
 .nn__status { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); margin: 0; }
 
 /* Tracks branch off the rail, which continues from the brain's stem */
 .nn__tracks {
   list-style: none; margin: 0; padding: 0 0 0 var(--nn-branch);
   margin-left: calc(var(--nn-brain) / 2 - var(--nn-rail) / 2);
-  border-left: var(--nn-rail) solid var(--green-800);
+  border-left: var(--nn-rail) solid var(--ink-green-800);
 }
 .nn-track { position: relative; padding: var(--space-1) 0; }
 .nn-track::before {  /* branch from the rail */
@@ -38,7 +38,7 @@
 }
 .nn-track::after {   /* synapse where the branch leaves the rail */
   content: ""; position: absolute; left: calc(-1 * var(--nn-branch) - 5px - var(--nn-rail) / 2); top: calc(1.7rem - 4px);
-  width: 8px; height: 8px; border-radius: 50%; background: var(--paper); border: 2px solid var(--green-800);
+  width: 8px; height: 8px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink-green-800);
 }
 .nn-track.has-built::after { background: var(--sand-300); }
 
@@ -49,16 +49,16 @@
   font-family: var(--font-sans); color: var(--ink); cursor: pointer;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
-.nn-track__head:hover { border-color: var(--green-700); }
+.nn-track__head:hover { border-color: var(--ink-green-700); }
 .nn-track__head:focus-visible { outline: none; box-shadow: var(--focus); }
-.nn-track__name { font-weight: 600; font-size: 1rem; color: var(--green-800); }
+.nn-track__name { font-weight: 600; font-size: 1rem; color: var(--ink-green-800); }
 .nn-track__count { font-size: var(--fs-sm); color: var(--ink-soft); margin-left: auto; white-space: nowrap; }
 .nn-track__chevron {
   width: 18px; height: 18px; align-self: center; flex-shrink: 0;
-  fill: none; stroke: var(--green-800); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  fill: none; stroke: var(--ink-green-800); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
   transition: transform 0.2s ease;
 }
-.nn-track.is-open .nn-track__head { background: var(--gradient-primary); border-color: var(--green-800); border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.nn-track.is-open .nn-track__head { background: var(--gradient-primary); border-color: var(--ink-green-800); border-radius: var(--radius-md) var(--radius-md) 0 0; }
 .nn-track.is-open .nn-track__name { color: #FFFFFF; }
 .nn-track.is-open .nn-track__count { color: var(--sand-200); }
 .nn-track.is-open .nn-track__chevron { stroke: var(--sand-300); transform: rotate(180deg); }
@@ -69,7 +69,7 @@
 .nn__svg { display: block; width: 100%; height: auto; overflow: visible; }
 
 /* Edges */
-.nn__edge { fill: none; stroke: var(--green-700); stroke-width: 2.5; stroke-linecap: round; transition: stroke 0.15s ease, opacity 0.15s ease; }
+.nn__edge { fill: none; stroke: var(--ink-green-700); stroke-width: 2.5; stroke-linecap: round; transition: stroke 0.15s ease, opacity 0.15s ease; }
 .nn__pulse {
   fill: none; stroke: var(--sand-300); stroke-width: 2.5; stroke-linecap: round;
   stroke-dasharray: 3 36; animation: nn-signal 2.4s linear infinite; pointer-events: none;
@@ -80,8 +80,8 @@
 
 /* Neurons: outlined until a page is built, then filled */
 .nn__neuron { cursor: pointer; outline: none; }
-.nn__dendrite { fill: none; stroke: var(--green-700); stroke-width: 2.2; stroke-linecap: round; }
-.nn__soma { fill: var(--paper); stroke: var(--green-800); stroke-width: 2.5; transition: fill 0.15s ease; }
+.nn__dendrite { fill: none; stroke: var(--ink-green-700); stroke-width: 2.2; stroke-linecap: round; }
+.nn__soma { fill: var(--paper); stroke: var(--ink-green-800); stroke-width: 2.5; transition: fill 0.15s ease; }
 .nn__code { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--green-800); text-anchor: middle; pointer-events: none; }
 .nn__neuron.is-built .nn__soma { fill: var(--green-800); stroke: var(--sand-300); stroke-width: 3; }
 .nn__neuron.is-built .nn__code { fill: #FFFFFF; }
@@ -108,17 +108,17 @@
 }
 .nn-modal__card { margin: var(--space-2) 0 var(--space-3); overflow-x: auto; }
 .nn-modal__card p { margin: 0.3rem 0; }
-.nn-modal__card .fcard__name { font-family: var(--font-sans); color: var(--green-800); }
+.nn-modal__card .fcard__name { font-family: var(--font-sans); color: var(--ink-green-800); }
 .nn-modal__note { font-style: italic; color: var(--ink-soft); }
 .nn-modal__facts { margin: var(--space-3) 0; font-size: 1rem; }
-.nn-modal__facts dt { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--green-800); }
+.nn-modal__facts dt { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
 .nn-modal__facts dd { margin: 0.25rem 0 var(--space-3); display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .nn-modal__link {
   font-family: var(--font-sans); font-size: 0.85rem; padding: 0.25rem 0.6rem; border-radius: 999px;
-  border: 1px solid var(--rule); background: var(--paper); color: var(--green-800); cursor: pointer;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--ink-green-800); cursor: pointer;
 }
-.nn-modal__link:hover { border-color: var(--green-700); }
-.nn-modal__link.is-built { background: var(--green-800); border-color: var(--green-800); color: #FFFFFF; }
+.nn-modal__link:hover { border-color: var(--ink-green-700); }
+.nn-modal__link.is-built { background: var(--green-800); border-color: var(--ink-green-800); color: #FFFFFF; }
 .nn-modal__link:focus-visible { outline: none; box-shadow: var(--focus); }
 /* Stands where "See how it works" goes until the page exists; not a link. */
 .nn-modal__soon {
@@ -141,15 +141,15 @@
   display: block; width: auto; height: auto; max-width: calc(100vw - 2rem);
   max-height: calc(100vh - 2rem - 3.75rem);   /* room for the caption below */
   border-radius: 18px; background: var(--paper);
-  box-shadow: 0 24px 60px rgba(7,42,32,0.45);
+  box-shadow: 0 24px 60px rgba(var(--shade-rgb), 0.45);
 }
 .art-modal__caption {
   padding: 0.5rem 1.1rem; border-radius: 999px; white-space: nowrap;
   background: var(--green-800); color: #FFFFFF; border: 2px solid var(--sand-300);
   font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02em;
-  box-shadow: 0 6px 16px rgba(7,42,32,0.3);
+  box-shadow: 0 6px 16px rgba(var(--shade-rgb), 0.3);
 }
-.art-modal__close { position: absolute; top: var(--space-3); right: var(--space-3); box-shadow: 0 4px 12px rgba(7,42,32,0.3); }
+.art-modal__close { position: absolute; top: var(--space-3); right: var(--space-3); box-shadow: 0 4px 12px rgba(var(--shade-rgb), 0.3); }
 
 @media (max-width: 640px) {
   .nn { --nn-brain: 96px; --nn-branch: var(--space-3); }

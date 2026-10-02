@@ -16,8 +16,8 @@ body {
 img, svg { display: block; max-width: 100%; }
 h1, h2, h3 { line-height: 1.2; font-weight: 500; margin: 0; }
 p { margin: 0 0 var(--space-3); }
-a { color: var(--green-700); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
-a:hover { color: var(--green-800); text-decoration-thickness: 2px; }
+a { color: var(--ink-green-700); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--ink-green-800); text-decoration-thickness: 2px; }
 button { font: inherit; cursor: pointer; }
 :focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--radius-sm); }
 

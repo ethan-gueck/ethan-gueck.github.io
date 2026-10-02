@@ -1,0 +1,75 @@
+/* Dark mode: <html data-theme="dark">, set by modules/theme.js from the moon/sun button.
+ *
+ * Blue-grey scale (given):   050 #f0f4f8  200 #bcccdc  400 #829ab1  600 #486581  900 #102a43
+ *   with the steps between:  100 #d9e2ec  300 #9fb3c8  500 #627d98  700 #334e68  800 #243b53
+ * Yellow scale, built from #E5A93C at the blue scale's lightness steps:
+ *   050 #fcf8ef  100 #f9efdc  200 #f3d7a5  300 #edc378  400 #e5a93c  500 #d8961d  600 #b17b18  700 #875d12
+ *
+ * The greens become the blue-grey backgrounds (mastheads, tab bar, buttons); the --ink-green tokens
+ * become light blues for text and lines; sand becomes the yellow. Loaded last, so it wins ties.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --green-900: #102a43;
+  --green-800: #243b53;
+  --green-700: #334e68;
+  --green-600: #486581;
+
+  --ink-green-900: #f0f4f8;
+  --ink-green-800: #bcccdc;
+  --ink-green-700: #9fb3c8;
+  --ink-green-600: #829ab1;
+
+  --sand-300: #e5a93c;
+  --sand-200: #f3d7a5;
+  --sand-500: #edc378;
+
+  --paper:  #1b334c;   /* cards: between 900 and 800 */
+  --canvas: #102a43;
+  --ink:      #f0f4f8;
+  --ink-soft: #bcccdc;
+  --rule:     #334e68;
+  --face:     #243b53;
+
+  --sand-rgb: 229,169,60;
+  --tint-rgb: 159,179,200;
+  --shade-rgb: 4,14,26;
+  --green-600-rgb: 130,154,177;
+
+  --gradient-primary: linear-gradient(135deg, #0c2236 0%, #1b334c 45%, #334e68 100%);
+  --shadow-paper: 0 1px 2px rgba(4,14,26,0.4), 0 8px 24px rgba(4,14,26,0.35);
+  --focus: 0 0 0 3px #e5a93c, 0 0 0 5px #102a43;
+}
+
+/* Surfaces that were plain white in light mode */
+[data-theme="dark"] .fcard__face { background: var(--face); }
+[data-theme="dark"] .fcard__face--pic { background: #f0f4f8; }      /* schematic and graph drawings stay on light paper */
+[data-theme="dark"] .nn { background: var(--paper); }
+[data-theme="dark"] .gg__card--edu { background: #243b53; }
+[data-theme="dark"] .nn__brain img, [data-theme="dark"] .art-modal__figure img { background: #f0f4f8; }
+
+/* Text drawn inside SVG shapes */
+[data-theme="dark"] .nn__code { fill: #f0f4f8; }
+[data-theme="dark"] .nn__neuron.is-built .nn__code { fill: #102a43; }
+[data-theme="dark"] .nn__neuron.is-built .nn__soma { fill: #e5a93c; stroke: #f3d7a5; }
+[data-theme="dark"] .nn__neuron.is-built:hover .nn__soma, [data-theme="dark"] .nn__neuron.is-built.is-lit .nn__soma { fill: #edc378; }
+[data-theme="dark"] .nn__neuron:hover .nn__soma, [data-theme="dark"] .nn__neuron.is-lit .nn__soma { fill: #334e68; }
+[data-theme="dark"] .nn__label { stroke: var(--paper); }
+[data-theme="dark"] .nn__legend .is-built i { background: #e5a93c; border-color: #f3d7a5; box-shadow: none; }
+[data-theme="dark"] .nn-modal__link.is-built { background: #e5a93c; border-color: #e5a93c; color: #102a43; }
+
+/* Buttons that sit on paper: light text on the blue fill */
+[data-theme="dark"] .text-btn { background: transparent; }
+[data-theme="dark"] .nn-modal .cta__btn--primary, [data-theme="dark"] .stated-modal .cta__btn--primary { background: #e5a93c; color: #102a43; }
+
+/* Backdrops behind dialogs */
+[data-theme="dark"] .modal::backdrop, [data-theme="dark"] .lightbox::backdrop { background: rgba(4,14,26,0.78); }
+
+/* COBYLA scene: the sky gradient is drawn in the page's SVG */
+[data-theme="dark"] #sky stop:first-child { stop-color: #243b53; }
+[data-theme="dark"] #sky stop:last-child { stop-color: #102a43; }
+
+/* Skill tags on the experience graph */
+[data-theme="dark"] .skill-tag--technical { background: rgba(159,179,200,0.16); color: #d9e2ec; }
+[data-theme="dark"] .skill-tag--soft { background: rgba(229,169,60,0.22); color: #f3d7a5; }

@@ -4,7 +4,7 @@
   max-width: min(96vw, 1800px); width: 100%;
   color: #F3EEE6;
 }
-.lightbox::backdrop { background: rgba(7,42,32,0.92); }
+.lightbox::backdrop { background: rgba(var(--shade-rgb), 0.92); }
 .lightbox__img { width: 100%; max-height: 84vh; object-fit: contain; border-radius: var(--radius-sm); }
 .lightbox__caption { font-size: 1rem; margin: var(--space-3) auto 0; max-width: 80ch; text-align: center; color: var(--sand-200); }
 .lightbox__close {

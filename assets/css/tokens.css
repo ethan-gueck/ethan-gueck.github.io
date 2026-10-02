@@ -16,6 +16,20 @@
   --ink-soft:  #45524C;
   --rule:      #CFD6D2;
 
+  /* Brand green as ink: text, borders and lines drawn on paper. Same as the greens in light mode;
+     dark mode (dark.css) makes these light while the greens above stay dark backgrounds. */
+  --ink-green-900: var(--green-900);
+  --ink-green-800: var(--green-800);
+  --ink-green-700: var(--green-700);
+  --ink-green-600: var(--green-600);
+
+  /* rgb triplets for tints, used as rgba(var(--sand-rgb), 0.3) so dark mode can swap their hue. */
+  --sand-rgb: 216,195,165;
+  --tint-rgb: 216,195,165;   /* faint fills; pale blue in dark mode */
+  --shade-rgb: 7,42,32;
+  --green-600-rgb: 27,110,83;
+  --face: #FFFFFF;          /* flashcard faces and other white panels */
+
   --gradient-primary: linear-gradient(135deg, var(--green-900) 0%, var(--green-800) 45%, var(--green-700) 100%);
 
   /* Type */
