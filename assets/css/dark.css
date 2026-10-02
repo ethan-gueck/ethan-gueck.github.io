@@ -44,7 +44,6 @@
 
 /* Surfaces that were plain white in light mode */
 [data-theme="dark"] .fcard__face { background: var(--face); }
-[data-theme="dark"] .fcard__face--pic { background: #f0f4f8; }      /* schematic and graph drawings stay on light paper */
 [data-theme="dark"] .nn { background: var(--paper); }
 [data-theme="dark"] .gg__card--edu { background: #243b53; }
 [data-theme="dark"] .nn__brain img, [data-theme="dark"] .art-modal__figure img { background: #f0f4f8; }

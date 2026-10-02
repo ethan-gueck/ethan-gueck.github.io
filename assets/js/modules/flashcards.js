@@ -79,9 +79,13 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       });
     });
 
+    // Picture fronts are drawn for the light theme; other themes recolour them (modules/recolor.js).
     function img(src, alt) {
       var im = document.createElement('img');
-      im.src = src; im.alt = alt; im.decoding = 'async';
+      im.alt = alt; im.decoding = 'async';
+      im.dataset.src = src;
+      if (Site.themedImage) Site.themedImage(src, function (url) { if (im.dataset.src === src) im.src = url; });
+      else im.src = src;
       return im;
     }
 
@@ -207,6 +211,10 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     });
     renders.push(render);
     render();
+    document.addEventListener('site:theme', function () {
+      var pic = front.querySelector('img[data-src]');
+      if (pic && Site.themedImage) Site.themedImage(pic.dataset.src, function (url) { pic.src = url; });
+    });
   });
 };
 

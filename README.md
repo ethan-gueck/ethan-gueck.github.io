@@ -44,6 +44,7 @@ Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanill
 │       ├── gitgraph.js     # Experience and education git graph (About Me)
 │       ├── flashcards.js   # Flashcard decks (My Flashcards)
 │       ├── stated.js       # Stated-equation popup (?): terms, stated equations, explanation, implementations
+│       ├── recolor.js      # Recolours SVG drawings (flashcard fronts) for the active theme from a palette map
 │       ├── nn.js           # Ethan's NN: flashcard neuron tracks; filled from each domain site's manifest
     │       └── ampacity.js     # Simplified IEEE 738 heat balance
     └── img/
