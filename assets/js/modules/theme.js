@@ -3,7 +3,8 @@
  * and remembers the choice in localStorage under "pp-theme". The topic sites
  * (ethan-gueck.github.io/<domain>/…) share this origin and read the same key, so a neuron
  * opened in dark mode opens dark. A small inline script in <head> applies the saved choice
- * before first paint; this module wires the button and tells canvases to recolour.
+ * (and the matching tab icon, favicon.svg / favicon-dark.svg) before first paint; this module
+ * wires the button, swaps the tab icon and tells canvases to recolour.
  */
 (function (Site) {
 'use strict';
@@ -17,6 +18,8 @@ function apply(mode) {
   else delete document.documentElement.dataset.theme;
   var meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.content = mode === 'dark' ? '#102a43' : '#0B3D2E';
+  var icon = document.querySelector('link[rel="icon"][data-dark]');
+  if (icon) icon.href = mode === 'dark' ? icon.dataset.dark : icon.dataset.light;
   document.dispatchEvent(new CustomEvent('site:theme', { detail: mode }));
 }
 

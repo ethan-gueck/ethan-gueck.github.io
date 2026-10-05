@@ -14,10 +14,10 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/img/profile/headshot.webp">
 
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" data-light="assets/img/favicon.svg" data-dark="assets/img/favicon-dark.svg">
 
   <!-- Dark mode before first paint (choice saved by modules/theme.js; shared with the topic sites) -->
-  <script>try { if (localStorage.getItem('pp-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+  <script>try { if (localStorage.getItem('pp-theme') === 'dark') { document.documentElement.dataset.theme = 'dark'; var i = document.querySelector('link[rel="icon"][data-dark]'); if (i) i.href = i.dataset.dark; } } catch (e) {}</script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
