@@ -64,10 +64,11 @@ function cardTitle(card) {
   return name ? name[1].replace(/<[^>]+>/g, '').trim() : card.id;
 }
 
-function buildModel(decks, trackDefs, requires) {
+function buildModel(decks, trackDefs, requires, excluded) {
   var byDeck = {};
   decks.forEach(function (d) { byDeck[d.name] = d; });
   var named = {};
+  (excluded || []).forEach(function (n) { named[n] = true; });  // flashcards only: no track of their own
   var tracks = trackDefs.map(function (t) {
     t.decks.forEach(function (n) { named[n] = true; });
     return { name: t.name, decks: t.decks.filter(function (n) { return byDeck[n]; }) };
@@ -264,7 +265,7 @@ function countText(track) {
 Site.initNN = function initNN(root, options) {
   if (!root) return null;
   var config = options.config || {};
-  var model = buildModel(options.decks || [], options.tracks || [], options.requires || {});
+  var model = buildModel(options.decks || [], options.tracks || [], options.requires || {}, options.exclude);
   var nodes = model.nodes;
   var list = root.querySelector('[data-nn-tracks]');
   var status = root.querySelector('[data-nn-status]');

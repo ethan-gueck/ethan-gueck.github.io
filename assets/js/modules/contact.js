@@ -57,6 +57,7 @@ Site.initContact = function initContact(cfg) {
   hydrate(document);
 
   var bar = document.querySelector('.contact-bar');
+  if (bar) glowSweep(bar.querySelector('.contact-bar__text'));
   var footer = document.querySelector('.site-footer');
   if (bar && footer && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
@@ -66,5 +67,38 @@ Site.initContact = function initContact(cfg) {
     }, { rootMargin: '0px 0px 90px 0px' }).observe(footer);   // hide just before the footer scrolls in
   }
 };
+
+/**
+ * The slow glow that runs across the text, as on the Conduit Carl home screen: each letter
+ * is its own span with a staggered animation delay, so the glow sweeps left to right. Spaces
+ * stay plain text so the line can still wrap, and screen readers get the sentence, not letters.
+ */
+function glowSweep(el) {
+  if (!el) return;
+  var i = 0;
+  var walk = function (node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === 1) { walk(child); return; }
+      if (child.nodeType !== 3 || !child.textContent.trim()) return;
+      var text = child.textContent;
+      var shown = document.createElement('span');
+      shown.setAttribute('aria-hidden', 'true');
+      for (var k = 0; k < text.length; k++) {
+        if (text[k] === ' ') { shown.appendChild(document.createTextNode(' ')); continue; }
+        var letter = document.createElement('span');
+        letter.className = 'glow-letter';
+        letter.style.animationDelay = (i++ * 0.025).toFixed(3) + 's';
+        letter.textContent = text[k];
+        shown.appendChild(letter);
+      }
+      var spoken = document.createElement('span');
+      spoken.className = 'sr-only';
+      spoken.textContent = text;
+      node.replaceChild(spoken, child);
+      node.insertBefore(shown, spoken);
+    });
+  };
+  walk(el);
+}
 
 })(window.Site = window.Site || {});

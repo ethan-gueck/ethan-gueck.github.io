@@ -47,6 +47,7 @@ var solver = safely('solver', function () { return Site.initConvergence(document
 var nn = safely('nn', function () {
   return Site.initNN(document.getElementById('nn'), {
     config: Site.config, decks: Site.flashcards, tracks: Site.neuronTracks, requires: Site.neuronRequires,
+    exclude: Site.neuronExcludedDecks,
   });
 });
 

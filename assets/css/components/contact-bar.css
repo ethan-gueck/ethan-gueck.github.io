@@ -17,6 +17,14 @@
 }
 .contact-bar__text { margin: 0; color: #FFFFFF; font-size: 1.05rem; }
 .contact-bar__more { color: var(--sand-200); }
+/* Slow glow sweeping across the text (letters wrapped by contact.js), as on the Conduit Carl home screen. */
+.contact-bar .glow-letter { display: inline-block; animation: contact-glow-sweep 7s ease-in-out infinite; }
+@keyframes contact-glow-sweep {
+  0%, 8%, 100% { color: inherit; transform: scale(1); text-shadow: none; }
+  4% { color: #fff6cf; transform: scale(1.22); text-shadow: 0 0 9px rgba(255, 224, 102, 0.95), 0 0 3px rgba(255, 255, 255, 0.8); }
+}
+@media (prefers-reduced-motion: reduce) { .contact-bar .glow-letter { animation: none; } }
+.contact-bar .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .contact-bar__actions { display: flex; gap: var(--space-2); flex-shrink: 0; }
 .contact-bar .cta__btn { padding: 0.55rem 1rem; font-size: 0.9rem; }
 

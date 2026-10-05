@@ -3,7 +3,7 @@
  *
  * Every flashcard is a neuron and every deck belongs to a track. Tracks are listed here in
  * the order they appear; a deck not named in any track gets a track of its own at the end,
- * so a new deck shows up without editing this file. `site` is the track's domain repo,
+ * so a new deck shows up without editing this file, unless it is in neuronExcludedDecks. `site` is the track's domain repo,
  * published at https://ethan-gueck.github.io/<site>/ (see Site.config.projects).
  *
  * requires maps a card to the cards it uses or builds on. Each pair is drawn as an edge
@@ -28,10 +28,11 @@
     { name: 'Finance', site: 'finance', decks: ['Finance', 'Finance Terms'] },
     { name: 'Physics & Natural Phenomena', site: 'physics', decks: ['Physics & Natural Phenomena'] },
     { name: 'Electrical Engineering', site: 'electrical-engineering', decks: ['Electrical Engineering', 'EE Symbols', 'EE Terms'] },
-    { name: 'Key Terms', site: 'key-terms', decks: ['Key Terms'] },
     { name: 'Acronyms', site: 'acronyms', decks: ['Acronyms'] },
-    { name: 'Greek Alphabet', site: 'greek-alphabet', decks: ['Greek Alphabet'] },
   ];
+
+  // Reference decks that stay flashcards only: no neurons and no track.
+  Site.neuronExcludedDecks = ['Key Terms', 'Greek Alphabet'];
 
   // Short names for cards whose front is a drawing and whose back runs name and description together.
   Site.neuronTitles = {
@@ -43,8 +44,8 @@
     'A1.2': ['A1.1'], 'A1.3': ['A1.2'], 'A1.4': ['A1.1'], 'A1.5': ['A1.4'], 'A1.6': ['A1.5'],
     'A1.7': ['A1.15'], 'A1.8': ['A1.5'], 'A1.9': ['A1.2'], 'A1.10': ['A1.9'], 'A1.11': ['A1.10', 'A1.3'],
     'A1.12': ['A1.11'], 'A1.13': ['A1.14'], 'A1.14': ['A1.1'], 'A1.15': ['A1.1'], 'A1.16': ['A1.15'],
-    'A2.1': ['A1.16', 'KT.1'], 'A2.2': ['A2.1', 'A1.12'], 'A2.3': ['A1.11'], 'A2.4': ['A1.10'],
-    'A2.5': ['A2.4', 'KT.5'], 'A2.6': ['A1.2'], 'A2.7': ['A2.6', 'A2.1'], 'A2.8': ['A2.7'],
+    'A2.1': ['A1.16'], 'A2.2': ['A2.1', 'A1.12'], 'A2.3': ['A1.11'], 'A2.4': ['A1.10'],
+    'A2.5': ['A2.4'], 'A2.6': ['A1.2'], 'A2.7': ['A2.6', 'A2.1'], 'A2.8': ['A2.7'],
     'A2.9': ['A1.5'], 'A2.10': ['A2.6'], 'A2.11': ['A2.9', 'A2.10'], 'A2.12': ['A1.9', 'S.8'],
     'A2.13': ['A1.8'], 'A2.14': ['A2.13'], 'A2.15': ['A1.12', 'G.6'],
     // Geometry
@@ -97,10 +98,10 @@
     // Algorithms
     'AL.1': ['S.19'], 'AL.2': ['ML.7'], 'AL.3': ['AL.1', 'ML.5'], 'AL.4': ['ML.9'], 'AL.5': ['ML.10'],
     'AL.6': ['ML.11'], 'AL.7': ['AL.6', 'ML.12'], 'AL.8': ['AL.6', 'ML.12'], 'AL.9': ['ML.13'],
-    'AL.10': ['ML.14'], 'AL.11': ['AL.10'], 'AL.12': ['AL.10'], 'AL.13': ['AL.10', 'KT.32'], 'AL.14': ['ML.17'],
+    'AL.10': ['ML.14'], 'AL.11': ['AL.10'], 'AL.12': ['AL.10'], 'AL.13': ['AL.10'], 'AL.14': ['ML.17'],
     'AL.15': ['ML.9'], 'AL.16': ['ML.18'], 'AL.17': ['ML.20'], 'AL.18': ['ML.19'], 'AL.19': ['AL.18'],
     'AL.20': ['AL.6'], 'AL.21': ['AL.10', 'AL.18'], 'AL.22': ['S.6'], 'AL.23': ['LA.12'], 'AL.24': ['S.21'],
-    'AL.25': ['KT.13'], 'AL.26': ['O.12'], 'AL.27': ['AL.14', 'LA.9'], 'AL.28': ['AL.10'],
+    'AL.26': ['O.12'], 'AL.27': ['AL.14', 'LA.9'], 'AL.28': ['AL.10'],
     // Optimization & simulation
     'O.2': ['O.1', 'A1.15'], 'O.3': ['O.2', 'LA.5'], 'O.4': ['O.2'], 'O.5': ['O.4'], 'O.6': ['O.4'],
     'O.7': ['O.2'], 'O.8': ['O.1'], 'O.9': ['O.8', 'C1.20', 'V.5'], 'O.10': ['O.1', 'V.2'], 'O.11': ['O.10', 'O.8'],
@@ -111,7 +112,7 @@
     'FN.10': ['FN.9', 'S.2'], 'FN.11': ['FN.10', 'S.18'], 'FN.12': ['FN.10'], 'FN.13': ['FN.11', 'S.19'],
     'FN.14': ['FN.4'], 'FN.15': ['FN.14', 'C1.4'], 'FN.16': ['FN.4'], 'FN.17': ['FT.3'],
     'FN.18': ['FN.17', 'FN.22', 'S.12'], 'FN.19': ['FN.10', 'S.12'], 'FN.21': ['S.9'], 'FN.22': ['FN.9', 'C2.16'],
-    'FT.13': ['FN.14'], 'FT.18': ['FN.10'], 'FT.19': ['FN.18'], 'FT.22': ['KT.18'], 'FT.10': ['FT.12'],
+    'FT.13': ['FN.14'], 'FT.18': ['FN.10'], 'FT.19': ['FN.18'], 'FT.10': ['FT.12'],
     // Physics
     'P.2': ['P.1', 'C1.4'], 'P.3': ['P.2'], 'P.4': ['P.3'], 'P.5': ['P.3'], 'P.6': ['P.3', 'T.2'],
     'P.7': ['P.3', 'T.9'], 'P.8': ['P.3'], 'P.9': ['P.8'], 'P.10': ['P.9'], 'P.11': ['P.10', 'P.3'],
@@ -129,9 +130,7 @@
     'SY.27': ['SY.24', 'SY.26'], 'SY.28': ['SY.24', 'SY.25'],
     'ET.6': ['EE.9'], 'ET.7': ['ET.6'], 'ET.8': ['EE.1'], 'ET.13': ['ET.17'], 'ET.15': ['ET.14', 'SY.22'],
     'ET.12': ['EE.18'], 'ET.18': ['EE.20'], 'ET.16': ['SY.7'], 'ET.20': ['EE.1'],
-    // Key terms and acronyms
-    'KT.3': ['KT.1'], 'KT.10': ['KT.9'], 'KT.11': ['KT.10'], 'KT.18': ['KT.17', 'ML.4'], 'KT.20': ['KT.19'],
-    'KT.21': ['KT.17'], 'KT.31': ['KT.25'], 'KT.34': ['KT.33'], 'KT.36': ['O.8'],
+    // Acronyms
     'AC.3': ['AC.2'], 'AC.4': ['AC.2'], 'AC.9': ['AC.7'], 'AC.22': ['AC.8'], 'AC.23': ['AC.7'],
     'AC.10': ['ML.14'], 'AC.16': ['LA.12'], 'AC.15': ['AC.16'],
   };
