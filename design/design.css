@@ -93,3 +93,7 @@
 [data-theme="dark"] .is-over { color: #f4a49a; }
 .design-refs { font-size: 0.95rem; padding-left: 1.4em; }
 .design-refs li { margin-bottom: var(--space-2); }
+.ref-link { display: inline-block; margin-left: 0.35em; padding: 0 0.5em; border: 1px solid var(--rule); border-radius: 999px; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; text-decoration: none; color: var(--ink-green-800); }
+.ref-link:hover { border-color: var(--ink-green-800); }
+.ref-link--pub { font-weight: 500; }
+.ref-note { font-family: var(--font-sans); font-size: 0.75rem; color: var(--ink-soft); }
