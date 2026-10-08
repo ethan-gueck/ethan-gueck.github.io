@@ -58,3 +58,10 @@
   font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; overflow-x: auto;
 }
 .calcs__list li { padding: 0.35rem 0 0.35rem 0.3rem; }
+
+/* IEEE Std 738 in brief: the full list of calculations folds open inside the pop-up. */
+.calcs-fold { margin: var(--space-3) 0; border: 1px solid var(--rule); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); background: rgba(var(--tint-rgb), 0.08); }
+.calcs-fold > summary { padding: 0.6rem var(--space-3); cursor: pointer; font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
+.calcs-fold > summary:hover { color: var(--ink-green-700); }
+.calcs-fold[open] > summary { border-bottom: 1px solid var(--rule); }
+.calcs-fold__body { padding: var(--space-2) var(--space-3) var(--space-3); }

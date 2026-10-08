@@ -945,25 +945,9 @@
           covering air properties, three convection regimes, solar geometry and heat flux, conductor resistance,
           heat capacity, and transient response.
         </p>
-        <p><button class="text-btn" type="button" data-modal-open="calc-modal">View all the calculations</button></p>
-        <p>
-          Ethan's pipeline applies this network-wide across five years of data, more than 9 billion records. For
-          each recorded amperage it calculates conductor temperature by minimizing the heat-balance residual, the
-          same kind of search shown with COBYLA on the Fun and Games tab.
-        </p>
-        <p class="resource-links"><a href="#f-cobyla" data-modal-close>Watch the COBYLA solver in Fun and Games</a></p>
-    </div>
-  </dialog>
-
-  <!-- IEEE 738 calculations (opened from the IEEE Std 738 in brief pop-up) -->
-  <dialog class="modal" id="calc-modal" aria-labelledby="calc-modal-title">
-    <div class="modal__head">
-      <h2 class="modal__title" id="calc-modal-title">Calculations in IEEE Std 738</h2>
-      <button class="modal__close" type="button" data-modal-close aria-label="Close">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
-    </div>
-    <div class="modal__body">
+        <details class="calcs-fold">
+          <summary>All 37 calculations</summary>
+          <div class="calcs-fold__body">
       <p class="modal__intro">37 calculations roll up into the standard's heat balance, shown in SI units: temperatures in °C, lengths in m, heat in W/m. Symbols follow the standard: <i>T</i><sub>s</sub> surface, <i>T</i><sub>a</sub> air, <i>D</i><sub>0</sub> conductor diameter, <i>V</i><sub>w</sub> wind speed, <i>H</i><sub>e</sub> elevation, <i>N</i> day of year. See IEEE Std 738-2023 for the authoritative formulations and coefficient tables before any engineering use.</p>
       <h3 class="calcs__group">Heat balance and ratings</h3>
       <ol class="calcs__list" start="1">
@@ -1020,9 +1004,16 @@
         <li>Effective radial thermal conductivity<span class="calcs__eq"><i>k</i><sub>th</sub>, an empirical value for the stranded conductor used in the radial difference above</span></li>
         <li>Thermal time constant<span class="calcs__eq">τ = <i>m</i><i>C</i><sub>p</sub> (<i>T</i><sub>f</sub> − <i>T</i><sub>i</sub>) / [<i>R</i>(<i>T</i><sub>f</sub>)<i>I</i><sub>f</sub><sup>2</sup> − <i>R</i>(<i>T</i><sub>i</sub>)<i>I</i><sub>i</sub><sup>2</sup>]</span></li>
       </ol>
+          </div>
+        </details>
+        <p>
+          Ethan's pipeline applies this network-wide across five years of data, more than 9 billion records. For
+          each recorded amperage it calculates conductor temperature by minimizing the heat-balance residual, the
+          same kind of search shown with COBYLA on the Fun and Games tab.
+        </p>
+        <p class="resource-links"><a href="#f-cobyla" data-modal-close>Watch the COBYLA solver in Fun and Games</a></p>
     </div>
   </dialog>
-
 
   <!-- Book list (opened from Field notes). Content comes from assets/js/data/books.js -->
   <dialog class="modal" id="book-modal" aria-labelledby="book-modal-title">
