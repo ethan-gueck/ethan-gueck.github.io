@@ -236,6 +236,9 @@ function fillPopup(dlg, n, nodes, onPick) {
   link.hidden = !n.url;
   link.href = n.url || '#';
   dlg.querySelector('[data-nn-pending]').hidden = !!n.url;
+  // The same card on My Flashcards (a #flashcards/<ID> link the router opens).
+  var card = dlg.querySelector('[data-nn-card]');
+  if (card) { card.href = '#flashcards/' + encodeURIComponent(n.id); card.onclick = function () { dlg.close(); }; }
   if (!dlg.open) dlg.showModal();
   dlg.querySelector('.modal__body').scrollTop = 0;
 }

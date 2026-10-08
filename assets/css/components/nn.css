@@ -164,3 +164,6 @@
   .nn__pulse { display: none; }
   .nn-track__chevron { transition: none; }
 }
+
+/* Link from a neuron to its card on My Flashcards */
+.nn-modal__card { display: inline-block; margin-left: var(--space-3); font-family: var(--font-sans); font-size: var(--fs-sm); }

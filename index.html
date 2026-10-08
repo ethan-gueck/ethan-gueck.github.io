@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="assets/css/components/flashcards.css">
   <link rel="stylesheet" href="assets/css/components/nn.css">
   <link rel="stylesheet" href="assets/css/components/library.css">
+  <link rel="stylesheet" href="assets/css/components/search.css">
   <link rel="stylesheet" href="assets/css/components/cta.css">
   <link rel="stylesheet" href="assets/css/components/footer.css">
   <link rel="stylesheet" href="assets/css/components/contact-bar.css">
@@ -72,6 +73,7 @@
   <script src="assets/js/modules/outcomes.js" defer></script>
   <script src="assets/js/modules/references.js" defer></script>
   <script src="assets/js/modules/articles.js" defer></script>
+  <script src="assets/js/modules/search.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -109,13 +111,14 @@
       <li role="presentation"><a class="tabs__tab" role="tab" href="#summary" data-tab="summary" id="tab-summary" aria-controls="panel-summary">Summary</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#fun" data-tab="fun" id="tab-fun" aria-controls="panel-fun">Fun and Games</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#portfolio" data-tab="portfolio" id="tab-portfolio" aria-controls="panel-portfolio">Portfolio</a></li>
-      <li role="presentation"><a class="tabs__tab" role="tab" href="#technical" data-tab="technical" id="tab-technical" aria-controls="panel-technical">The Technical Stuff</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#flashcards" data-tab="flashcards" id="tab-flashcards" aria-controls="panel-flashcards">My Flashcards</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#nn" data-tab="nn" id="tab-nn" aria-controls="panel-nn">Ethan's NN</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#about" data-tab="about" id="tab-about" aria-controls="panel-about">About Me</a></li>
-      <li role="presentation"><a class="tabs__tab" role="tab" href="#misc" data-tab="misc" id="tab-misc" aria-controls="panel-misc">Misc</a></li>
-      <li role="presentation"><a class="tabs__tab" role="tab" href="#articles" data-tab="articles" id="tab-articles" aria-controls="panel-articles">Articles</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#margins" data-tab="margins" id="tab-margins" aria-controls="panel-margins">The Margins</a></li>
     </ul>
+    <button class="theme-toggle search-toggle" type="button" data-search-open aria-label="Search the site (press /)" title="Search (/)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.2 15.2L20.5 20.5"/></svg>
+    </button>
     <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Dark mode">
       <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
       <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
@@ -131,6 +134,12 @@
     </aside>
 
     <main id="main" class="page__main" tabindex="-1">
+      <!-- On phones the Contents sidebar is hidden; this outline replaces it (modules/toc.js). -->
+      <details class="toc-mobile" id="toc-mobile">
+        <summary>On this page</summary>
+        <ol class="toc-mobile__list" data-toc-mobile></ol>
+      </details>
+
 
       <!-- ---------- SUMMARY ---------- -->
       <section class="panel article" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary" data-panel="summary">
@@ -254,10 +263,12 @@
           <li>Tested a range of optimizers for the conductor temperature solve, including Nelder–Mead, Powell, BFGS, simulated annealing, bounded scalar, and TNC.</li>
           <li>Manages big data loads of <strong>more than 9 billion records</strong> using advanced optimization techniques and models, <strong>multicore processing, multithreading, njit wrappers</strong>, distributed computing, and cloud computing.</li>
         </ul>
-        <p>See it in action, or read how it works.</p>
+        <p>Read how the standard works, or watch the pipeline run.</p>
         <p class="resource-links">
-          <a href="#fun">Try the solver in Fun and Games</a>
-          <a href="#t-ieee738">Read the method in The Technical Stuff</a>
+          <button class="resource-btn" type="button" data-modal-open="ieee-modal">IEEE Std 738 in brief</button>
+          <a class="camera-link" href="https://ethan-gueck.github.io/ieee738-pipeline/" target="_blank" rel="noopener" title="Watch the line risk pipeline animation (new tab)" aria-label="Watch the line risk pipeline animation (opens in a new tab)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="8" width="13" height="10" rx="1.6"/><path d="M15.5 11.5l6-3.2v9.4l-6-3.2"/><circle cx="6" cy="5.2" r="2.2"/><circle cx="11.6" cy="5.2" r="2.2"/></svg>
+          </a>
         </p>
 
         <h2 id="p-power"><span class="sec-num">3</span>Power Project: predicting lagging power factor</h2>
@@ -368,7 +379,34 @@
           </p>
         </article>
 
-        <h2 id="p-refs"><span class="sec-num">5</span>References</h2>
+        <h2 id="t-stack"><span class="sec-num">5</span>Technical stack</h2>
+        <p>The languages, platforms, and methods Ethan works with, and where each one has been applied.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <caption><span class="caption-label">Table 2.</span> Tools and methods by area. Applied in lists jobs and education first, then projects.</caption>
+            <thead><tr><th scope="col">Area</th><th scope="col">Tools and methods</th><th scope="col">Applied in</th></tr></thead>
+            <tbody>
+              <tr><td>Languages</td><td>Python, SQL, R, HTML/CSS/JS</td><td>Data Society, All Points Broadband; IEEE 738 pipeline, GIS mapping application, Power Project</td></tr>
+              <tr><td>Python data stack</td><td>pandas, polars, FastAPI, scikit-learn, PyTorch, Manim, matplotlib, seaborn, and much more</td><td>N/A</td></tr>
+              <tr><td>Machine learning</td><td>Supervised and unsupervised learning</td><td>Data Society, All Points Broadband, Eastern University; Power Project</td></tr>
+              <tr><td>Computer vision</td><td>ML development, OCR, classifiers, object detection</td><td>Data Society; engineering diagram AI prototype (photo-to-diagram pipeline)</td></tr>
+              <tr><td>Optimization</td><td>Linear programming (LP), mixed-integer programming (MIP), nonlinear programming (NLP)</td><td>Data Society; IEEE 738 pipeline</td></tr>
+              <tr><td>Industrial analytics</td><td>Seeq, PI Asset Framework</td><td>Data Society; UFLS analytics initiative, Seeq courses and curriculum</td></tr>
+              <tr><td>Business intelligence</td><td>Power BI</td><td>Data Society, All Points Broadband; prototype dashboards, Power Project report</td></tr>
+              <tr><td>Geospatial</td><td>GIS SQL databases, k-d trees, QGIS, Esri, multi-layer HTML maps</td><td>All Points Broadband; network build maps, GIS mapping application</td></tr>
+              <tr><td>Data engineering</td><td>ETL design, optimization for large data loads, multiprocessing, multithreading, distributed computing, cloud computing, batch processing</td><td>Data Society; IEEE 738 pipeline (9 billion+ records)</td></tr>
+              <tr><td>Networking</td><td>Switching, routing, and wireless; satellite and emergency communications</td><td>DHS (TSA forward team), Liberty University (B.S.), Cisco CCNAv7</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="t-code"><span class="sec-num">6</span>Code and repositories</h2>
+        <p class="resource-links">
+          <a data-link="github" href="#" rel="noopener">GitHub profile</a>
+          <a href="https://github.com/ethan-gueck/power_project" rel="noopener">power_project</a>
+        </p>
+
+        <h2 id="p-refs"><span class="sec-num">7</span>References</h2>
         <ol class="references">
           <li id="p-ref-1"><span class="ref__num">[1]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
         </ol>
@@ -517,79 +555,20 @@
         </ol>
       </section>
 
-      <!-- ---------- THE TECHNICAL STUFF ---------- -->
-      <section class="panel article" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical" data-panel="technical" hidden>
-        <h2 id="t-stack"><span class="sec-num">1</span>Technical stack</h2>
-        <p>The languages, platforms, and methods Ethan works with, and where each one has been applied.</p>
-        <div class="table-wrap">
-          <table class="data-table">
-            <caption><span class="caption-label">Table 1.</span> Tools and methods by area. Applied in lists jobs and education first, then projects.</caption>
-            <thead><tr><th scope="col">Area</th><th scope="col">Tools and methods</th><th scope="col">Applied in</th></tr></thead>
-            <tbody>
-              <tr><td>Languages</td><td>Python, SQL, R, HTML/CSS/JS</td><td>Data Society, All Points Broadband; IEEE 738 pipeline, GIS mapping application, Power Project</td></tr>
-              <tr><td>Python data stack</td><td>pandas, polars, FastAPI, scikit-learn, PyTorch, Manim, matplotlib, seaborn, and much more</td><td>N/A</td></tr>
-              <tr><td>Machine learning</td><td>Supervised and unsupervised learning</td><td>Data Society, All Points Broadband, Eastern University; Power Project</td></tr>
-              <tr><td>Computer vision</td><td>ML development, OCR, classifiers, object detection</td><td>Data Society; engineering diagram AI prototype (photo-to-diagram pipeline)</td></tr>
-              <tr><td>Optimization</td><td>Linear programming (LP), mixed-integer programming (MIP), nonlinear programming (NLP)</td><td>Data Society; IEEE 738 pipeline</td></tr>
-              <tr><td>Industrial analytics</td><td>Seeq, PI Asset Framework</td><td>Data Society; UFLS analytics initiative, Seeq courses and curriculum</td></tr>
-              <tr><td>Business intelligence</td><td>Power BI</td><td>Data Society, All Points Broadband; prototype dashboards, Power Project report</td></tr>
-              <tr><td>Geospatial</td><td>GIS SQL databases, k-d trees, QGIS, Esri, multi-layer HTML maps</td><td>All Points Broadband; network build maps, GIS mapping application</td></tr>
-              <tr><td>Data engineering</td><td>ETL design, optimization for large data loads, multiprocessing, multithreading, distributed computing, cloud computing, batch processing</td><td>Data Society; IEEE 738 pipeline (9 billion+ records)</td></tr>
-              <tr><td>Networking</td><td>Switching, routing, and wireless; satellite and emergency communications</td><td>DHS (TSA forward team), Liberty University (B.S.), Cisco CCNAv7</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h2 id="t-ieee738"><span class="sec-num">2</span>IEEE Std 738 in brief</h2>
-        <p>
-          IEEE Std 738 <a class="cite" href="#t-ref-1">[1]</a> calculates the relationship between current and temperature in bare overhead conductors.
-          At steady state, the heat a conductor gains from its own resistance and from the sun equals the heat it
-          loses to the surrounding air:
-        </p>
-        <div class="equation" role="math" aria-label="I squared times R of T c, plus q s, equals q c plus q r">
-          <span class="equation__body"><i>I</i><sup>2</sup>&thinsp;<i>R</i>(<i>T</i><sub>c</sub>) + <i>q</i><sub>s</sub> = <i>q</i><sub>c</sub> + <i>q</i><sub>r</sub></span>
-          <span class="equation__num">(1)</span>
-        </div>
-        <p>
-          Here <i>I</i> is current, <i>R</i>(<i>T</i><sub>c</sub>) is the conductor's resistance at temperature
-          <i>T</i><sub>c</sub>, <i>q</i><sub>s</sub> is solar heat gain, <i>q</i><sub>c</sub> is convective cooling
-          from wind or rising air, and <i>q</i><sub>r</sub> is radiative cooling, all per unit length. Solving
-          for <i>I</i> at the conductor's maximum allowable temperature gives its thermal rating; solving for
-          <i>T</i><sub>c</sub> at a known current gives its operating temperature.
-        </p>
-        <p>
-          That one line hides a lot. The standard rolls more than 35 separate calculations into the balance,
-          covering air properties, three convection regimes, solar geometry and heat flux, conductor resistance,
-          heat capacity, and transient response.
-        </p>
-        <p><button class="text-btn" type="button" data-modal-open="calc-modal">View all the calculations</button></p>
-        <p>
-          Ethan's pipeline applies this network-wide across five years of data, more than 9 billion records. For
-          each recorded amperage it calculates conductor temperature by minimizing the heat-balance residual, the
-          same kind of search shown with COBYLA on the Fun and Games tab.
-        </p>
-        <p class="resource-links"><a href="#fun">Try the COBYLA solver in Fun and Games</a></p>
-
-        <h2 id="t-code"><span class="sec-num">3</span>Code and repositories</h2>
-        <p class="resource-links">
-          <a data-link="github" href="#" rel="noopener">GitHub profile</a>
-          <a href="https://github.com/ethan-gueck/power_project" rel="noopener">power_project</a>
-        </p>
-
-        <h2 id="t-refs"><span class="sec-num">4</span>References</h2>
-        <ol class="references">
-          <li id="t-ref-1"><span class="ref__num">[1]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
-        </ol>
-      </section>
 
       <!-- ---------- MY FLASHCARDS ---------- -->
       <section class="panel article" id="panel-flashcards" role="tabpanel" aria-labelledby="tab-flashcards" data-panel="flashcards" hidden>
-        <p class="lede">These are concepts I aspire to have an exhaustive knowledge of. Please feel free to study with me: <span data-total></span>. Select a card to flip it, then use the arrows to move through the deck.</p>
+        <p class="lede">These are concepts I aspire to have an exhaustive knowledge of. Please feel free to study with me: <span data-total></span>. Select a card to flip it, then use the arrows to move through the deck, or find any card by its ID or name.</p>
         <fieldset class="segmented fc-side">
           <legend>Show first</legend>
           <label><input type="radio" name="fc-side" value="front" checked><span>Prompt</span></label>
           <label><input type="radio" name="fc-side" value="back"><span>Answer</span></label>
         </fieldset>
+        <div class="card-find" data-card-find>
+          <label class="card-find__label" for="card-find">Find a card</label>
+          <input class="card-find__input" id="card-find" type="search" placeholder="An ID or a name: A1.13, variation, Bayes…" autocomplete="off">
+          <ul class="card-find__results" data-card-results hidden></ul>
+        </div>
         <div data-decks></div>
       </section>
 
@@ -604,6 +583,7 @@
           temperature until the current that temperature implies matches the line's recorded current. Set the conditions, then press
           Run to watch it converge.
         </p>
+        <p class="resource-links"><a href="#p-ieee">Read about the project behind this optimization</a></p>
 
         <figure class="solver" id="solver">
           <div class="solver__inputs">
@@ -813,8 +793,8 @@
         </ol>
       </section>
 
-      <!-- ---------- MISC (references) ---------- -->
-      <section class="panel article" id="panel-misc" role="tabpanel" aria-labelledby="tab-misc" data-panel="misc" hidden>
+      <!-- ---------- THE MARGINS (references and articles) ---------- -->
+      <section class="panel article" id="panel-margins" role="tabpanel" aria-labelledby="tab-margins" data-panel="margins" hidden>
         <h2 id="r-in-page"><span class="sec-num">1</span>In-page references</h2>
         <p>Open here, below the panels.</p>
         <ul class="ref-grid">
@@ -884,25 +864,22 @@
           <li>
             <a class="ref-card" href="design/" target="_blank" rel="noopener">
               <span class="ref-card__art ref-card__art--design" aria-hidden="true">
-                <span class="design-chips"><i style="background:#0B3D2E"></i><i style="background:#125A43"></i><i style="background:#D8C3A5"></i><i style="background:#EEF1EF"></i></span>
-                <span class="design-chips"><i style="background:#102a43"></i><i style="background:#486581"></i><i style="background:#e5a93c"></i><i style="background:#f0f4f8"></i></span>
-                <span class="design-type"><span class="design-type__serif">Aa</span><span class="design-type__sans">Aa</span></span>
+                <span class="design-preview__title">Design philosophy</span>
+                <span class="design-preview__bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
               </span>
               <span class="ref-card__body">
                 <span class="ref-card__kind"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>New tab</span>
-                <span class="ref-card__title">Profile page design philosophy</span>
-                <span class="ref-card__text">The light and dark colour schemes, the geometry between their colours (hue angles, lightness ladders, contrast), and why Newsreader and IBM Plex Sans.</span>
+                <span class="ref-card__title">Design philosophy</span>
+                <span class="ref-card__text">Colour geometry in light and dark, typography, depth, and information entropy: how much a visitor can take in, and how many clicks each detail takes.</span>
               </span>
             </a>
           </li>
         </ul>
-      </section>
 
-      <!-- ---------- ARTICLES ---------- -->
-      <section class="panel article" id="panel-articles" role="tabpanel" aria-labelledby="tab-articles" data-panel="articles" hidden>
-        <h2 id="w-articles"><span class="sec-num">1</span>Articles</h2>
+        <h2 id="w-articles"><span class="sec-num">3</span>Articles</h2>
         <div data-articles></div>
       </section>
+
     </main>
   </div>
 
@@ -938,7 +915,47 @@
   </aside>
 
 
-  <!-- IEEE 738 calculations (opened from The Technical Stuff) -->
+  <!-- IEEE Std 738 in brief (opened from Portfolio, under Network-wide conductor thermal ratings) -->
+  <dialog class="modal ieee-modal" id="ieee-modal" aria-labelledby="ieee-modal-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="ieee-modal-title">IEEE Std 738 in brief</h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+        <p>
+          IEEE Std 738 <a class="cite" href="#p-ref-1" data-modal-close>[1]</a> calculates the relationship between current and temperature in bare overhead conductors.
+          At steady state, the heat a conductor gains from its own resistance and from the sun equals the heat it
+          loses to the surrounding air:
+        </p>
+        <div class="equation" role="math" aria-label="I squared times R of T c, plus q s, equals q c plus q r">
+          <span class="equation__body"><i>I</i><sup>2</sup>&thinsp;<i>R</i>(<i>T</i><sub>c</sub>) + <i>q</i><sub>s</sub> = <i>q</i><sub>c</sub> + <i>q</i><sub>r</sub></span>
+          <span class="equation__num">(1)</span>
+        </div>
+        <p>
+          Here <i>I</i> is current, <i>R</i>(<i>T</i><sub>c</sub>) is the conductor's resistance at temperature
+          <i>T</i><sub>c</sub>, <i>q</i><sub>s</sub> is solar heat gain, <i>q</i><sub>c</sub> is convective cooling
+          from wind or rising air, and <i>q</i><sub>r</sub> is radiative cooling, all per unit length. Solving
+          for <i>I</i> at the conductor's maximum allowable temperature gives its thermal rating; solving for
+          <i>T</i><sub>c</sub> at a known current gives its operating temperature.
+        </p>
+        <p>
+          That one line hides a lot. The standard rolls more than 35 separate calculations into the balance,
+          covering air properties, three convection regimes, solar geometry and heat flux, conductor resistance,
+          heat capacity, and transient response.
+        </p>
+        <p><button class="text-btn" type="button" data-modal-open="calc-modal">View all the calculations</button></p>
+        <p>
+          Ethan's pipeline applies this network-wide across five years of data, more than 9 billion records. For
+          each recorded amperage it calculates conductor temperature by minimizing the heat-balance residual, the
+          same kind of search shown with COBYLA on the Fun and Games tab.
+        </p>
+        <p class="resource-links"><a href="#f-cobyla" data-modal-close>Watch the COBYLA solver in Fun and Games</a></p>
+    </div>
+  </dialog>
+
+  <!-- IEEE 738 calculations (opened from the IEEE Std 738 in brief pop-up) -->
   <dialog class="modal" id="calc-modal" aria-labelledby="calc-modal-title">
     <div class="modal__head">
       <h2 class="modal__title" id="calc-modal-title">Calculations in IEEE Std 738</h2>
@@ -1041,6 +1058,7 @@
       <a class="cta__btn cta__btn--primary" data-nn-launch href="#" target="_blank" rel="noopener">See how it works
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg></a>
       <span class="nn-modal__soon" data-nn-pending aria-disabled="true">Coming soon</span>
+      <a class="text-btn nn-modal__card" data-nn-card href="#flashcards">Open this flashcard</a>
     </div>
   </dialog>
 
@@ -1075,6 +1093,21 @@
     <button class="modal__close art-modal__close" type="button" data-modal-close aria-label="Close">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
+  </dialog>
+
+  <!-- Site search (modules/search.js): sections, flashcards, symbols and pages -->
+  <dialog class="modal search-modal" id="site-search" aria-label="Search the site">
+    <div class="modal__head search-modal__head">
+      <label class="sr-only" for="site-search-input">Search the site</label>
+      <input class="search-modal__input" id="site-search-input" type="search" placeholder="Search sections, flashcards, symbols…" autocomplete="off">
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p class="search-modal__status" data-search-status aria-live="polite"></p>
+      <ul class="search-modal__results" data-search-results></ul>
+    </div>
   </dialog>
 
   <!-- Lightbox (shared) -->

@@ -62,3 +62,13 @@
   .toc { display: none; }
   .container { padding-inline: var(--space-3); }
 }
+
+/* "On this page": the Contents outline on phones, where the sidebar is hidden (modules/toc.js). */
+.toc-mobile { display: none; }
+@media (max-width: 880px) {
+  .toc-mobile { display: block; margin: 0 0 var(--space-3); font-family: var(--font-sans); font-size: var(--fs-sm); background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); }
+  .toc-mobile[hidden] { display: none; }
+  .toc-mobile summary { padding: 0.6rem var(--space-3); cursor: pointer; font-weight: 600; color: var(--ink-green-800); }
+  .toc-mobile__list { list-style: none; margin: 0; padding: 0 var(--space-3) var(--space-2); max-height: 50vh; overflow-y: auto; }
+  .toc-mobile__list a { display: flex; gap: var(--space-2); padding: 0.4rem 0; color: var(--ink-soft); text-decoration: none; border-top: 1px solid var(--rule); }
+}

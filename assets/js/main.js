@@ -15,9 +15,10 @@ safely('modals', function () { Site.initModals(); });
 safely('books', function () { Site.initBookList(Site.books); });
 safely('outcomes', function () { Site.initOutcomeCards(); });
 safely('stated', function () { Site.initStated(); });
-safely('references', function () { Site.initReferences(document.getElementById('panel-misc'), Site.symbolGroups); });
-safely('articles', function () { Site.initArticles(document.querySelector('#panel-articles [data-articles]')); });
+safely('references', function () { Site.initReferences(document.getElementById('panel-margins'), Site.symbolGroups); });
+safely('articles', function () { Site.initArticles(document.querySelector('#panel-margins [data-articles]')); });
 safely('flashcards', function () { Site.initFlashcards(document.getElementById('panel-flashcards'), Site.flashcards); });
+safely('search', function () { Site.initSearch(); });
 var gitgraph = safely('gitgraph', function () { return Site.initGitGraph(document.querySelector('.gg')); });
 
 document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
@@ -50,6 +51,16 @@ var nn = safely('nn', function () {
   return Site.initNN(document.getElementById('nn'), {
     config: Site.config, decks: Site.flashcards, tracks: Site.neuronTracks, requires: Site.neuronRequires,
     exclude: Site.neuronExcludedDecks,
+  });
+});
+
+// #portfolio/ieee738 (and old #t-ieee738 links) opens IEEE Std 738 in brief over its project.
+document.addEventListener('site:detail', function (e) {
+  if (e.detail.tab !== 'portfolio' || e.detail.id !== 'ieee738') return;
+  var dlg = document.getElementById('ieee-modal'), project = document.getElementById('p-ieee');
+  requestAnimationFrame(function () {
+    if (project) project.scrollIntoView();
+    if (dlg && !dlg.open) dlg.showModal();
   });
 });
 

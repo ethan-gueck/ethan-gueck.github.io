@@ -17,7 +17,7 @@
     { token: "--green-600", hex: "#1B6E53", role: "Lightest brand step" },
     { token: "--sand-200", hex: "#E6D7C2", role: "Pale accent" },
     { token: "--sand-300", hex: "#D8C3A5", role: "Accent: primary buttons, top borders, active tab edge, accents on green" },
-    { token: "--sand-500", hex: "#9C8261", role: "Section numbers, list markers, dates on white" },
+    { token: "--sand-500", hex: "#897255", role: "Section numbers, list markers, dates on white" },
     { token: "--paper", hex: "#FFFFFF", role: "Cards and the article sheet" },
     { token: "--canvas", hex: "#EEF1EF", role: "Page background (green-tinted)" },
     { token: "--rule", hex: "#CFD6D2", role: "Lines and borders" },
@@ -47,7 +47,7 @@
     ["Light", "Secondary text on paper", "#45524C", "#FFFFFF"],
     ["Light", "Headings green on paper", "#0B3D2E", "#FFFFFF"],
     ["Light", "Sand accent on green masthead", "#D8C3A5", "#0B3D2E"],
-    ["Light", "Sand-500 marks on paper", "#9C8261", "#FFFFFF"],
+    ["Light", "Sand-500 marks on paper", "#897255", "#FFFFFF"],
     ["Dark", "Body text on canvas", "#f0f4f8", "#102a43"],
     ["Dark", "Body text on cards", "#f0f4f8", "#1b334c"],
     ["Dark", "Secondary text on cards", "#bcccdc", "#1b334c"],
@@ -303,20 +303,50 @@
     const longest = Math.max(...decks.map((d) => Math.floor(d.cards.length / 2)));
     const greekShare = symbols[0] / symbolsTotal;
     const ideal = (N) => Math.max(1, Math.ceil(Math.log(N) / Math.log(BREADTH)));
+    // Typing in a search box is not a click; picking a result is.
     const paths = [
       ["A summary of Ethan's work", 0, "The Summary tab opens first", 1],
-      ["Any section of a tab", 1, "Tab, then scroll or the Contents sidebar", sections.reduce((a, b) => a + b, 0)],
-      ["A symbol's shortcut", 3 + (1 - greekShare), "Misc → open the reference → open its group (Greek starts open) → select to copy", symbolsUnique],
-      ["A section of the Math Review", 3, "Misc → the card (new tab) → Jump to section", 17],
+      ["Any section of a tab", 1, "Tab, then scroll or the Contents sidebar (On this page on phones)", sections.reduce((a, b) => a + b, 0)],
+      ["Any section, by search", 2, "Search (/) → pick the section", sections.reduce((a, b) => a + b, 0)],
+      ["A symbol, copied", 2, "Search (/) → pick the symbol: it is copied, with its VS Code shortcut shown", symbolsUnique],
+      ["A symbol's shortcut, browsing", 3 + (1 - greekShare), "The Margins → open the reference → open its group (Greek starts open) → select to copy", symbolsUnique],
+      ["A section of the Math Review", 3, "The Margins → the card (new tab) → Jump to section", 17],
       ["An interactive neuron page", 4, "Ethan's NN → track → neuron → See how it works (new tab)", cardsTotal],
-      ["A flashcard's answer", 2 + walk, `My Flashcards → arrows to the card (${f1(walk)} on average, ${longest} at most) → flip`, cardsTotal],
-      ["A card's stated equation", 3 + walk, "As above, then the ? button", cardsTotal],
+      ["A flashcard's answer", 3, "My Flashcards → Find a card → pick it → flip (or Search → pick → flip)", cardsTotal],
+      ["A card's stated equation", 4, "As above, then the ? button", cardsTotal],
+      ["A flashcard's answer, walking the deck", 2 + walk, `My Flashcards → arrows to the card (${f1(walk)} on average, ${longest} at most) → flip`, cardsTotal],
     ];
     $("[data-clicks]").innerHTML = `<table class="data-table"><thead><tr><th>Detail</th><th class="num">Clicks</th><th>Path</th><th class="num">Items <var>N</var></th><th class="num">⌈log<sub>8</sub> <var>N</var>⌉</th></tr></thead><tbody>${
       paths.map(([what, c, how, N]) => `<tr><td>${what}</td><td class="num ${c > ideal(N) + 1 ? "is-over" : ""}">${Number.isInteger(c) ? c : f1(c)}</td><td>${how}</td><td class="num">${N}</td><td class="num">${N > 1 ? ideal(N) : 0}</td></tr>`).join("")
     }</tbody></table>`;
-    $("[data-clicks-note]").innerHTML = `The last column is the depth a breadth of ${BREADTH} would need for that many items. Most branches sit at or within one click of it. The exception is the flashcard walk: a deck is a line, not a tree, so reaching one card takes ${f1(walk)} arrow presses on average, which suits studying a deck in order but not looking one card up. The section numbers in the Math Review come from its outline (17 sections); everything else is counted from the live site.`;
+    $("[data-clicks-note]").innerHTML = `The last column is the depth a breadth of ${BREADTH} would need for that many items. Every route a visitor would choose to find something is now at or within one click of it: Find a card and the site search turn the ${cardsTotal}-card collection from a line into a direct lookup. Walking a deck still takes ${f1(walk)} arrow presses on average, which suits studying a deck in order. The section count of the Math Review comes from its outline (17 sections); everything else is counted from the live site.`;
   }
+
+  // ---- Contents: sidebar on wide screens, a collapsible "On this page" on phones --------
+  function contents() {
+    const list = $("[data-design-toc]"), box = list.closest("details");
+    const heads = [...document.querySelectorAll(".article > h2[id]")];
+    const links = heads.map((h) => {
+      const num = h.querySelector(".sec-num")?.textContent ?? "";
+      const li = document.createElement("li"), a = document.createElement("a");
+      a.href = "#" + h.id;
+      a.innerHTML = `<span class="design-toc__num">${num}</span><span></span>`;
+      a.lastElementChild.textContent = h.textContent.replace(num, "").trim();
+      a.addEventListener("click", () => { if (matchMedia("(max-width: 1100px)").matches) box.open = false; });
+      li.append(a); list.append(li);
+      return a;
+    });
+    const narrow = matchMedia("(max-width: 1100px)");
+    const sync = () => { box.open = !narrow.matches; };
+    sync(); narrow.addEventListener("change", sync);
+    box.querySelector("summary").addEventListener("click", (e) => { if (!narrow.matches) e.preventDefault(); });   // always open beside the article
+    const io = new IntersectionObserver((entries) => {
+      const seen = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (seen) links.forEach((a, i) => a.setAttribute("aria-current", String(heads[i] === seen.target)));
+    }, { rootMargin: "0px 0px -65% 0px" });
+    heads.forEach((h) => io.observe(h));
+  }
+  contents();
 
   for (const mode of ["light", "dark"]) { geometry(mode, wheel(mode)); swatches(mode); }
   ramp(); ladder(); contrastTable(); scale(); depth();

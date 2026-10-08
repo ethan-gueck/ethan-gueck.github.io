@@ -24,7 +24,7 @@
 <body>
   <header class="masthead">
     <div class="masthead__bar container">
-      <a class="masthead__journal" href="../#misc">← Portfolio of Ethan Gueck</a>
+      <a class="masthead__journal" href="../#margins">← Portfolio of Ethan Gueck</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Dark mode">
         <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
         <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
@@ -36,7 +36,14 @@
     </div>
   </header>
 
-  <main class="container design-main">
+  <div class="container design-layout">
+    <nav class="design-toc" aria-label="On this page">
+      <details class="design-toc__box" open>
+        <summary class="design-toc__heading">Contents</summary>
+        <ol class="design-toc__list" data-design-toc></ol>
+      </details>
+    </nav>
+  <main class="design-main">
     <article class="article">
       <h2 id="d-idea"><span class="sec-num">1</span>The idea: a journal on paper</h2>
       <p>The portfolio is laid out like a research journal: a masthead, numbered sections, figures with captions and a reference list. The palette serves that page rather than competing with it.</p>
@@ -86,7 +93,7 @@
         <section class="type-card type-card--sans">
           <p class="type-card__label">Interface</p>
           <p class="type-card__name">IBM Plex Sans</p>
-          <p class="type-card__sample">Summary · Portfolio · Ethan's NN · Misc</p>
+          <p class="type-card__sample">Summary · Portfolio · Ethan's NN · The Margins</p>
           <p class="type-card__sample">Data Scientist | ML | AI | Optimization</p>
           <p class="type-card__why">An engineered grotesque for everything you operate rather than read: tabs, buttons, labels, captions, tables and code-adjacent text. Its technical character suits the data and engineering content, and it separates interface from prose at a glance.</p>
           <p class="type-card__stack"><code>"IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif</code></p>
@@ -147,6 +154,7 @@
       </ol>
     </article>
   </main>
+  </div>
 
   <footer class="design-foot">© Ethan Gueck 2026</footer>
 </body>

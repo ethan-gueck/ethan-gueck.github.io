@@ -4,6 +4,9 @@
  * through the deck. Backs are HTML + MathML, so they stay sharp at any size.
  * When a card's equation side is showing, a ? button in its corner opens the
  * stated-equation popup (modules/stated.js): terms, how it is read aloud, explanation, implementations.
+ * "Find a card" jumps straight to any card by ID or name, and #flashcards/<ID> links open one
+ * (the router announces them as "site:detail"); each deck's "Copy link" gives that link.
+ * Site.flashcardIndex and Site.goToCard are shared with the site search (modules/search.js).
  */
 (function (Site) {
 'use strict';
@@ -30,6 +33,9 @@ Site.initFlashcards = function initFlashcards(root, decks) {
   });
   if (countEl) countEl.textContent = total + ' cards in ' + decks.length + ' decks';
 
+  var registry = {};   // card id -> { deck name, show(): moves that deck to the card }
+  Site.flashcardIndex = [];
+
   decks.forEach(function (deck, di) {
     var id = 'fc-' + slugify(deck.name);
     var sec = document.createElement('section');
@@ -52,7 +58,8 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       '</div>' +
       '<div class="deck__bar"><span class="deck__pos"></span>' +
         '<button class="text-btn text-btn--small" type="button" data-shuffle>Shuffle</button>' +
-        '<button class="text-btn text-btn--small" type="button" data-reset>In order</button></div>';
+        '<button class="text-btn text-btn--small" type="button" data-reset>In order</button>' +
+        '<button class="text-btn text-btn--small" type="button" data-link>Copy link</button></div>';
     if (deck.ref && !(decks[di - 1] || {}).ref) {
       var div = document.createElement('p');
       div.className = 'deck__divider';
@@ -209,6 +216,26 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     sec.querySelector('[data-reset]').addEventListener('click', function () {
       order = deck.cards.map(function (_, i) { return i; }); idx = 0; render();
     });
+    sec.querySelector('[data-link]').addEventListener('click', function (e) {
+      var id = deck.cards[order[idx]].id, url = location.href.split('#')[0] + '#flashcards/' + encodeURIComponent(id), btn = e.currentTarget;
+      var done = function () { btn.textContent = 'Link copied'; setTimeout(function () { btn.textContent = 'Copy link'; }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () { prompt('Link to this card:', url); });
+      else prompt('Link to this card:', url);
+    });
+    deck.cards.forEach(function (c, i) {
+      registry[c.id.toLowerCase()] = {
+        deck: deck.name,
+        show: function () {
+          if (order.indexOf(i) < 0) order = deck.cards.map(function (_, k) { return k; });
+          idx = order.indexOf(i);
+          render();
+          sec.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+          card.classList.remove('is-found'); void card.offsetWidth; card.classList.add('is-found');
+          card.focus({ preventScroll: true });
+        },
+      };
+      Site.flashcardIndex.push({ id: c.id, title: c.title || c.glyphs || '', deck: deck.name });
+    });
     renders.push(render);
     render();
     document.addEventListener('site:theme', function () {
@@ -216,6 +243,54 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       if (pic && Site.themedImage) Site.themedImage(pic.dataset.src, function (url) { pic.src = url; });
     });
   });
+
+  // Jump straight to a card: Site.goToCard('A1.13') returns false for an unknown id.
+  Site.goToCard = function (id) {
+    var entry = registry[String(id).toLowerCase()];
+    if (!entry) return false;
+    entry.show();
+    try { history.replaceState(null, '', '#flashcards/' + encodeURIComponent(entry ? id : '')); } catch (e) { /* sandboxed */ }
+    return true;
+  };
+  document.addEventListener('site:detail', function (e) {
+    if (e.detail.tab === 'flashcards') requestAnimationFrame(function () { Site.goToCard(e.detail.id); });
+  });
+
+  // "Find a card": type an ID or part of a name; pick a match to jump to it.
+  var find = root.querySelector('[data-card-find]');
+  if (find) {
+    var input = find.querySelector('input'), results = find.querySelector('[data-card-results]');
+    var matches = function (q) {
+      q = q.trim().toLowerCase();
+      if (!q) return [];
+      var scored = Site.flashcardIndex.map(function (c) {
+        var id = c.id.toLowerCase(), t = c.title.toLowerCase();
+        var score = id === q ? 0 : id.indexOf(q) === 0 ? 1 : t.indexOf(q) === 0 ? 2 : t.indexOf(q) >= 0 ? 3 : c.deck.toLowerCase().indexOf(q) >= 0 ? 4 : -1;
+        return { c: c, score: score };
+      }).filter(function (m) { return m.score >= 0; });
+      scored.sort(function (a, b) { return a.score - b.score; });
+      return scored.slice(0, 8).map(function (m) { return m.c; });
+    };
+    var draw = function () {
+      var list = matches(input.value);
+      results.replaceChildren();
+      list.forEach(function (c) {
+        var li = document.createElement('li'), b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = '<span class="card-find__id"></span><span class="card-find__title"></span><span class="card-find__deck"></span>';
+        b.children[0].textContent = c.id; b.children[1].textContent = c.title; b.children[2].textContent = c.deck;
+        b.addEventListener('click', function () { Site.goToCard(c.id); input.value = ''; results.replaceChildren(); });
+        li.append(b); results.append(li);
+      });
+      results.hidden = !list.length;
+      if (input.value.trim() && !list.length) { results.hidden = false; results.innerHTML = '<li class="card-find__none">No card matches “' + input.value.trim().replace(/[<&]/g, '') + '”</li>'; }
+    };
+    input.addEventListener('input', draw);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { var first = results.querySelector('button'); if (first) { e.preventDefault(); first.click(); } }
+      if (e.key === 'Escape') { input.value = ''; draw(); }
+    });
+  }
 };
 
 })(window.Site = window.Site || {});

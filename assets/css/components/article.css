@@ -134,6 +134,19 @@
   text-decoration: none; color: var(--ink-green-800); background: var(--paper);
 }
 .resource-links a:hover { border-color: var(--ink-green-800); background: rgba(var(--tint-rgb), 0.2); }
+/* A pop-up opener styled exactly like the link pills beside it, and a film-camera icon that opens an animation. */
+.resource-links { align-items: center; }
+.resource-btn {
+  padding: 0.35rem 0.75rem; border: 1px solid var(--rule); border-radius: 999px; cursor: pointer;
+  background: var(--paper); color: var(--ink-green-800); font-family: var(--font-sans); font-size: var(--fs-sm);
+}
+.resource-btn:hover { border-color: var(--ink-green-800); background: rgba(var(--tint-rgb), 0.2); }
+.camera-link {
+  display: inline-grid !important; place-items: center; width: 2.1rem; height: 2.1rem; padding: 0 !important;
+  border-radius: 50% !important; color: var(--ink-green-800);
+}
+.camera-link svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.camera-link:hover { color: var(--sand-500); }
 
 /* Display equations, numbered on the right as in a journal */
 .equation {

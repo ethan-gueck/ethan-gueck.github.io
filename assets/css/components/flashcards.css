@@ -119,3 +119,19 @@
   .stated-terms dd { margin-bottom: var(--space-2); }
   .stated-modal__tabs { padding-inline: var(--space-3); }
 }
+
+/* Find a card: jump to any card by ID or name */
+.card-find { position: relative; max-width: 34rem; margin: var(--space-3) 0 var(--space-2); font-family: var(--font-sans); }
+.card-find__label { display: block; font-size: var(--fs-sm); font-weight: 600; color: var(--ink-soft); margin-bottom: var(--space-1); }
+.card-find__input { width: 100%; padding: 0.55rem 0.9rem; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); color: var(--ink); font: inherit; font-size: 0.95rem; }
+.card-find__results { position: absolute; z-index: 5; left: 0; right: 0; top: 100%; margin: 0.3rem 0 0; padding: 0.3rem; list-style: none; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius-md); box-shadow: 0 10px 26px rgba(var(--shade-rgb), 0.18); }
+.card-find__results[hidden] { display: none; }
+.card-find__results button { display: grid; grid-template-columns: 4.2rem minmax(0, 1fr) auto; gap: 0.6rem; width: 100%; padding: 0.45rem 0.6rem; border: 0; border-radius: var(--radius-sm); background: none; color: var(--ink); text-align: left; font-size: 0.9rem; }
+.card-find__results button:hover, .card-find__results button:focus-visible { background: rgba(var(--tint-rgb), 0.25); }
+.card-find__id { font-weight: 600; color: var(--ink-green-800); }
+.card-find__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card-find__deck { font-size: 0.78rem; color: var(--ink-soft); }
+.card-find__none { padding: 0.45rem 0.6rem; font-size: 0.9rem; color: var(--ink-soft); }
+.fcard.is-found .fcard__face { animation: fc-found 1.2s ease-out; }
+@keyframes fc-found { 0% { box-shadow: 0 0 0 4px var(--sand-300), 0 10px 26px rgba(var(--shade-rgb), 0.14); } 100% { box-shadow: 0 10px 26px rgba(var(--shade-rgb), 0.14); } }
+@media (max-width: 560px) { .card-find__results button { grid-template-columns: 3.6rem minmax(0, 1fr); } .card-find__deck { display: none; } }

@@ -5,8 +5,27 @@
 .masthead__bar .theme-toggle { margin: 0; }
 .design-title { padding-block: var(--space-5); }
 .design-title .masthead__subtitle { max-width: 46ch; }
-.design-main { padding-block: var(--space-5); }
-.design-main .article { max-width: 980px; margin: 0 auto; }
+.design-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--space-5); align-items: start; padding-block: var(--space-5); }
+.design-main .article { max-width: 980px; }
+/* Contents: sticky beside the article; a collapsible "On this page" above it on narrower screens. */
+.design-toc { position: sticky; top: var(--space-4); font-family: var(--font-sans); font-size: var(--fs-sm); }
+.design-toc__heading { list-style: none; cursor: default; font-weight: 600; color: var(--ink-soft); padding-bottom: var(--space-2); margin-bottom: var(--space-2); border-bottom: 2px solid var(--sand-300); }
+.design-toc__heading::-webkit-details-marker { display: none; }
+.design-toc__list { list-style: none; margin: 0; padding: 0; }
+.design-toc__list a { display: flex; gap: var(--space-2); padding: 0.4rem 0 0.4rem var(--space-2); color: var(--ink-soft); text-decoration: none; border-left: 2px solid transparent; line-height: 1.35; }
+.design-toc__list a:hover { color: var(--ink-green-800); border-left-color: var(--rule); }
+.design-toc__list a[aria-current="true"] { color: var(--ink-green-800); border-left-color: var(--ink-green-800); font-weight: 500; }
+.design-toc__num { color: var(--sand-500); min-width: 1.4em; font-variant-numeric: tabular-nums; }
+@media (max-width: 1100px) {
+  .design-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-4); }
+  .design-toc { position: static; }
+  .design-toc__box { background: var(--paper); border: 1px solid var(--rule); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); padding: 0 var(--space-3); }
+  .design-toc__heading { cursor: pointer; border-bottom: 0; margin: 0; padding: 0.6rem 0; color: var(--ink-green-800); }
+  .design-toc__heading::before { content: "On this page"; }
+  .design-toc__heading { font-size: 0; }
+  .design-toc__heading::before { font-size: var(--fs-sm); }
+  .design-toc__list { padding-bottom: var(--space-2); }
+}
 .design-foot { padding: var(--space-4) var(--space-3); text-align: center; font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
 .design-note { font-size: 0.95rem; color: var(--ink-soft); }
 

@@ -7,7 +7,7 @@
   --green-600: #1B6E53;
   --sand-300:  #D8C3A5;   /* accent */
   --sand-200:  #E6D7C2;
-  --sand-500:  #9C8261;   /* accent, dark enough for text on white */
+  --sand-500:  #897255;   /* accent for small text on white: 4.56:1 (WCAG AA); same hue as sand-300 */
 
   /* Neutrals (cool, slightly green-tinted paper) */
   --paper:     #FFFFFF;
