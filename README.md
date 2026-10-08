@@ -1,13 +1,21 @@
 # ethan-gueck.github.io
 
-Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanilla JavaScript (plain scripts), with no build step.
+Personal portfolio for Ethan Gueck, Data Scientist. Static HTML, CSS, and vanilla JavaScript (plain scripts), with no build step: the Pages workflow publishes the files as they are.
+
+## Storage
+
+![Published site size against the 1 GB GitHub Pages limit](https://ethan-gueck.github.io/health.svg)
+
+The bar is the cumulative size of every file in the published site, where 100% is 1 GB, the most GitHub Pages will publish. [`.github/site_health.py`](.github/site_health.py) redraws it on every deploy.
 
 ## Structure
 
 ```
 .
 ├── index.html                  # Launcher: header, four tab panels, footer
-├── .nojekyll                   # Serve files as-is on GitHub Pages
+├── .github/workflows/pages.yml # Publish to GitHub Pages on every push to main
+├── .github/site_health.py      # Draws the storage bar above (health.svg) on every deploy
+├── tools/                      # Symbol reference generator and validator (not published)
 ├── games/
 │   └── conduit-carl/
 │       └── conduit-carl.html   # Conduit Carl arcade game (opened from the Fun and Games tab)
