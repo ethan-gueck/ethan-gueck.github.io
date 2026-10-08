@@ -320,5 +320,5 @@
 
   for (const mode of ["light", "dark"]) { geometry(mode, wheel(mode)); swatches(mode); }
   ramp(); ladder(); contrastTable(); scale(); depth();
-  entropy().catch((e) => { console.error(e); document.querySelectorAll("[data-bits], [data-absorb], [data-clicks]").forEach((el) => { el.textContent = "Could not load the portfolio's pages to measure them."; }); });
+  entropy().catch((e) => { console.error(e); document.querySelectorAll("[data-bits], [data-absorb], [data-clicks]").forEach((el) => { el.textContent = `Could not load the portfolio's pages to measure them (${e && e.message ? e.message : e}).`; }); });
 })();
