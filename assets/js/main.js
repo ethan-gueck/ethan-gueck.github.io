@@ -15,6 +15,8 @@ safely('modals', function () { Site.initModals(); });
 safely('books', function () { Site.initBookList(Site.books); });
 safely('outcomes', function () { Site.initOutcomeCards(); });
 safely('stated', function () { Site.initStated(); });
+safely('references', function () { Site.initReferences(document.getElementById('panel-misc'), Site.symbolGroups); });
+safely('articles', function () { Site.initArticles(document.querySelector('#panel-articles [data-articles]')); });
 safely('flashcards', function () { Site.initFlashcards(document.getElementById('panel-flashcards'), Site.flashcards); });
 var gitgraph = safely('gitgraph', function () { return Site.initGitGraph(document.querySelector('.gg')); });
 

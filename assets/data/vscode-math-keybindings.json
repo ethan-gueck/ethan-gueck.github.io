@@ -1,0 +1,320 @@
+// Math symbol shortcuts for VS Code, from https://ethan-gueck.github.io/#misc (Ethan Gueck).
+// Install: Command Palette (Ctrl+Shift+P / Cmd+Shift+P) → "Preferences: Open Keyboard Shortcuts (JSON)",
+// then paste these entries inside the [ ] already in that file. On a Mac, Alt is the Option key.
+// Each shortcut is a chord: press Alt+<prefix>, let go, then press the second key.
+//   Alt+J Greek (Greek keyboard layout; Shift = capital)   Alt+' superscript   Alt+, subscript
+//   Alt+O operators   Alt+U sets & logic   Alt+D calculus   Alt+/ arrows   Alt+M geometry   Alt+Q typography   Alt+B bold
+// Every prefix is an Alt key VS Code leaves unbound by default on Windows, Mac and Linux.
+[
+  // Greek alphabet
+  {"key": "alt+j shift+a", "command": "type", "args": {"text": "Α"}, "when": "editorTextFocus"},  // Capital alpha
+  {"key": "alt+j a", "command": "type", "args": {"text": "α"}, "when": "editorTextFocus"},  // Alpha
+  {"key": "alt+j shift+b", "command": "type", "args": {"text": "Β"}, "when": "editorTextFocus"},  // Capital beta
+  {"key": "alt+j b", "command": "type", "args": {"text": "β"}, "when": "editorTextFocus"},  // Beta
+  {"key": "alt+j shift+g", "command": "type", "args": {"text": "Γ"}, "when": "editorTextFocus"},  // Capital gamma
+  {"key": "alt+j g", "command": "type", "args": {"text": "γ"}, "when": "editorTextFocus"},  // Gamma
+  {"key": "alt+j shift+d", "command": "type", "args": {"text": "Δ"}, "when": "editorTextFocus"},  // Capital delta
+  {"key": "alt+j d", "command": "type", "args": {"text": "δ"}, "when": "editorTextFocus"},  // Delta
+  {"key": "alt+j shift+e", "command": "type", "args": {"text": "Ε"}, "when": "editorTextFocus"},  // Capital epsilon
+  {"key": "alt+j e", "command": "type", "args": {"text": "ε"}, "when": "editorTextFocus"},  // Epsilon
+  {"key": "alt+j shift+z", "command": "type", "args": {"text": "Ζ"}, "when": "editorTextFocus"},  // Capital zeta
+  {"key": "alt+j z", "command": "type", "args": {"text": "ζ"}, "when": "editorTextFocus"},  // Zeta
+  {"key": "alt+j shift+h", "command": "type", "args": {"text": "Η"}, "when": "editorTextFocus"},  // Capital eta
+  {"key": "alt+j h", "command": "type", "args": {"text": "η"}, "when": "editorTextFocus"},  // Eta
+  {"key": "alt+j shift+u", "command": "type", "args": {"text": "Θ"}, "when": "editorTextFocus"},  // Capital theta
+  {"key": "alt+j u", "command": "type", "args": {"text": "θ"}, "when": "editorTextFocus"},  // Theta
+  {"key": "alt+j shift+i", "command": "type", "args": {"text": "Ι"}, "when": "editorTextFocus"},  // Capital iota
+  {"key": "alt+j i", "command": "type", "args": {"text": "ι"}, "when": "editorTextFocus"},  // Iota
+  {"key": "alt+j shift+k", "command": "type", "args": {"text": "Κ"}, "when": "editorTextFocus"},  // Capital kappa
+  {"key": "alt+j k", "command": "type", "args": {"text": "κ"}, "when": "editorTextFocus"},  // Kappa
+  {"key": "alt+j shift+l", "command": "type", "args": {"text": "Λ"}, "when": "editorTextFocus"},  // Capital lambda
+  {"key": "alt+j l", "command": "type", "args": {"text": "λ"}, "when": "editorTextFocus"},  // Lambda
+  {"key": "alt+j shift+m", "command": "type", "args": {"text": "Μ"}, "when": "editorTextFocus"},  // Capital mu
+  {"key": "alt+j m", "command": "type", "args": {"text": "μ"}, "when": "editorTextFocus"},  // Mu
+  {"key": "alt+j shift+n", "command": "type", "args": {"text": "Ν"}, "when": "editorTextFocus"},  // Capital nu
+  {"key": "alt+j n", "command": "type", "args": {"text": "ν"}, "when": "editorTextFocus"},  // Nu
+  {"key": "alt+j shift+j", "command": "type", "args": {"text": "Ξ"}, "when": "editorTextFocus"},  // Capital xi
+  {"key": "alt+j j", "command": "type", "args": {"text": "ξ"}, "when": "editorTextFocus"},  // Xi
+  {"key": "alt+j shift+o", "command": "type", "args": {"text": "Ο"}, "when": "editorTextFocus"},  // Capital omicron
+  {"key": "alt+j o", "command": "type", "args": {"text": "ο"}, "when": "editorTextFocus"},  // Omicron
+  {"key": "alt+j shift+p", "command": "type", "args": {"text": "Π"}, "when": "editorTextFocus"},  // Capital pi
+  {"key": "alt+j p", "command": "type", "args": {"text": "π"}, "when": "editorTextFocus"},  // Pi
+  {"key": "alt+j shift+r", "command": "type", "args": {"text": "Ρ"}, "when": "editorTextFocus"},  // Capital rho
+  {"key": "alt+j r", "command": "type", "args": {"text": "ρ"}, "when": "editorTextFocus"},  // Rho
+  {"key": "alt+j shift+s", "command": "type", "args": {"text": "Σ"}, "when": "editorTextFocus"},  // Capital sigma
+  {"key": "alt+j s", "command": "type", "args": {"text": "σ"}, "when": "editorTextFocus"},  // Sigma
+  {"key": "alt+j shift+t", "command": "type", "args": {"text": "Τ"}, "when": "editorTextFocus"},  // Capital tau
+  {"key": "alt+j t", "command": "type", "args": {"text": "τ"}, "when": "editorTextFocus"},  // Tau
+  {"key": "alt+j shift+y", "command": "type", "args": {"text": "Υ"}, "when": "editorTextFocus"},  // Capital upsilon
+  {"key": "alt+j y", "command": "type", "args": {"text": "υ"}, "when": "editorTextFocus"},  // Upsilon
+  {"key": "alt+j shift+f", "command": "type", "args": {"text": "Φ"}, "when": "editorTextFocus"},  // Capital phi
+  {"key": "alt+j f", "command": "type", "args": {"text": "φ"}, "when": "editorTextFocus"},  // Phi
+  {"key": "alt+j shift+x", "command": "type", "args": {"text": "Χ"}, "when": "editorTextFocus"},  // Capital chi
+  {"key": "alt+j x", "command": "type", "args": {"text": "χ"}, "when": "editorTextFocus"},  // Chi
+  {"key": "alt+j shift+c", "command": "type", "args": {"text": "Ψ"}, "when": "editorTextFocus"},  // Capital psi
+  {"key": "alt+j c", "command": "type", "args": {"text": "ψ"}, "when": "editorTextFocus"},  // Psi
+  {"key": "alt+j shift+v", "command": "type", "args": {"text": "Ω"}, "when": "editorTextFocus"},  // Capital omega
+  {"key": "alt+j v", "command": "type", "args": {"text": "ω"}, "when": "editorTextFocus"},  // Omega
+  {"key": "alt+j alt+e", "command": "type", "args": {"text": "ϵ"}, "when": "editorTextFocus"},  // Epsilon (lunate)
+  {"key": "alt+j alt+u", "command": "type", "args": {"text": "ϑ"}, "when": "editorTextFocus"},  // Theta (script)
+  {"key": "alt+j alt+f", "command": "type", "args": {"text": "ϕ"}, "when": "editorTextFocus"},  // Phi (straight)
+  {"key": "alt+j w", "command": "type", "args": {"text": "ς"}, "when": "editorTextFocus"},  // Sigma (final)
+  {"key": "alt+j alt+p", "command": "type", "args": {"text": "ϖ"}, "when": "editorTextFocus"},  // Pi (varpi)
+  {"key": "alt+j alt+r", "command": "type", "args": {"text": "ϱ"}, "when": "editorTextFocus"},  // Rho (varrho)
+  // Superscripts & subscripts
+  {"key": "alt+' 0", "command": "type", "args": {"text": "⁰"}, "when": "editorTextFocus"},  // Superscript 0
+  {"key": "alt+, 0", "command": "type", "args": {"text": "₀"}, "when": "editorTextFocus"},  // Subscript 0
+  {"key": "alt+' 1", "command": "type", "args": {"text": "¹"}, "when": "editorTextFocus"},  // Superscript 1
+  {"key": "alt+, 1", "command": "type", "args": {"text": "₁"}, "when": "editorTextFocus"},  // Subscript 1
+  {"key": "alt+' 2", "command": "type", "args": {"text": "²"}, "when": "editorTextFocus"},  // Superscript 2
+  {"key": "alt+, 2", "command": "type", "args": {"text": "₂"}, "when": "editorTextFocus"},  // Subscript 2
+  {"key": "alt+' 3", "command": "type", "args": {"text": "³"}, "when": "editorTextFocus"},  // Superscript 3
+  {"key": "alt+, 3", "command": "type", "args": {"text": "₃"}, "when": "editorTextFocus"},  // Subscript 3
+  {"key": "alt+' 4", "command": "type", "args": {"text": "⁴"}, "when": "editorTextFocus"},  // Superscript 4
+  {"key": "alt+, 4", "command": "type", "args": {"text": "₄"}, "when": "editorTextFocus"},  // Subscript 4
+  {"key": "alt+' 5", "command": "type", "args": {"text": "⁵"}, "when": "editorTextFocus"},  // Superscript 5
+  {"key": "alt+, 5", "command": "type", "args": {"text": "₅"}, "when": "editorTextFocus"},  // Subscript 5
+  {"key": "alt+' 6", "command": "type", "args": {"text": "⁶"}, "when": "editorTextFocus"},  // Superscript 6
+  {"key": "alt+, 6", "command": "type", "args": {"text": "₆"}, "when": "editorTextFocus"},  // Subscript 6
+  {"key": "alt+' 7", "command": "type", "args": {"text": "⁷"}, "when": "editorTextFocus"},  // Superscript 7
+  {"key": "alt+, 7", "command": "type", "args": {"text": "₇"}, "when": "editorTextFocus"},  // Subscript 7
+  {"key": "alt+' 8", "command": "type", "args": {"text": "⁸"}, "when": "editorTextFocus"},  // Superscript 8
+  {"key": "alt+, 8", "command": "type", "args": {"text": "₈"}, "when": "editorTextFocus"},  // Subscript 8
+  {"key": "alt+' 9", "command": "type", "args": {"text": "⁹"}, "when": "editorTextFocus"},  // Superscript 9
+  {"key": "alt+, 9", "command": "type", "args": {"text": "₉"}, "when": "editorTextFocus"},  // Subscript 9
+  {"key": "alt+' shift+=", "command": "type", "args": {"text": "⁺"}, "when": "editorTextFocus"},  // Superscript Plus
+  {"key": "alt+, shift+=", "command": "type", "args": {"text": "₊"}, "when": "editorTextFocus"},  // Subscript Plus
+  {"key": "alt+' -", "command": "type", "args": {"text": "⁻"}, "when": "editorTextFocus"},  // Superscript Minus
+  {"key": "alt+, -", "command": "type", "args": {"text": "₋"}, "when": "editorTextFocus"},  // Subscript Minus
+  {"key": "alt+' =", "command": "type", "args": {"text": "⁼"}, "when": "editorTextFocus"},  // Superscript Equals
+  {"key": "alt+, =", "command": "type", "args": {"text": "₌"}, "when": "editorTextFocus"},  // Subscript Equals
+  {"key": "alt+' shift+9", "command": "type", "args": {"text": "⁽"}, "when": "editorTextFocus"},  // Superscript Left parenthesis
+  {"key": "alt+, shift+9", "command": "type", "args": {"text": "₍"}, "when": "editorTextFocus"},  // Subscript Left parenthesis
+  {"key": "alt+' shift+0", "command": "type", "args": {"text": "⁾"}, "when": "editorTextFocus"},  // Superscript Right parenthesis
+  {"key": "alt+, shift+0", "command": "type", "args": {"text": "₎"}, "when": "editorTextFocus"},  // Subscript Right parenthesis
+  {"key": "alt+' a", "command": "type", "args": {"text": "ᵃ"}, "when": "editorTextFocus"},  // Superscript a
+  {"key": "alt+, a", "command": "type", "args": {"text": "ₐ"}, "when": "editorTextFocus"},  // Subscript a
+  {"key": "alt+' c", "command": "type", "args": {"text": "ᶜ"}, "when": "editorTextFocus"},  // Superscript c (complement)
+  {"key": "alt+' e", "command": "type", "args": {"text": "ᵉ"}, "when": "editorTextFocus"},  // Superscript e
+  {"key": "alt+, e", "command": "type", "args": {"text": "ₑ"}, "when": "editorTextFocus"},  // Subscript e
+  {"key": "alt+' h", "command": "type", "args": {"text": "ʰ"}, "when": "editorTextFocus"},  // Superscript h
+  {"key": "alt+, h", "command": "type", "args": {"text": "ₕ"}, "when": "editorTextFocus"},  // Subscript h
+  {"key": "alt+' i", "command": "type", "args": {"text": "ⁱ"}, "when": "editorTextFocus"},  // Superscript i
+  {"key": "alt+, i", "command": "type", "args": {"text": "ᵢ"}, "when": "editorTextFocus"},  // Subscript i
+  {"key": "alt+' j", "command": "type", "args": {"text": "ʲ"}, "when": "editorTextFocus"},  // Superscript j
+  {"key": "alt+, j", "command": "type", "args": {"text": "ⱼ"}, "when": "editorTextFocus"},  // Subscript j
+  {"key": "alt+' k", "command": "type", "args": {"text": "ᵏ"}, "when": "editorTextFocus"},  // Superscript k
+  {"key": "alt+, k", "command": "type", "args": {"text": "ₖ"}, "when": "editorTextFocus"},  // Subscript k
+  {"key": "alt+' l", "command": "type", "args": {"text": "ˡ"}, "when": "editorTextFocus"},  // Superscript l
+  {"key": "alt+, l", "command": "type", "args": {"text": "ₗ"}, "when": "editorTextFocus"},  // Subscript l
+  {"key": "alt+' m", "command": "type", "args": {"text": "ᵐ"}, "when": "editorTextFocus"},  // Superscript m
+  {"key": "alt+, m", "command": "type", "args": {"text": "ₘ"}, "when": "editorTextFocus"},  // Subscript m
+  {"key": "alt+' n", "command": "type", "args": {"text": "ⁿ"}, "when": "editorTextFocus"},  // Superscript n
+  {"key": "alt+, n", "command": "type", "args": {"text": "ₙ"}, "when": "editorTextFocus"},  // Subscript n
+  {"key": "alt+' o", "command": "type", "args": {"text": "ᵒ"}, "when": "editorTextFocus"},  // Superscript o
+  {"key": "alt+, o", "command": "type", "args": {"text": "ₒ"}, "when": "editorTextFocus"},  // Subscript o
+  {"key": "alt+' p", "command": "type", "args": {"text": "ᵖ"}, "when": "editorTextFocus"},  // Superscript p
+  {"key": "alt+, p", "command": "type", "args": {"text": "ₚ"}, "when": "editorTextFocus"},  // Subscript p
+  {"key": "alt+' s", "command": "type", "args": {"text": "ˢ"}, "when": "editorTextFocus"},  // Superscript s
+  {"key": "alt+, s", "command": "type", "args": {"text": "ₛ"}, "when": "editorTextFocus"},  // Subscript s
+  {"key": "alt+' t", "command": "type", "args": {"text": "ᵗ"}, "when": "editorTextFocus"},  // Superscript t
+  {"key": "alt+, t", "command": "type", "args": {"text": "ₜ"}, "when": "editorTextFocus"},  // Subscript t
+  {"key": "alt+' x", "command": "type", "args": {"text": "ˣ"}, "when": "editorTextFocus"},  // Superscript x
+  {"key": "alt+, x", "command": "type", "args": {"text": "ₓ"}, "when": "editorTextFocus"},  // Subscript x
+  {"key": "alt+' shift+t", "command": "type", "args": {"text": "ᵀ"}, "when": "editorTextFocus"},  // Superscript T (transpose, Aᵀ)
+  // Arithmetic & comparison
+  {"key": "alt+o alt+shift+=", "command": "type", "args": {"text": "+"}, "when": "editorTextFocus"},  // Plus
+  {"key": "alt+o -", "command": "type", "args": {"text": "−"}, "when": "editorTextFocus"},  // Minus sign
+  {"key": "alt+o x", "command": "type", "args": {"text": "×"}, "when": "editorTextFocus"},  // Multiplication
+  {"key": "alt+o /", "command": "type", "args": {"text": "÷"}, "when": "editorTextFocus"},  // Division
+  {"key": "alt+o 8", "command": "type", "args": {"text": "·"}, "when": "editorTextFocus"},  // Middle dot (product)
+  {"key": "alt+o shift+8", "command": "type", "args": {"text": "∙"}, "when": "editorTextFocus"},  // Bullet operator
+  {"key": "alt+o =", "command": "type", "args": {"text": "±"}, "when": "editorTextFocus"},  // Plus-minus
+  {"key": "alt+o shift+=", "command": "type", "args": {"text": "∓"}, "when": "editorTextFocus"},  // Minus-plus
+  {"key": "alt+o alt+/", "command": "type", "args": {"text": "/"}, "when": "editorTextFocus"},  // Solidus (slash)
+  {"key": "alt+o shift+/", "command": "type", "args": {"text": "⁄"}, "when": "editorTextFocus"},  // Fraction slash
+  {"key": "alt+o alt+=", "command": "type", "args": {"text": "="}, "when": "editorTextFocus"},  // Equals
+  {"key": "alt+o n", "command": "type", "args": {"text": "≠"}, "when": "editorTextFocus"},  // Not equal
+  {"key": "alt+o a", "command": "type", "args": {"text": "≈"}, "when": "editorTextFocus"},  // Approximately equal
+  {"key": "alt+o e", "command": "type", "args": {"text": "≡"}, "when": "editorTextFocus"},  // Identical to / congruent (mod)
+  {"key": "alt+o c", "command": "type", "args": {"text": "≅"}, "when": "editorTextFocus"},  // Congruent (geometry)
+  {"key": "alt+o `", "command": "type", "args": {"text": "∼"}, "when": "editorTextFocus"},  // Similar to / distributed as
+  {"key": "alt+o p", "command": "type", "args": {"text": "∝"}, "when": "editorTextFocus"},  // Proportional to
+  {"key": "alt+o alt+shift+,", "command": "type", "args": {"text": "<"}, "when": "editorTextFocus"},  // Less than
+  {"key": "alt+o alt+shift+.", "command": "type", "args": {"text": ">"}, "when": "editorTextFocus"},  // Greater than
+  {"key": "alt+o ,", "command": "type", "args": {"text": "≤"}, "when": "editorTextFocus"},  // Less than or equal
+  {"key": "alt+o .", "command": "type", "args": {"text": "≥"}, "when": "editorTextFocus"},  // Greater than or equal
+  {"key": "alt+o shift+,", "command": "type", "args": {"text": "≪"}, "when": "editorTextFocus"},  // Much less than
+  {"key": "alt+o shift+.", "command": "type", "args": {"text": "≫"}, "when": "editorTextFocus"},  // Much greater than
+  {"key": "alt+o r", "command": "type", "args": {"text": "√"}, "when": "editorTextFocus"},  // Square root
+  {"key": "alt+o 3", "command": "type", "args": {"text": "∛"}, "when": "editorTextFocus"},  // Cube root
+  {"key": "alt+o 4", "command": "type", "args": {"text": "∜"}, "when": "editorTextFocus"},  // Fourth root
+  {"key": "alt+o i", "command": "type", "args": {"text": "∞"}, "when": "editorTextFocus"},  // Infinity
+  {"key": "alt+o alt+shift+5", "command": "type", "args": {"text": "%"}, "when": "editorTextFocus"},  // Percent
+  {"key": "alt+o 5", "command": "type", "args": {"text": "‰"}, "when": "editorTextFocus"},  // Per mille
+  {"key": "alt+o 0", "command": "type", "args": {"text": "°"}, "when": "editorTextFocus"},  // Degree
+  {"key": "alt+o '", "command": "type", "args": {"text": "′"}, "when": "editorTextFocus"},  // Prime (f′, feet, minutes)
+  {"key": "alt+o shift+'", "command": "type", "args": {"text": "″"}, "when": "editorTextFocus"},  // Double prime
+  {"key": "alt+o alt+shift+1", "command": "type", "args": {"text": "!"}, "when": "editorTextFocus"},  // Factorial
+  {"key": "alt+o alt+shift+\\", "command": "type", "args": {"text": "|"}, "when": "editorTextFocus"},  // Vertical line (absolute value)
+  {"key": "alt+o \\", "command": "type", "args": {"text": "∣"}, "when": "editorTextFocus"},  // Divides / given (P(A ∣ B))
+  {"key": "alt+o shift+\\", "command": "type", "args": {"text": "‖"}, "when": "editorTextFocus"},  // Double vertical line (norm ‖x‖)
+  {"key": "alt+o [", "command": "type", "args": {"text": "⌊"}, "when": "editorTextFocus"},  // Left floor
+  {"key": "alt+o ]", "command": "type", "args": {"text": "⌋"}, "when": "editorTextFocus"},  // Right floor
+  {"key": "alt+o shift+[", "command": "type", "args": {"text": "⌈"}, "when": "editorTextFocus"},  // Left ceiling
+  {"key": "alt+o shift+]", "command": "type", "args": {"text": "⌉"}, "when": "editorTextFocus"},  // Right ceiling
+  {"key": "alt+o l", "command": "type", "args": {"text": "…"}, "when": "editorTextFocus"},  // Ellipsis
+  {"key": "alt+o shift+l", "command": "type", "args": {"text": "⋯"}, "when": "editorTextFocus"},  // Midline ellipsis (a₁ + ⋯ + aₙ)
+  // Sets & logic
+  {"key": "alt+u u", "command": "type", "args": {"text": "∪"}, "when": "editorTextFocus"},  // Union
+  {"key": "alt+u n", "command": "type", "args": {"text": "∩"}, "when": "editorTextFocus"},  // Intersection
+  {"key": "alt+u e", "command": "type", "args": {"text": "∈"}, "when": "editorTextFocus"},  // Element of
+  {"key": "alt+u shift+e", "command": "type", "args": {"text": "∉"}, "when": "editorTextFocus"},  // Not an element of
+  {"key": "alt+u s", "command": "type", "args": {"text": "⊂"}, "when": "editorTextFocus"},  // Proper subset
+  {"key": "alt+u shift+s", "command": "type", "args": {"text": "⊆"}, "when": "editorTextFocus"},  // Subset or equal
+  {"key": "alt+u p", "command": "type", "args": {"text": "⊃"}, "when": "editorTextFocus"},  // Proper superset
+  {"key": "alt+u shift+p", "command": "type", "args": {"text": "⊇"}, "when": "editorTextFocus"},  // Superset or equal
+  {"key": "alt+u 0", "command": "type", "args": {"text": "∅"}, "when": "editorTextFocus"},  // Empty set
+  {"key": "alt+u \\", "command": "type", "args": {"text": "∖"}, "when": "editorTextFocus"},  // Set minus
+  {"key": "alt+u shift+\\", "command": "type", "args": {"text": "⧵"}, "when": "editorTextFocus"},  // Reverse solidus operator (set minus, A ⧵ B)
+  {"key": "alt+u a", "command": "type", "args": {"text": "∀"}, "when": "editorTextFocus"},  // For all
+  {"key": "alt+u x", "command": "type", "args": {"text": "∃"}, "when": "editorTextFocus"},  // There exists
+  {"key": "alt+u shift+x", "command": "type", "args": {"text": "∄"}, "when": "editorTextFocus"},  // There does not exist
+  {"key": "alt+u 1", "command": "type", "args": {"text": "¬"}, "when": "editorTextFocus"},  // Not
+  {"key": "alt+u 6", "command": "type", "args": {"text": "∧"}, "when": "editorTextFocus"},  // And
+  {"key": "alt+u v", "command": "type", "args": {"text": "∨"}, "when": "editorTextFocus"},  // Or
+  {"key": "alt+u o", "command": "type", "args": {"text": "⊕"}, "when": "editorTextFocus"},  // Exclusive or / direct sum
+  {"key": "alt+u shift+o", "command": "type", "args": {"text": "⊗"}, "when": "editorTextFocus"},  // Tensor / Kronecker product
+  {"key": "alt+u .", "command": "type", "args": {"text": "⊙"}, "when": "editorTextFocus"},  // Element-wise (Hadamard) product
+  {"key": "alt+u c", "command": "type", "args": {"text": "∘"}, "when": "editorTextFocus"},  // Composition (f ∘ g)
+  {"key": "alt+u t", "command": "type", "args": {"text": "∴"}, "when": "editorTextFocus"},  // Therefore
+  {"key": "alt+u b", "command": "type", "args": {"text": "∵"}, "when": "editorTextFocus"},  // Because
+  {"key": "alt+u shift+n", "command": "type", "args": {"text": "ℕ"}, "when": "editorTextFocus"},  // Natural numbers
+  {"key": "alt+u shift+z", "command": "type", "args": {"text": "ℤ"}, "when": "editorTextFocus"},  // Integers
+  {"key": "alt+u shift+q", "command": "type", "args": {"text": "ℚ"}, "when": "editorTextFocus"},  // Rationals
+  {"key": "alt+u shift+r", "command": "type", "args": {"text": "ℝ"}, "when": "editorTextFocus"},  // Real numbers
+  {"key": "alt+u shift+c", "command": "type", "args": {"text": "ℂ"}, "when": "editorTextFocus"},  // Complex numbers
+  {"key": "alt+u g", "command": "type", "args": {"text": "≻"}, "when": "editorTextFocus"},  // Succeeds (preference)
+  {"key": "alt+u shift+g", "command": "type", "args": {"text": "⪰"}, "when": "editorTextFocus"},  // Succeeds or equal
+  // Calculus, vectors & matrices
+  {"key": "alt+d d", "command": "type", "args": {"text": "∂"}, "when": "editorTextFocus"},  // Partial derivative
+  {"key": "alt+d n", "command": "type", "args": {"text": "∇"}, "when": "editorTextFocus"},  // Nabla (gradient, del)
+  {"key": "alt+d shift+d", "command": "type", "args": {"text": "∆"}, "when": "editorTextFocus"},  // Increment (change, Δx); Greek Δ is in the alphabet above
+  {"key": "alt+d i", "command": "type", "args": {"text": "∫"}, "when": "editorTextFocus"},  // Integral
+  {"key": "alt+d 2", "command": "type", "args": {"text": "∬"}, "when": "editorTextFocus"},  // Double integral
+  {"key": "alt+d 3", "command": "type", "args": {"text": "∭"}, "when": "editorTextFocus"},  // Triple integral
+  {"key": "alt+d o", "command": "type", "args": {"text": "∮"}, "when": "editorTextFocus"},  // Contour integral
+  {"key": "alt+d s", "command": "type", "args": {"text": "∑"}, "when": "editorTextFocus"},  // Summation
+  {"key": "alt+d p", "command": "type", "args": {"text": "∏"}, "when": "editorTextFocus"},  // Product
+  {"key": "alt+d .", "command": "type", "args": {"text": "˙"}, "when": "editorTextFocus"},  // Dot above (time derivative ẋ)
+  {"key": "alt+d -", "command": "type", "args": {"text": "¯"}, "when": "editorTextFocus"},  // Macron (mean x̄)
+  {"key": "alt+d 6", "command": "type", "args": {"text": "ˆ"}, "when": "editorTextFocus"},  // Circumflex (estimate ŷ)
+  {"key": "alt+d t", "command": "type", "args": {"text": "⊤"}, "when": "editorTextFocus"},  // Transpose (Aᵀ, A⊤)
+  {"key": "alt+d shift+t", "command": "type", "args": {"text": "⊥"}, "when": "editorTextFocus"},  // Perpendicular / orthogonal
+  {"key": "alt+d /", "command": "type", "args": {"text": "⟂"}, "when": "editorTextFocus"},  // Perpendicular
+  {"key": "alt+d \\", "command": "type", "args": {"text": "∥"}, "when": "editorTextFocus"},  // Parallel
+  {"key": "alt+d l", "command": "type", "args": {"text": "ℓ"}, "when": "editorTextFocus"},  // Script small l (length, loss)
+  {"key": "alt+d shift+l", "command": "type", "args": {"text": "ℒ"}, "when": "editorTextFocus"},  // Script L (Lagrangian, Laplace)
+  {"key": "alt+d shift+e", "command": "type", "args": {"text": "ℰ"}, "when": "editorTextFocus"},  // Script E
+  {"key": "alt+d h", "command": "type", "args": {"text": "ℏ"}, "when": "editorTextFocus"},  // h-bar (reduced Planck)
+  {"key": "alt+d shift+o", "command": "type", "args": {"text": "Ω"}, "when": "editorTextFocus"},  // Ohm sign; prefer Greek Ω (U+03A9)
+  {"key": "alt+d m", "command": "type", "args": {"text": "µ"}, "when": "editorTextFocus"},  // Micro sign; prefer Greek μ (U+03BC)
+  {"key": "alt+d shift+a", "command": "type", "args": {"text": "Å"}, "when": "editorTextFocus"},  // Ångström
+  // Arrows
+  {"key": "alt+/ right", "command": "type", "args": {"text": "→"}, "when": "editorTextFocus"},  // Right arrow (tends to, maps to)
+  {"key": "alt+/ left", "command": "type", "args": {"text": "←"}, "when": "editorTextFocus"},  // Left arrow (assignment)
+  {"key": "alt+/ up", "command": "type", "args": {"text": "↑"}, "when": "editorTextFocus"},  // Up arrow
+  {"key": "alt+/ down", "command": "type", "args": {"text": "↓"}, "when": "editorTextFocus"},  // Down arrow
+  {"key": "alt+/ h", "command": "type", "args": {"text": "↔"}, "when": "editorTextFocus"},  // Left-right arrow
+  {"key": "alt+/ v", "command": "type", "args": {"text": "↕"}, "when": "editorTextFocus"},  // Up-down arrow
+  {"key": "alt+/ shift+right", "command": "type", "args": {"text": "⇒"}, "when": "editorTextFocus"},  // Implies
+  {"key": "alt+/ shift+left", "command": "type", "args": {"text": "⇐"}, "when": "editorTextFocus"},  // Is implied by
+  {"key": "alt+/ shift+h", "command": "type", "args": {"text": "⇔"}, "when": "editorTextFocus"},  // If and only if
+  {"key": "alt+/ ]", "command": "type", "args": {"text": "⟹"}, "when": "editorTextFocus"},  // Long implies
+  {"key": "alt+/ [", "command": "type", "args": {"text": "⟸"}, "when": "editorTextFocus"},  // Long implied by
+  {"key": "alt+/ =", "command": "type", "args": {"text": "⟺"}, "when": "editorTextFocus"},  // Long if and only if
+  {"key": "alt+/ m", "command": "type", "args": {"text": "↦"}, "when": "editorTextFocus"},  // Maps to (x ↦ x²)
+  {"key": "alt+/ l", "command": "type", "args": {"text": "⟶"}, "when": "editorTextFocus"},  // Long right arrow
+  {"key": "alt+/ u", "command": "type", "args": {"text": "↗"}, "when": "editorTextFocus"},  // North-east arrow (increasing)
+  {"key": "alt+/ d", "command": "type", "args": {"text": "↘"}, "when": "editorTextFocus"},  // South-east arrow (decreasing)
+  // Geometry
+  {"key": "alt+m a", "command": "type", "args": {"text": "∠"}, "when": "editorTextFocus"},  // Angle
+  {"key": "alt+m shift+a", "command": "type", "args": {"text": "∡"}, "when": "editorTextFocus"},  // Measured angle
+  {"key": "alt+m t", "command": "type", "args": {"text": "△"}, "when": "editorTextFocus"},  // Triangle
+  {"key": "alt+m s", "command": "type", "args": {"text": "□"}, "when": "editorTextFocus"},  // Square
+  {"key": "alt+m c", "command": "type", "args": {"text": "○"}, "when": "editorTextFocus"},  // Circle
+  {"key": "alt+m r", "command": "type", "args": {"text": "⌒"}, "when": "editorTextFocus"},  // Arc
+  {"key": "alt+m =", "command": "type", "args": {"text": "≅"}, "when": "editorTextFocus"},  // Congruent
+  {"key": "alt+m `", "command": "type", "args": {"text": "∼"}, "when": "editorTextFocus"},  // Similar
+  {"key": "alt+m p", "command": "type", "args": {"text": "⊥"}, "when": "editorTextFocus"},  // Perpendicular
+  {"key": "alt+m \\", "command": "type", "args": {"text": "∥"}, "when": "editorTextFocus"},  // Parallel
+  {"key": "alt+m 0", "command": "type", "args": {"text": "°"}, "when": "editorTextFocus"},  // Degree
+  {"key": "alt+m 3", "command": "type", "args": {"text": "π"}, "when": "editorTextFocus"},  // Pi
+  // Typography
+  {"key": "alt+q -", "command": "type", "args": {"text": "–"}, "when": "editorTextFocus"},  // En dash (ranges, 1–10)
+  {"key": "alt+q shift+-", "command": "type", "args": {"text": "—"}, "when": "editorTextFocus"},  // Em dash
+  {"key": "alt+q [", "command": "type", "args": {"text": "“"}, "when": "editorTextFocus"},  // Left double quote
+  {"key": "alt+q ]", "command": "type", "args": {"text": "”"}, "when": "editorTextFocus"},  // Right double quote
+  {"key": "alt+q shift+[", "command": "type", "args": {"text": "‘"}, "when": "editorTextFocus"},  // Left single quote
+  {"key": "alt+q shift+]", "command": "type", "args": {"text": "’"}, "when": "editorTextFocus"},  // Right single quote / apostrophe
+  {"key": "alt+q 8", "command": "type", "args": {"text": "•"}, "when": "editorTextFocus"},  // Bullet
+  {"key": "alt+q t", "command": "type", "args": {"text": "†"}, "when": "editorTextFocus"},  // Dagger
+  {"key": "alt+q s", "command": "type", "args": {"text": "§"}, "when": "editorTextFocus"},  // Section
+  {"key": "alt+q p", "command": "type", "args": {"text": "¶"}, "when": "editorTextFocus"},  // Pilcrow (paragraph)
+  {"key": "alt+q c", "command": "type", "args": {"text": "©"}, "when": "editorTextFocus"},  // Copyright
+  {"key": "alt+q e", "command": "type", "args": {"text": "é"}, "when": "editorTextFocus"},  // e acute
+  {"key": "alt+q o", "command": "type", "args": {"text": "ô"}, "when": "editorTextFocus"},  // o circumflex
+  // Bold vector letters
+  {"key": "alt+b shift+a", "command": "type", "args": {"text": "𝐀"}, "when": "editorTextFocus"},  // Bold A
+  {"key": "alt+b a", "command": "type", "args": {"text": "𝐚"}, "when": "editorTextFocus"},  // Bold a
+  {"key": "alt+b shift+b", "command": "type", "args": {"text": "𝐁"}, "when": "editorTextFocus"},  // Bold B
+  {"key": "alt+b b", "command": "type", "args": {"text": "𝐛"}, "when": "editorTextFocus"},  // Bold b
+  {"key": "alt+b shift+c", "command": "type", "args": {"text": "𝐂"}, "when": "editorTextFocus"},  // Bold C
+  {"key": "alt+b c", "command": "type", "args": {"text": "𝐜"}, "when": "editorTextFocus"},  // Bold c
+  {"key": "alt+b shift+d", "command": "type", "args": {"text": "𝐃"}, "when": "editorTextFocus"},  // Bold D
+  {"key": "alt+b d", "command": "type", "args": {"text": "𝐝"}, "when": "editorTextFocus"},  // Bold d
+  {"key": "alt+b shift+e", "command": "type", "args": {"text": "𝐄"}, "when": "editorTextFocus"},  // Bold E
+  {"key": "alt+b e", "command": "type", "args": {"text": "𝐞"}, "when": "editorTextFocus"},  // Bold e
+  {"key": "alt+b shift+f", "command": "type", "args": {"text": "𝐅"}, "when": "editorTextFocus"},  // Bold F
+  {"key": "alt+b f", "command": "type", "args": {"text": "𝐟"}, "when": "editorTextFocus"},  // Bold f
+  {"key": "alt+b shift+g", "command": "type", "args": {"text": "𝐆"}, "when": "editorTextFocus"},  // Bold G
+  {"key": "alt+b g", "command": "type", "args": {"text": "𝐠"}, "when": "editorTextFocus"},  // Bold g
+  {"key": "alt+b shift+h", "command": "type", "args": {"text": "𝐇"}, "when": "editorTextFocus"},  // Bold H
+  {"key": "alt+b h", "command": "type", "args": {"text": "𝐡"}, "when": "editorTextFocus"},  // Bold h
+  {"key": "alt+b shift+i", "command": "type", "args": {"text": "𝐈"}, "when": "editorTextFocus"},  // Bold I
+  {"key": "alt+b i", "command": "type", "args": {"text": "𝐢"}, "when": "editorTextFocus"},  // Bold i
+  {"key": "alt+b shift+j", "command": "type", "args": {"text": "𝐉"}, "when": "editorTextFocus"},  // Bold J
+  {"key": "alt+b j", "command": "type", "args": {"text": "𝐣"}, "when": "editorTextFocus"},  // Bold j
+  {"key": "alt+b shift+k", "command": "type", "args": {"text": "𝐊"}, "when": "editorTextFocus"},  // Bold K
+  {"key": "alt+b k", "command": "type", "args": {"text": "𝐤"}, "when": "editorTextFocus"},  // Bold k
+  {"key": "alt+b shift+l", "command": "type", "args": {"text": "𝐋"}, "when": "editorTextFocus"},  // Bold L
+  {"key": "alt+b l", "command": "type", "args": {"text": "𝐥"}, "when": "editorTextFocus"},  // Bold l
+  {"key": "alt+b shift+m", "command": "type", "args": {"text": "𝐌"}, "when": "editorTextFocus"},  // Bold M
+  {"key": "alt+b m", "command": "type", "args": {"text": "𝐦"}, "when": "editorTextFocus"},  // Bold m
+  {"key": "alt+b shift+n", "command": "type", "args": {"text": "𝐍"}, "when": "editorTextFocus"},  // Bold N
+  {"key": "alt+b n", "command": "type", "args": {"text": "𝐧"}, "when": "editorTextFocus"},  // Bold n
+  {"key": "alt+b shift+o", "command": "type", "args": {"text": "𝐎"}, "when": "editorTextFocus"},  // Bold O
+  {"key": "alt+b o", "command": "type", "args": {"text": "𝐨"}, "when": "editorTextFocus"},  // Bold o
+  {"key": "alt+b shift+p", "command": "type", "args": {"text": "𝐏"}, "when": "editorTextFocus"},  // Bold P
+  {"key": "alt+b p", "command": "type", "args": {"text": "𝐩"}, "when": "editorTextFocus"},  // Bold p
+  {"key": "alt+b shift+q", "command": "type", "args": {"text": "𝐐"}, "when": "editorTextFocus"},  // Bold Q
+  {"key": "alt+b q", "command": "type", "args": {"text": "𝐪"}, "when": "editorTextFocus"},  // Bold q
+  {"key": "alt+b shift+r", "command": "type", "args": {"text": "𝐑"}, "when": "editorTextFocus"},  // Bold R
+  {"key": "alt+b r", "command": "type", "args": {"text": "𝐫"}, "when": "editorTextFocus"},  // Bold r
+  {"key": "alt+b shift+s", "command": "type", "args": {"text": "𝐒"}, "when": "editorTextFocus"},  // Bold S
+  {"key": "alt+b s", "command": "type", "args": {"text": "𝐬"}, "when": "editorTextFocus"},  // Bold s
+  {"key": "alt+b shift+t", "command": "type", "args": {"text": "𝐓"}, "when": "editorTextFocus"},  // Bold T
+  {"key": "alt+b t", "command": "type", "args": {"text": "𝐭"}, "when": "editorTextFocus"},  // Bold t
+  {"key": "alt+b shift+u", "command": "type", "args": {"text": "𝐔"}, "when": "editorTextFocus"},  // Bold U
+  {"key": "alt+b u", "command": "type", "args": {"text": "𝐮"}, "when": "editorTextFocus"},  // Bold u
+  {"key": "alt+b shift+v", "command": "type", "args": {"text": "𝐕"}, "when": "editorTextFocus"},  // Bold V
+  {"key": "alt+b v", "command": "type", "args": {"text": "𝐯"}, "when": "editorTextFocus"},  // Bold v
+  {"key": "alt+b shift+w", "command": "type", "args": {"text": "𝐖"}, "when": "editorTextFocus"},  // Bold W
+  {"key": "alt+b w", "command": "type", "args": {"text": "𝐰"}, "when": "editorTextFocus"},  // Bold w
+  {"key": "alt+b shift+x", "command": "type", "args": {"text": "𝐗"}, "when": "editorTextFocus"},  // Bold X
+  {"key": "alt+b x", "command": "type", "args": {"text": "𝐱"}, "when": "editorTextFocus"},  // Bold x
+  {"key": "alt+b shift+y", "command": "type", "args": {"text": "𝐘"}, "when": "editorTextFocus"},  // Bold Y
+  {"key": "alt+b y", "command": "type", "args": {"text": "𝐲"}, "when": "editorTextFocus"},  // Bold y
+  {"key": "alt+b shift+z", "command": "type", "args": {"text": "𝐙"}, "when": "editorTextFocus"},  // Bold Z
+  {"key": "alt+b z", "command": "type", "args": {"text": "𝐳"}, "when": "editorTextFocus"},  // Bold z
+]

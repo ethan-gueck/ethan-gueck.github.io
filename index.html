@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="assets/css/components/arcade.css">
   <link rel="stylesheet" href="assets/css/components/flashcards.css">
   <link rel="stylesheet" href="assets/css/components/nn.css">
+  <link rel="stylesheet" href="assets/css/components/library.css">
   <link rel="stylesheet" href="assets/css/components/cta.css">
   <link rel="stylesheet" href="assets/css/components/footer.css">
   <link rel="stylesheet" href="assets/css/components/contact-bar.css">
@@ -49,6 +50,7 @@
   <script src="assets/js/data/books.js" defer></script>
   <script src="assets/js/data/flashcards.js" defer></script>
   <script src="assets/js/data/neurons.js" defer></script>
+  <script src="assets/js/data/symbols.js" defer></script>
   <script src="assets/js/modules/theme.js" defer></script>
   <script src="assets/js/modules/tabs.js" defer></script>
   <script src="assets/js/modules/toc.js" defer></script>
@@ -68,6 +70,8 @@
   <script src="assets/js/modules/stated.js" defer></script>
   <script src="assets/js/modules/nn.js" defer></script>
   <script src="assets/js/modules/outcomes.js" defer></script>
+  <script src="assets/js/modules/references.js" defer></script>
+  <script src="assets/js/modules/articles.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -109,6 +113,8 @@
       <li role="presentation"><a class="tabs__tab" role="tab" href="#flashcards" data-tab="flashcards" id="tab-flashcards" aria-controls="panel-flashcards">My Flashcards</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#nn" data-tab="nn" id="tab-nn" aria-controls="panel-nn">Ethan's NN</a></li>
       <li role="presentation"><a class="tabs__tab" role="tab" href="#about" data-tab="about" id="tab-about" aria-controls="panel-about">About Me</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#misc" data-tab="misc" id="tab-misc" aria-controls="panel-misc">Misc</a></li>
+      <li role="presentation"><a class="tabs__tab" role="tab" href="#articles" data-tab="articles" id="tab-articles" aria-controls="panel-articles">Articles</a></li>
     </ul>
     <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Dark mode">
       <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
@@ -805,6 +811,83 @@
           <li id="f-ref-1"><span class="ref__num">[1]</span> <span class="ref__body">M. J. D. Powell, "A direct search optimization method that models the objective and constraint functions by linear interpolation," in <em>Advances in Optimization and Numerical Analysis</em>, S. Gomez and J.-P. Hennart, Eds. Dordrecht: Kluwer Academic, 1994, pp. 51–67.</span></li>
           <li id="f-ref-2"><span class="ref__num">[2]</span> <span class="ref__body"><em>IEEE Standard for Calculating the Current-Temperature Relationship of Bare Overhead Conductors</em>, IEEE Std 738-2023, IEEE, Dec. 2023. <a href="https://ieeexplore.ieee.org/document/10382442" rel="noopener">IEEE Xplore</a></span></li>
         </ol>
+      </section>
+
+      <!-- ---------- MISC (references) ---------- -->
+      <section class="panel article" id="panel-misc" role="tabpanel" aria-labelledby="tab-misc" data-panel="misc" hidden>
+        <h2 id="r-in-page"><span class="sec-num">1</span>In-page references</h2>
+        <p>Open here, below the panels.</p>
+        <ul class="ref-grid">
+          <li>
+            <button class="ref-card" type="button" data-ref-toggle="ref-keys" aria-expanded="false" aria-controls="ref-keys">
+              <span class="ref-card__art ref-card__art--keys" aria-hidden="true"><span>αβ∑∫ <kbd>Alt</kbd> <kbd>⌥</kbd></span></span>
+              <span class="ref-card__body">
+                <span class="ref-card__kind"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>In page</span>
+                <span class="ref-card__title">Typing math symbols: VS Code, Windows and Mac shortcuts</span>
+                <span class="ref-card__text">The whole Greek alphabet, superscripts and subscripts for every digit, operators, sets, calculus and arrows: everything on the flashcards. Select a symbol to copy it.</span>
+              </span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="ref-view" id="ref-keys" hidden>
+          <div class="ref-view__head">
+            <h3 class="ref-view__title">Typing math symbols</h3>
+            <button class="ref-view__close" type="button" data-ref-close>Close</button>
+          </div>
+          <div class="keys__bar">
+            <fieldset class="segmented keys__os" data-keys-os>
+              <legend>Show keys for</legend>
+              <label><input type="radio" name="keys-os" value="vs"><span>VS Code</span></label>
+              <label><input type="radio" name="keys-os" value="win"><span>Windows</span></label>
+              <label><input type="radio" name="keys-os" value="mac"><span>Mac</span></label>
+            </fieldset>
+            <div class="keys__all">
+              <button class="ref-view__close" type="button" data-keys-all="open">Expand all</button>
+              <button class="ref-view__close" type="button" data-keys-all="close">Collapse all</button>
+            </div>
+          </div>
+          <ul class="keys__how">
+            <li data-os-only="vs"><strong>VS Code: install once</strong><a class="keys__download" href="assets/data/vscode-math-keybindings.json" download>Download the shortcuts</a>, then in VS Code open the Command Palette (<kbd>Ctrl+Shift+P</kbd>, Mac <kbd>⌘+⇧+P</kbd>) → “Preferences: Open Keyboard Shortcuts (JSON)” and paste the entries inside its <kbd>[ ]</kbd>. Works on Windows and Mac (Alt is Option).</li>
+            <li data-os-only="vs"><strong>VS Code: two keys in turn</strong>Press the first key, let go, then the second: <kbd>Alt+J</kbd> › <kbd>A</kbd> types α. Prefixes: <kbd>Alt+J</kbd> Greek (Greek keyboard layout; Shift for capitals), <kbd>Alt+'</kbd> superscript, <kbd>Alt+,</kbd> subscript, <kbd>Alt+O</kbd> operators, <kbd>Alt+U</kbd> sets, <kbd>Alt+D</kbd> calculus, <kbd>Alt+/</kbd> arrows, <kbd>Alt+M</kbd> geometry, <kbd>Alt+Q</kbd> typography, <kbd>Alt+B</kbd> bold. None of them replaces a VS Code shortcut.</li>
+            <li data-os-only="win"><strong>Windows: Unicode codes</strong>Each symbol shows its Unicode code (U+03B1 is α). In Word, Outlook or WordPad type the digits after U+, then press <kbd>Alt+X</kbd>.</li>
+            <li data-os-only="win"><strong>Windows: any app</strong><kbd>Win+.</kbd> opens the emoji and symbol panel (Ω tab), or select a symbol here to copy it. In VS Code, switch to the VS Code view for shortcuts.</li>
+            <li data-os-only="mac"><strong>Mac: Option keys</strong>Shortcuts are for the U.S. keyboard layout: <kbd>⌥</kbd> is Option, <kbd>⇧</kbd> is Shift. Only π and Ω are true Greek letters; every other symbol shows Option + its code (Unicode Hex Input, next box).</li>
+            <li data-os-only="mac"><strong>Mac: any symbol</strong>Add “Unicode Hex Input” under System Settings → Keyboard → Input Sources, switch to it, then hold <kbd>⌥</kbd> and type the code. <kbd>Ctrl+⌘+Space</kbd> opens the Character Viewer.</li>
+          </ul>
+
+          <div class="keys__tools">
+            <label class="sr-only" for="keys-search">Search symbols</label>
+            <input class="keys__search" id="keys-search" type="search" placeholder="Search: theta, union, 2208, ≤ …" autocomplete="off" data-keys-search>
+            <p class="keys__status" aria-live="polite" data-keys-status></p>
+          </div>
+          <nav class="keys__jump" aria-label="Symbol groups" data-keys-jump></nav>
+          <div data-keys></div>
+        </div>
+
+        <h2 id="r-new-window"><span class="sec-num">2</span>New window references</h2>
+        <p>Open in their own window, so they can sit beside this page.</p>
+        <ul class="ref-grid">
+          <li>
+            <a class="ref-card" href="https://ethan-gueck.github.io/resources/math-review/" target="_blank" rel="noopener" data-ref-window="math-review">
+              <span class="ref-card__art">
+                <img class="ref-card__thumb--light" src="assets/img/references/math-review.webp" alt="" width="640" height="378" loading="lazy">
+                <img class="ref-card__thumb--dark" src="assets/img/references/math-review-dark.webp" alt="" width="640" height="378" loading="lazy">
+              </span>
+              <span class="ref-card__body">
+                <span class="ref-card__kind"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>New window</span>
+                <span class="ref-card__title">Mathematics: A Comprehensive Review</span>
+                <span class="ref-card__text">The study edition behind my flashcards: formulas, definitions, context and print-ready cards, in light and dark, with a download.</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ---------- ARTICLES ---------- -->
+      <section class="panel article" id="panel-articles" role="tabpanel" aria-labelledby="tab-articles" data-panel="articles" hidden>
+        <h2 id="w-articles"><span class="sec-num">1</span>Articles</h2>
+        <div data-articles></div>
       </section>
     </main>
   </div>
