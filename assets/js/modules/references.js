@@ -5,8 +5,7 @@
  *     with its Unicode code point and how to type it on Windows or Mac (a switch shows one), in
  *     collapsible groups with only the first open, paired forms (capital and lowercase,
  *     superscript and subscript) on one line, searchable, and a click on a symbol copies it.
- *   - New window (data-ref-window): opens the resource in its own pop-up window (a new tab where
- *     pop-ups are blocked or on phones).
+ *   - New tab: a plain link (target="_blank") to a resource on its own page.
  */
 (function (Site) {
 'use strict';
@@ -177,15 +176,6 @@ Site.initReferences = function initReferences(panel, groups) {
     });
   });
 
-  panel.querySelectorAll('[data-ref-window]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      // Phones and narrow screens: a normal new tab. Elsewhere: a pop-up window sized for reading.
-      if (window.matchMedia('(max-width: 760px)').matches) return;
-      var w = Math.min(1100, screen.availWidth - 40), h = Math.min(1000, screen.availHeight - 40);
-      var win = window.open(link.href, link.dataset.refWindow, 'popup=yes,width=' + w + ',height=' + h + ',left=' + Math.round((screen.availWidth - w) / 2) + ',top=20');
-      if (win) { e.preventDefault(); win.focus(); }
-    });
-  });
 };
 
 })(window.Site = window.Site || {});

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Philosophy | Ethan Gueck</title>
+  <meta name="description" content="The design of Ethan Gueck's portfolio: the light and dark colour schemes, the geometry between their colours, and the typefaces.">
+  <meta name="author" content="Ethan Gueck">
+  <meta name="theme-color" content="#0B3D2E">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <!-- Dark mode before first paint: the portfolio's saved choice (localStorage "pp-theme"). -->
+  <script>try { if (localStorage.getItem('pp-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components/article.css">
+  <link rel="stylesheet" href="../assets/css/components/header.css">
+  <link rel="stylesheet" href="../assets/css/dark.css">
+  <link rel="stylesheet" href="design.css">
+  <script src="design.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead__bar container">
+      <a class="masthead__journal" href="../#misc">← Portfolio of Ethan Gueck</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Dark mode">
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+      </button>
+    </div>
+    <div class="container design-title">
+      <h1 class="masthead__name">Design Philosophy</h1>
+      <p class="masthead__subtitle">How the portfolio looks and reads, and why: one colour family on tinted paper, a single accent, two typefaces, shallow depth and a measured amount to take in.</p>
+    </div>
+  </header>
+
+  <main class="container design-main">
+    <article class="article">
+      <h2 id="d-idea"><span class="sec-num">1</span>The idea: a journal on paper</h2>
+      <p>The portfolio is laid out like a research journal: a masthead, numbered sections, figures with captions and a reference list. The palette serves that page rather than competing with it.</p>
+      <ul class="prose-list">
+        <li><strong>One brand family, one accent.</strong> Every brand colour is a single hue stepped in lightness; one warm accent marks what matters (section numbers, active states, the call to action).</li>
+        <li><strong>Tinted neutrals.</strong> Paper, rules and ink lean toward the brand hue instead of pure grey, so text and background read as one material.</li>
+        <li><strong>Dark mode keeps the roles, not the colours.</strong> The brand greens become a blue-grey family and the sand accent becomes yellow, each in the same role, with the same geometry between them.</li>
+        <li><strong>Quiet texture.</strong> The masthead's faint concentric contour lines evoke topographic and network maps without competing with the title.</li>
+      </ul>
+      <p class="note">Every number on this page is computed live in your browser from the site's own colour tokens (<code>tokens.css</code> and <code>dark.css</code>): HSL hue and lightness, perceptual OKLCH lightness, and WCAG contrast ratios.</p>
+
+      <h2 id="d-light"><span class="sec-num">2</span>Light mode: forest green on sand</h2>
+      <div class="design-split">
+        <figure class="design-wheel" data-wheel="light"></figure>
+        <div data-geometry="light"></div>
+      </div>
+      <h3>Swatches</h3>
+      <div class="swatches" data-swatches="light"></div>
+      <h3>The green ramp: one hue, four lightness steps</h3>
+      <div data-ramp="light"></div>
+
+      <h2 id="d-dark"><span class="sec-num">3</span>Dark mode: blue-grey and yellow</h2>
+      <div class="design-split">
+        <figure class="design-wheel" data-wheel="dark"></figure>
+        <div data-geometry="dark"></div>
+      </div>
+      <h3>Swatches</h3>
+      <div class="swatches" data-swatches="dark"></div>
+      <h3>Matched ladders: the yellow scale against the blue scale</h3>
+      <p>The yellow scale was built from <code>#E5A93C</code> to sit at the blue-grey scale's lightness steps, so a yellow and a blue of the same number carry the same weight. The table shows how closely each step matches.</p>
+      <div class="table-wrap" data-ladder></div>
+
+      <h2 id="d-contrast"><span class="sec-num">4</span>Contrast</h2>
+      <p>WCAG 2 contrast ratios for the pairs the site actually uses. 4.5:1 passes body text (AA), 7:1 passes AAA, and 3:1 passes large text only.</p>
+      <div class="table-wrap" data-contrast></div>
+
+      <h2 id="d-type"><span class="sec-num">5</span>Typography</h2>
+      <div class="type-grid">
+        <section class="type-card type-card--serif">
+          <p class="type-card__label">Reading and display</p>
+          <p class="type-card__name">Newsreader</p>
+          <p class="type-card__sample">Data science for critical infrastructure.</p>
+          <p class="type-card__sample type-card__sample--italic">ETL pipelines, models and dashboards.</p>
+          <p class="type-card__why">A serif drawn for long-form reading on screens, with an optical-size axis (6–72) the site turns on (<code>font-optical-sizing: auto</code>): small text gets sturdier strokes, large titles finer ones. It carries headings, body text and the italic subtitles, which gives the journal voice.</p>
+          <p class="type-card__stack"><code>"Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif</code></p>
+        </section>
+        <section class="type-card type-card--sans">
+          <p class="type-card__label">Interface</p>
+          <p class="type-card__name">IBM Plex Sans</p>
+          <p class="type-card__sample">Summary · Portfolio · Ethan's NN · Misc</p>
+          <p class="type-card__sample">Data Scientist | ML | AI | Optimization</p>
+          <p class="type-card__why">An engineered grotesque for everything you operate rather than read: tabs, buttons, labels, captions, tables and code-adjacent text. Its technical character suits the data and engineering content, and it separates interface from prose at a glance.</p>
+          <p class="type-card__stack"><code>"IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif</code></p>
+        </section>
+      </div>
+      <h3>Type scale</h3>
+      <div class="table-wrap" data-scale></div>
+
+      <h2 id="d-depth"><span class="sec-num">6</span>Depth</h2>
+      <p>Depth has two meanings here: how far a surface sits above the page, and how many steps a detail sits below the top of the site.</p>
+      <h3>Visual depth: layers and shadows</h3>
+      <p>Surfaces stack in a fixed order, and each layer up casts a darker shadow; the two you handle, flashcards and dialogs, also cast the longest. Shadows are tinted with the darkest brand colour (<code>--shade-rgb</code>: green in light mode, navy in dark mode) instead of black, so they read as shade on the same material rather than a grey stain.</p>
+      <div class="depth-demo" data-depth-demo></div>
+      <div class="table-wrap" data-elevation></div>
+      <p data-dark-depth></p>
+
+      <h3>Structural depth: tab, section, detail</h3>
+      <p>Every piece of content sits at one of five depths: <strong>0</strong> the tab bar, <strong>1</strong> a tab's numbered sections, <strong>2</strong> a panel, card or deck inside a section, <strong>3</strong> a detail opened from it (a flipped card, a popup, an expanded reference, or a page in a new tab), and <strong>4</strong> a detail of a detail, such as a flashcard's stated-equation popup. The table in section 7 counts the clicks to each kind of detail.</p>
+
+      <h2 id="d-entropy"><span class="sec-num">7</span>Information entropy</h2>
+      <p>Every click is a choice, and a choice costs attention in proportion to how much it narrows things down. Information theory gives that cost a unit, the bit, so the site's structure can be measured rather than guessed.</p>
+      <div class="formula-block">
+        <p class="formula-block__eq"><var>H</var> = −∑<sub><var>i</var>=1</sub><sup><var>n</var></sup> <var>p<sub>i</sub></var> log<sub>2</sub> <var>p<sub>i</sub></var> &nbsp;bits</p>
+        <p>where <var>H</var> is the Shannon entropy of one choice (the information a visitor resolves by making it), <var>n</var> is the number of options on screen, and <var>p<sub>i</sub></var> is the probability the visitor wants option <var>i</var>. With no traffic data each option is taken as equally likely (<var>p<sub>i</sub></var> = 1/<var>n</var>), which gives the maximum: <var>H</var> = log<sub>2</sub> <var>n</var>.</p>
+      </div>
+      <div class="formula-block">
+        <p class="formula-block__eq"><var>T</var> = <var>a</var> + <var>b</var> · log<sub>2</sub>(<var>n</var> + 1)</p>
+        <p>The Hick–Hyman law: <var>T</var> is the time to decide among <var>n</var> equally likely options, <var>a</var> is the fixed time to see and respond, and <var>b</var> is the time per bit; both constants are fitted per person and task. Decision time grows with the bits, not the option count, so doubling the options adds one bit, not double the time.</p>
+      </div>
+      <h3>Bits per decision on this site</h3>
+      <p>Measured live from the portfolio's page and data files:</p>
+      <div class="table-wrap" data-bits></div>
+
+      <h3>How much can someone absorb?</h3>
+      <p>Working memory holds about four chunks at once (Cowan, 2001), a revision of Miller's (1956) "seven, plus or minus two", which Cowan treats as a rough estimate rather than a limit. Options that stay visible, like the tab bar, are recognised rather than remembered, so the limit applies to what a visitor must hold in mind: the ideas in one section. Reading time uses the average adult silent reading rate for non-fiction, 238 words per minute (Brysbaert, 2019).</p>
+      <div class="table-wrap" data-absorb></div>
+      <p data-absorb-note></p>
+
+      <h3>How many clicks should a detail take?</h3>
+      <div class="formula-block">
+        <p class="formula-block__eq"><var>d</var> = ⌈log<sub><var>b</var></sub> <var>N</var>⌉ &nbsp;clicks, &nbsp;each resolving log<sub>2</sub> <var>b</var> bits</p>
+        <p>where <var>N</var> is the number of items a visitor might want, <var>b</var> is the breadth (options per click), <var>d</var> is the depth (clicks to reach any one item), and ⌈ ⌉ rounds up. Finding one item among <var>N</var> always takes log<sub>2</sub> <var>N</var> bits in total; breadth only decides how those bits are split into clicks. Menu studies found depth costs more than breadth: two levels of about eight beat deeper trees (Miller, 1981; Kiger, 1984), and a three-level web hierarchy was slower than two-level ones (Larson &amp; Czerwinski, 1998). The count itself matters less than confidence: in Porter's (2003) study of 44 users and 620 tasks, the number of clicks did not predict quitting or satisfaction; whether people found what they wanted did.</p>
+      </div>
+      <div class="table-wrap" data-clicks></div>
+      <p data-clicks-note></p>
+
+      <h2 id="d-refs"><span class="sec-num">8</span>References</h2>
+      <ol class="design-refs">
+        <li>Brysbaert, M. (2019). How many words do we read per minute? A review and meta-analysis of reading rate. <em>Journal of Memory and Language</em>, 109, 104047.</li>
+        <li>Cowan, N. (2001). The magical number 4 in short-term memory: A reconsideration of mental storage capacity. <em>Behavioral and Brain Sciences</em>, 24(1), 87–114.</li>
+        <li>Hick, W. E. (1952). On the rate of gain of information. <em>Quarterly Journal of Experimental Psychology</em>, 4(1), 11–26. Hyman, R. (1953). Stimulus information as a determinant of reaction time. <em>Journal of Experimental Psychology</em>, 45(3), 188–196.</li>
+        <li>Kiger, J. I. (1984). The depth/breadth trade-off in the design of menu-driven user interfaces. <em>International Journal of Man-Machine Studies</em>, 20(2), 201–213.</li>
+        <li>Larson, K., &amp; Czerwinski, M. (1998). Web page design: Implications of memory, structure and scent for information retrieval. <em>Proceedings of CHI 98</em>, 25–32.</li>
+        <li>Miller, D. P. (1981). The depth/breadth tradeoff in hierarchical computer menus. <em>Proceedings of the Human Factors Society 25th Annual Meeting</em>, 296–300.</li>
+        <li>Miller, G. A. (1956). The magical number seven, plus or minus two. <em>Psychological Review</em>, 63(2), 81–97.</li>
+        <li>Porter, J. (2003). Testing the three-click rule. <em>User Interface Engineering</em>.</li>
+        <li>Shannon, C. E. (1948). A mathematical theory of communication. <em>Bell System Technical Journal</em>, 27(3), 379–423.</li>
+      </ol>
+    </article>
+  </main>
+
+  <footer class="design-foot">© Ethan Gueck 2026</footer>
+</body>
+</html>
