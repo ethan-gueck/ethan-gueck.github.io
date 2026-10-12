@@ -404,4 +404,19 @@ Site.initNN = function initNN(root, options) {
   };
 };
 
+// A formula page's "Back to Ethan's NN" (built by portfolio-projects general/web/page.py) asks over
+// this channel whether a portfolio tab is open; this tab answers, then shows the NN when asked, and
+// the formula page closes itself so the reader lands back here.
+if ('BroadcastChannel' in window) {
+  var nnChannel = new BroadcastChannel('ethans-nn');
+  nnChannel.onmessage = function (m) {
+    if (!m.data) return;
+    if (m.data.type === 'where-is-nn') nnChannel.postMessage({ type: 'nn-here' });
+    if (m.data.type === 'show-nn') {
+      if (location.hash !== '#nn') location.hash = '#nn';
+      window.focus();
+    }
+  };
+}
+
 })(window.Site = window.Site || {});
