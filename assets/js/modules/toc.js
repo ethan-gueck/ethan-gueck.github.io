@@ -5,14 +5,15 @@
  * and highlights the section currently in view. On phones, where the sidebar is hidden,
  * the same outline fills the collapsible "On this page" menu above the panel.
  */
-let observer;
+let stopTracking = () => {};
 
 Site.buildToc = function buildToc(panel, listEl = document.getElementById('toc')) {
   if (!listEl) return;
-  observer?.disconnect();
+  stopTracking();
   listEl.replaceChildren();
 
   const headings = [...panel.querySelectorAll('h2[id]')];
+  let chosen = null;   // index of a section picked from the contents, until the reader scrolls
   const links = headings.map(h => {
     const num = h.querySelector('.sec-num')?.textContent ?? '';
     const label = h.textContent.replace(num, '').trim();
@@ -23,6 +24,11 @@ Site.buildToc = function buildToc(panel, listEl = document.getElementById('toc')
     a.lastElementChild.textContent = label;
     a.addEventListener('click', e => {
       e.preventDefault();
+      // A minimized section (a flashcard deck) opens as you go to it.
+      const toggle = h.querySelector('button[aria-expanded="false"]');
+      if (toggle) toggle.click();
+      chosen = headings.indexOf(h);   // highlighted even if the page ends before it reaches the top
+      setActive(chosen);
       h.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       history.replaceState(null, '', `#${panel.dataset.panel}`);
     });
@@ -49,13 +55,27 @@ Site.buildToc = function buildToc(panel, listEl = document.getElementById('toc')
 
   buildMobile(panel, headings);
 
-  observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(e => e.isIntersecting);
-    if (!visible.length) return;
-    const top = visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-    setActive(headings.indexOf(top.target));
-  }, { rootMargin: '0px 0px -65% 0px' });
-  headings.forEach(h => observer.observe(h));
+  // The section in view is the last heading that has reached the top of the page (just below the
+  // tab bar, where a heading stops when you go to it). After a contents link, that section stays
+  // highlighted until the reader scrolls on their own.
+  let frame = 0;
+  const track = () => {
+    frame = 0;
+    if (chosen !== null) { setActive(chosen); return; }
+    const line = (parseFloat(getComputedStyle(headings[0] || document.body).scrollMarginTop) || 0) + 40;
+    let current = 0;
+    headings.forEach((h, j) => { if (h.getBoundingClientRect().top <= line) current = j; });
+    setActive(current);
+  };
+  const onScroll = () => { if (!frame) frame = requestAnimationFrame(track); };
+  const release = () => { chosen = null; };
+  addEventListener('scroll', onScroll, { passive: true });
+  requestAnimationFrame(track);
+  ['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, release, { passive: true }));
+  stopTracking = () => {
+    removeEventListener('scroll', onScroll);
+    ['wheel', 'touchstart', 'keydown'].forEach(t => removeEventListener(t, release));
+  };
 }
 
 function buildMobile(panel, headings) {
@@ -74,6 +94,8 @@ function buildMobile(panel, headings) {
     a.addEventListener('click', e => {
       e.preventDefault();
       box.open = false;
+      const toggle = h.querySelector('button[aria-expanded="false"]');
+      if (toggle) toggle.click();
       h.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       history.replaceState(null, '', `#${panel.dataset.panel}`);
     });
