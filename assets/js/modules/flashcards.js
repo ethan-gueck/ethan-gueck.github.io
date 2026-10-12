@@ -1,5 +1,6 @@
 /**
- * Flashcard decks (My Flashcards tab). Renders one section per deck with a single card viewer:
+ * Flashcard decks (My Flashcards tab). Renders one section per deck, minimized to its heading until
+ * opened (the heading is a toggle, as on Ethan's NN), with a single card viewer:
  * select the card (or press Space) to flip it, and use the arrows, keyboard arrows, or Shuffle to move
  * through the deck. Cards are the Second Edition's print cards (data/flashcards.js): a concept card's
  * front lists the numbered names of its formulas and its back the numbered formulas, key terms and
@@ -44,8 +45,11 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     var sec = document.createElement('section');
     sec.className = 'deck';
     sec.innerHTML =
-      '<h2 id="' + id + '"><span class="sec-num">' + (deck.num || di + 1) + '</span>' + deck.name +
-        ' <span class="deck__count">' + deck.cards.length + ' cards</span></h2>' +
+      '<h2 class="deck__h" id="' + id + '"><button class="deck__head" type="button" aria-expanded="false" aria-controls="' + id + '-body">' +
+        '<span class="sec-num">' + (deck.num || di + 1) + '</span><span class="deck__name"></span>' +
+        ' <span class="deck__count">' + deck.cards.length + ' cards</span>' +
+        '<svg class="deck__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h2>' +
+      '<div class="deck__body" id="' + id + '-body" hidden>' +
       '<div class="deck__viewer">' +
         '<button class="deck__nav deck__nav--prev" type="button" aria-label="Previous card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>' +
         '<div class="fcard-wrap">' +
@@ -62,7 +66,8 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       '<div class="deck__bar"><span class="deck__pos"></span>' +
         '<button class="text-btn text-btn--small" type="button" data-shuffle>Shuffle</button>' +
         '<button class="text-btn text-btn--small" type="button" data-reset>In order</button>' +
-        '<button class="text-btn text-btn--small" type="button" data-link>Copy link</button></div>';
+        '<button class="text-btn text-btn--small" type="button" data-link>Copy link</button></div></div>';
+    sec.querySelector('.deck__name').textContent = deck.name;
     if (deck.ref && !(decks[di - 1] || {}).ref) {
       var div = document.createElement('p');
       div.className = 'deck__divider';
@@ -76,6 +81,14 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     var card = sec.querySelector('.fcard'), front = sec.querySelector('.fcard__front'), back = sec.querySelector('.fcard__back');
     var pos = sec.querySelector('.deck__pos');
     var tools = sec.querySelector('.fcard__tools');
+    // Every deck starts minimized; its heading opens and closes it.
+    var head = sec.querySelector('.deck__head'), body = sec.querySelector('.deck__body');
+    function setOpen(on) {
+      head.setAttribute('aria-expanded', String(on));
+      body.hidden = !on;
+      sec.classList.toggle('is-open', on);
+    }
+    head.addEventListener('click', function () { setOpen(body.hidden); });
 
     function hasEquation(c) { return !!c.stated; }
     function setTools() {
@@ -262,6 +275,7 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       registry[c.id.toLowerCase()] = {
         deck: deck.name,
         show: function () {
+          setOpen(true);
           if (order.indexOf(i) < 0) order = deck.cards.map(function (_, k) { return k; });
           idx = order.indexOf(i);
           render();

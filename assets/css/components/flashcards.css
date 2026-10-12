@@ -209,3 +209,35 @@ mtable.tml-small mtd { padding-top: 0.35ex; padding-bottom: 0.35ex; }
 .stated-decide { padding: var(--space-2) var(--space-3); background: var(--paper); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); }
 .stated-modal .fcard__ref, .nn-modal .fcard__ref { font-size: 0.7em; }
 .stated-modal .stated-terms dt { white-space: normal; max-width: 16rem; }
+
+/* Decks start minimized: the heading is a toggle, styled like the tracks on Ethan's NN. */
+.deck { margin-bottom: var(--space-2); }
+.article .deck > h2.deck__h { display: block; margin: 0; padding: 0; border: 0; font-size: var(--fs-md); }
+.article .deck:first-child > h2.deck__h { margin-top: var(--space-3); }
+.deck__head {
+  display: flex; align-items: baseline; gap: var(--space-3); width: 100%;
+  padding: 0.75rem var(--space-3); text-align: left;
+  border: 1px solid var(--rule); border-radius: var(--radius-md); background: var(--paper);
+  font: inherit; font-weight: 600; color: var(--ink-green-800); cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.deck__head:hover { border-color: var(--ink-green-700); }
+.deck__head:focus-visible { outline: none; box-shadow: var(--focus); }
+.deck__head .deck__count { margin-left: auto; white-space: nowrap; }
+.deck__chevron {
+  width: 18px; height: 18px; align-self: center; flex-shrink: 0;
+  fill: none; stroke: var(--ink-green-800); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+.deck.is-open .deck__head { background: var(--gradient-primary); border-color: var(--ink-green-800); border-radius: var(--radius-md) var(--radius-md) 0 0; color: #FFFFFF; }
+.deck.is-open .deck__head .sec-num { color: var(--sand-300); }
+.deck.is-open .deck__head .deck__count { color: var(--sand-200); }
+.deck.is-open .deck__chevron { stroke: var(--sand-300); transform: rotate(180deg); }
+.deck__body {
+  padding: var(--space-3) var(--space-2) var(--space-2); border: 1px solid var(--rule); border-top: 3px solid var(--sand-300);
+  border-radius: 0 0 var(--radius-md) var(--radius-md); background: var(--paper);
+}
+.deck__body .deck__viewer { margin-top: 0; }
+.deck__divider { margin-top: var(--space-4); }
+@media (prefers-reduced-motion: reduce) { .deck__chevron { transition: none; } }
+@media (max-width: 560px) { .deck__head { gap: var(--space-2); padding-inline: var(--space-2); } .deck__head .deck__count { font-size: 0.78rem; } }
