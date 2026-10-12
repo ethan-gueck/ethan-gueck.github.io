@@ -36,20 +36,23 @@ GROUPS = [
       ("=","Equals"),("≠","Not equal"),("≈","Approximately equal"),("≡","Identical to / congruent (mod)"),("≅","Congruent (geometry)"),("∼","Similar to / distributed as"),("∝","Proportional to"),
       ("<","Less than"),(">","Greater than"),("≤","Less than or equal"),("≥","Greater than or equal"),("≪","Much less than"),("≫","Much greater than"),
       ("√","Square root"),("∛","Cube root"),("∜","Fourth root"),("∞","Infinity"),("%","Percent"),("‰","Per mille"),("°","Degree"),("′","Prime (f′, feet, minutes)"),("″","Double prime"),("!","Factorial"),
-      ("|","Vertical line (absolute value)"),("∣","Divides / given (P(A ∣ B))"),("‖","Double vertical line (norm ‖x‖)"),("⌊","Left floor"),("⌋","Right floor"),("⌈","Left ceiling"),("⌉","Right ceiling"),("…","Ellipsis"),("⋯","Midline ellipsis (a₁ + ⋯ + aₙ)")]),
+      ("|","Vertical line (absolute value)"),("∣","Divides / given (P(A ∣ B))"),("∤","Does not divide"),("‖","Double vertical line (norm ‖x‖)"),("⌊","Left floor"),("⌋","Right floor"),("⌈","Left ceiling"),("⌉","Right ceiling"),("…","Ellipsis"),("⋯","Midline ellipsis (a₁ + ⋯ + aₙ)"),("⋮","Vertical ellipsis"),("⋱","Diagonal ellipsis"),
+      ("⋅","Dot operator (a ⋅ b)"),("∗","Asterisk operator (convolution f ∗ g)"),("≔","Colon equals (is defined as)"),("≜","Equal by definition"),
+      ("≲","Less than or about"),("≳","Greater than or about"),("⋚","Less than, equal to or greater than")]),
   ("sets", "Sets & logic", "Union, intersection, membership, quantifiers and number sets.", None,
-     [("∪","Union"),("∩","Intersection"),("∈","Element of"),("∉","Not an element of"),("⊂","Proper subset"),("⊆","Subset or equal"),("⊃","Proper superset"),("⊇","Superset or equal"),("∅","Empty set"),("∖","Set minus"),("\u29f5","Reverse solidus operator (set minus, A ⧵ B)"),
+     [("∪","Union"),("∩","Intersection"),("∈","Element of"),("∉","Not an element of"),("⊂","Proper subset"),("⊆","Subset or equal"),("⊃","Proper superset"),("⊇","Superset or equal"),("⊊","Proper subset (not equal)"),("⋃","Union over many sets (⋃ᵢ Aᵢ)"),("∅","Empty set"),("∖","Set minus"),("\u29f5","Reverse solidus operator (set minus, A ⧵ B)"),
       ("∀","For all"),("∃","There exists"),("∄","There does not exist"),("¬","Not"),("∧","And"),("∨","Or"),("⊕","Exclusive or / direct sum"),("⊗","Tensor / Kronecker product"),("⊙","Element-wise (Hadamard) product"),("∘","Composition (f ∘ g)"),
-      ("∴","Therefore"),("∵","Because"),("ℕ","Natural numbers"),("ℤ","Integers"),("ℚ","Rationals"),("ℝ","Real numbers"),("ℂ","Complex numbers"),("≻","Succeeds (preference)"),("⪰","Succeeds or equal")]),
+      ("∴","Therefore"),("∵","Because"),("⊢","Proves (syntactic consequence)"),("⊨","Models (semantic consequence)"),("ℕ","Natural numbers"),("ℤ","Integers"),("ℚ","Rationals"),("ℝ","Real numbers"),("ℂ","Complex numbers"),("≻","Succeeds (preference)"),("⪰","Succeeds or equal")]),
   ("calc", "Calculus, vectors & matrices", "Derivatives, integrals, sums and the symbols around them.", None,
      [("∂","Partial derivative"),("∇","Nabla (gradient, del)"),("\u2206","Increment (change, Δx); Greek Δ is in the alphabet above"),("∫","Integral"),("∬","Double integral"),("∭","Triple integral"),("∮","Contour integral"),("∑","Summation"),("∏","Product"),
-      ("˙","Dot above (time derivative ẋ)"),("¯","Macron (mean x̄)"),("ˆ","Circumflex (estimate ŷ)"),("⊤","Transpose (Aᵀ, A⊤)"),("⊥","Perpendicular / orthogonal"),("⟂","Perpendicular"),("∥","Parallel"),("ℓ","Script small l (length, loss)"),("ℒ","Script L (Lagrangian, Laplace)"),("ℰ","Script E"),("ℏ","h-bar (reduced Planck)"),("\u2126","Ohm sign; prefer Greek Ω (U+03A9)"),("\u00b5","Micro sign; prefer Greek μ (U+03BC)"),("Å","Ångström")]),
+      ("˙","Dot above (time derivative ẋ)"),("¨","Diaeresis (second derivative ẍ)"),("¯","Macron (mean x̄)"),("ˆ","Circumflex (estimate ŷ)"),("⊤","Transpose (Aᵀ, A⊤)"),("⊥","Perpendicular / orthogonal"),("⟂","Perpendicular"),("∥","Parallel"),("ℓ","Script small l (length, loss)"),("ℒ","Script L (Lagrangian, Laplace)"),("ℰ","Script E"),("ℏ","h-bar (reduced Planck)"),("𝔼","Expectation (𝔼[X])"),("⟨","Left angle bracket (inner product ⟨x, y⟩)"),("⟩","Right angle bracket"),
+      ("ı","Dotless i (î, a unit vector)"),("ȷ","Dotless j (ĵ)"),("\u2126","Ohm sign; prefer Greek Ω (U+03A9)"),("\u00b5","Micro sign; prefer Greek μ (U+03BC)"),("Å","Ångström")]),
   ("arrows", "Arrows", "Implication, limits, maps and directions.", None,
-     [("→","Right arrow (tends to, maps to)"),("←","Left arrow (assignment)"),("↑","Up arrow"),("↓","Down arrow"),("↔","Left-right arrow"),("↕","Up-down arrow"),("⇒","Implies"),("⇐","Is implied by"),("⇔","If and only if"),("⟹","Long implies"),("⟸","Long implied by"),("⟺","Long if and only if"),("↦","Maps to (x ↦ x²)"),("⟶","Long right arrow"),("↗","North-east arrow (increasing)"),("↘","South-east arrow (decreasing)")]),
+     [("→","Right arrow (tends to, maps to)"),("←","Left arrow (assignment)"),("↑","Up arrow"),("↓","Down arrow"),("↔","Left-right arrow"),("↕","Up-down arrow"),("⇒","Implies"),("⇐","Is implied by"),("⇔","If and only if"),("⟹","Long implies"),("⟸","Long implied by"),("⟺","Long if and only if"),("↦","Maps to (x ↦ x²)"),("⟶","Long right arrow"),("⟷","Long left-right arrow"),("↪","Hooked arrow (injection, ↪)"),("↺","Anticlockwise arrow"),("↻","Clockwise arrow"),("↗","North-east arrow (increasing)"),("↘","South-east arrow (decreasing)")]),
   ("geom", "Geometry", "Angles, shapes and relations between figures.", None,
-     [("∠","Angle"),("∡","Measured angle"),("△","Triangle"),("□","Square"),("○","Circle"),("⌒","Arc"),("≅","Congruent"),("∼","Similar"),("⊥","Perpendicular"),("∥","Parallel"),("°","Degree"),("π","Pi")]),
+     [("∠","Angle"),("∡","Measured angle"),("△","Triangle"),("□","Square"),("○","Circle"),("⌒","Arc"),("⌢","Frown (arc ⌢AB)"),("⌀","Diameter"),("≅","Congruent"),("∼","Similar"),("⊥","Perpendicular"),("∥","Parallel"),("°","Degree"),("π","Pi")]),
   ("type", "Typography", "Dashes, quotes and marks used in the notes on the flashcards.", None,
-     [("–","En dash (ranges, 1–10)"),("—","Em dash"),("“","Left double quote"),("”","Right double quote"),("‘","Left single quote"),("’","Right single quote / apostrophe"),("•","Bullet"),("†","Dagger"),("§","Section"),("¶","Pilcrow (paragraph)"),("©","Copyright"),("é","e acute"),("ô","o circumflex")]),
+     [("–","En dash (ranges, 1–10)"),("—","Em dash"),("“","Left double quote"),("”","Right double quote"),("‘","Left single quote"),("’","Right single quote / apostrophe"),("•","Bullet"),("†","Dagger"),("§","Section"),("¶","Pilcrow (paragraph)"),("©","Copyright"),("é","e acute"),("è","e grave"),("ô","o circumflex"),("■","End of proof (∎, Q.E.D.)")]),
   ("bold", "Bold vector letters", "Bold mathematical letters (𝐱, 𝐯, 𝐅) live outside the 4-digit range: in Word type the 5-digit code, then Alt+X; on a Mac use the two-part code with Unicode Hex Input, or the Character Viewer.", ("Capital", "Lowercase"), None),
 ]
 
@@ -57,7 +60,7 @@ GROUPS = [
 MAC = {
   "π":"⌥P","Ω":"⌥Z","∑":"⌥W","∏":"⇧⌥P","∆":"⌥J","∂":"⌥D","∫":"⌥B","√":"⌥V","∞":"⌥5","≠":"⌥=","≈":"⌥X","≤":"⌥,","≥":"⌥.",
   "÷":"⌥/","±":"⇧⌥=","°":"⇧⌥8","·":"⇧⌥9","•":"⌥8","µ":"⌥M","¬":"⌥L","–":"⌥-","—":"⇧⌥-","…":"⌥;","“":"⌥[","”":"⇧⌥[",
-  "‘":"⌥]","’":"⇧⌥]","‰":"⇧⌥R","⁄":"⇧⌥1","†":"⌥T","§":"⌥6","¶":"⌥7","©":"⌥G","˙":"⌥H","¯":"⇧⌥,","ˆ":"⇧⌥I","Å":"⇧⌥A",
+  "‘":"⌥]","’":"⇧⌥]","‰":"⇧⌥R","⁄":"⇧⌥1","†":"⌥T","§":"⌥6","¶":"⌥7","©":"⌥G","˙":"⌥H","¯":"⇧⌥,","ˆ":"⇧⌥I","Å":"⇧⌥A","¨":"⇧⌥U","ı":"⇧⌥B",
 }
 
 # VS Code: every symbol gets an Alt chord (Alt+prefix, then a key), installed from the generated
@@ -75,14 +78,16 @@ SCRIPT_KEYS = {"Plus":"shift+=","Minus":"-","Equals":"=","Left parenthesis":"shi
 VS_KEYS = {
   "arith": {"−":"-","×":"x","÷":"/","·":"8","∙":"shift+8","±":"=","∓":"shift+=","⁄":"shift+/","≠":"n","≈":"a","≡":"e","≅":"c","∼":"`","∝":"p",
             "≤":",","≥":".","≪":"shift+,","≫":"shift+.","√":"r","∛":"3","∜":"4","∞":"i","‰":"5","°":"0","′":"'","″":"shift+'",
-            "∣":"\\","‖":"shift+\\","⌊":"[","⌋":"]","⌈":"shift+[","⌉":"shift+]","…":"l","⋯":"shift+l"},
+            "∣":"\\","‖":"shift+\\","⌊":"[","⌋":"]","⌈":"shift+[","⌉":"shift+]","…":"l","⋯":"shift+l",
+            "∤":"shift+n","⋮":"v","⋱":"shift+v","⋅":"d","∗":"s","≔":"shift+;","≜":"shift+d","≲":"w","≳":"shift+w","⋚":"g"},
   "sets": {"∪":"u","∩":"n","∈":"e","∉":"shift+e","⊂":"s","⊆":"shift+s","⊃":"p","⊇":"shift+p","∅":"0","∖":"\\","\u29f5":"shift+\\","∀":"a","∃":"x","∄":"shift+x",
-           "¬":"1","∧":"6","∨":"v","⊕":"o","⊗":"shift+o","⊙":".","∘":"c","∴":"t","∵":"b","ℕ":"shift+n","ℤ":"shift+z","ℚ":"shift+q","ℝ":"shift+r","ℂ":"shift+c","≻":"g","⪰":"shift+g"},
+           "¬":"1","∧":"6","∨":"v","⊕":"o","⊗":"shift+o","⊙":".","∘":"c","∴":"t","∵":"b","ℕ":"shift+n","ℤ":"shift+z","ℚ":"shift+q","ℝ":"shift+r","ℂ":"shift+c","≻":"g","⪰":"shift+g","⊊":"w","⋃":"shift+u","⊢":"d","⊨":"m"},
   "calc": {"∂":"d","∇":"n","\u2206":"shift+d","∫":"i","∬":"2","∭":"3","∮":"o","∑":"s","∏":"p","˙":".","¯":"-","ˆ":"6","⊤":"t","⊥":"shift+t","⟂":"/","∥":"\\",
-           "ℓ":"l","ℒ":"shift+l","ℰ":"shift+e","ℏ":"h","\u2126":"shift+o","\u00b5":"m","Å":"shift+a"},
-  "arrows": {"→":"right","←":"left","↑":"up","↓":"down","↔":"h","↕":"v","⇒":"shift+right","⇐":"shift+left","⇔":"shift+h","⟹":"]","⟸":"[","⟺":"=","↦":"m","⟶":"l","↗":"u","↘":"d"},
-  "geom": {"∠":"a","∡":"shift+a","△":"t","□":"s","○":"c","⌒":"r","≅":"=","∼":"`","⊥":"p","∥":"\\","°":"0","π":"3"},
-  "type": {"–":"-","—":"shift+-","“":"[","”":"]","‘":"shift+[","’":"shift+]","•":"8","†":"t","§":"s","¶":"p","©":"c","é":"e","ô":"o"},
+           "ℓ":"l","ℒ":"shift+l","ℰ":"shift+e","ℏ":"h","\u2126":"shift+o","\u00b5":"m","Å":"shift+a",
+           "¨":"shift+.","𝔼":"e","⟨":"9","⟩":"0","ı":"shift+i","ȷ":"shift+j"},
+  "arrows": {"→":"right","←":"left","↑":"up","↓":"down","↔":"h","↕":"v","⇒":"shift+right","⇐":"shift+left","⇔":"shift+h","⟹":"]","⟸":"[","⟺":"=","↦":"m","⟶":"l","↗":"u","↘":"d","⟷":"-","↪":"k","↺":"a","↻":"c"},
+  "geom": {"∠":"a","∡":"shift+a","△":"t","□":"s","○":"c","⌒":"r","⌢":"f","⌀":"d","≅":"=","∼":"`","⊥":"p","∥":"\\","°":"0","π":"3"},
+  "type": {"–":"-","—":"shift+-","“":"[","”":"]","‘":"shift+[","’":"shift+]","•":"8","†":"t","§":"s","¶":"p","©":"c","é":"e","è":"shift+e","ô":"o","■":"q"},
 }
 
 # Characters already on the keyboard still get a chord, so every symbol has one: the group prefix, then
@@ -170,10 +175,18 @@ KEYBINDINGS.write_text("""// Math symbol shortcuts for VS Code, from https://eth
 [
 """ + "\n".join(lines) + "\n]\n", encoding="utf-8")
 
-# Every non-ASCII character on the flashcards (except letters with accents in names and plain quotes) must appear.
+# Every non-ASCII character on the flashcards must appear, except:
+#   - spacing and invisible marks the MathML carries (thin and em spaces, function application, a variation
+#     selector, the combining slash of a negated relation, the stretchy overline and underbrace);
+#   - styled letters (bold italic α, script N, monospace 1 …) whose plain letter is listed or on the keyboard.
+FORMATTING = {"\u00a0", "\u2003", "\u2009", "\u2061", "\ufe0e", "\u0338", "\u203e", "\u23df"}
 covered = {e["c"] for g in groups for r in g["rows"] for e in r["e"] if e}
-on_cards = {c for c in html.unescape(FLASHCARDS.read_text(encoding="utf-8")) if ord(c) > 127 and c != "\u00a0"}
-missing = sorted(on_cards - covered, key=ord)
+def is_covered(c):
+    if c in covered or c in FORMATTING: return True
+    plain = unicodedata.normalize("NFKC", c)
+    return plain != c and len(plain) == 1 and (plain in covered or ord(plain) < 128)
+on_cards = {c for c in html.unescape(FLASHCARDS.read_text(encoding="utf-8")) if ord(c) > 127}
+missing = sorted((c for c in on_cards if not is_covered(c)), key=ord)
 if missing:
     sys.exit("Missing from the reference: " + " ".join(f"{c} U+{ord(c):04X} {unicodedata.name(c, '?')}" for c in missing))
 

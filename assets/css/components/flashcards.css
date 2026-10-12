@@ -26,7 +26,7 @@
 .fcard__bar { height: 8px; flex-shrink: 0; background: linear-gradient(90deg, var(--green-800), var(--sand-300)); }
 .fcard__bar--bottom { margin: 0 4cqw 4cqw; height: 1.8cqw; border-radius: 1px; }
 .fcard__top { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0.9rem; }
-.fcard__id { font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; color: var(--sand-300); background: var(--green-800); padding: 0.1rem 0.45rem; border-radius: 3px; }
+.fcard__id { white-space: nowrap; font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; color: var(--sand-300); background: var(--green-800); padding: 0.1rem 0.45rem; border-radius: 3px; }
 .fcard__sec { font-family: var(--font-sans); font-size: 0.72rem; color: var(--ink-soft); }
 .fcard__title--glyphs { font-family: var(--font-serif); font-weight: 400; font-size: 4.5rem; letter-spacing: 0.35em; }
 .fcard__title { flex: 1; display: grid; place-items: center; padding: 0 1.4rem; text-align: center; font-family: var(--font-sans); font-weight: 600; font-size: 1.35rem; line-height: 1.3; color: var(--ink); }
@@ -135,3 +135,77 @@
 .fcard.is-found .fcard__face { animation: fc-found 1.2s ease-out; }
 @keyframes fc-found { 0% { box-shadow: 0 0 0 4px var(--sand-300), 0 10px 26px rgba(var(--shade-rgb), 0.14); } 100% { box-shadow: 0 10px 26px rgba(var(--shade-rgb), 0.14); } }
 @media (max-width: 560px) { .card-find__results button { grid-template-columns: 3.6rem minmax(0, 1fr); } .card-find__deck { display: none; } }
+
+/* Second Edition cards: a concept card's front names up to three formulas (numbered), its back
+   gives them in the same order with the key terms; symbol and letter fronts are MathML glyphs. */
+.fcard__main { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2cqw; padding: 0 7cqw; overflow: hidden; }
+.fcard__main .fcard__title { flex: none; display: block; padding: 0; font-size: 6.2cqw; }
+.fcard__main:has(.fcard__names) .fcard__title { font-size: 5.4cqw; }
+.fcard__main .fcard__title--glyphs { font-size: 16cqw; letter-spacing: 0; white-space: nowrap; font-weight: 400; }
+.fcard__main .fcard__title--question { font-size: 5.6cqw; line-height: 1.35; }
+.fcard__part { font-family: var(--font-sans); font-size: 2.7cqw; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.fcard__names {
+  list-style: none; counter-reset: fn; margin: 1.5cqw 0 0; padding: 0; display: grid; gap: 1.4cqw; max-width: 100%;
+  text-align: left; font-family: var(--font-sans); font-size: 4.3cqw; line-height: 1.3; color: var(--ink);
+}
+.fcard__names li { counter-increment: fn; display: grid; grid-template-columns: 1.5em minmax(0, 1fr); }
+.fcard__names li::before { content: counter(fn); font-weight: 700; font-size: 0.85em; color: var(--ink-green-700); }
+.fcard__body--num { counter-reset: fl; }
+.fcard__body--num .fcard__line { counter-increment: fl; }
+.fcard__body--num .fcard__line::before {
+  content: counter(fl); margin-right: 0.6em; vertical-align: 0.3em;
+  font-family: var(--font-sans); font-size: 0.55em; font-weight: 700; color: var(--ink-green-700);
+}
+.fcard__terms { padding: 0 8cqw 1.4cqw; text-align: center; font-family: var(--font-sans); font-size: 3.1cqw; line-height: 1.35; color: var(--ink-soft); }
+.fcard__terms-label { font-size: 0.82em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.25em; }
+.fcard__ex { display: block; margin-top: 0.5em; font-family: var(--font-sans); font-size: 0.55em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+/* A cross reference to another concept, boxed as in the book. */
+.fcard__ref {
+  display: inline-block; padding: 0 0.28em; border: 1px solid currentColor; border-radius: 2px; vertical-align: 0.12em;
+  font-family: var(--font-sans); font-size: 0.62em; font-style: normal; font-weight: 700; line-height: 1.35; color: var(--ink-green-700);
+}
+
+/* MathML from Temml (data/flashcards.js, data/stated.js): the few rules its markup relies on
+   (from Temml-Local.css, MIT). Temml.woff2 holds only the prime and script capitals. */
+@font-face { font-family: "Temml"; src: url("../../fonts/Temml.woff2") format("woff2"); font-display: swap; }
+math * { border-color: currentColor; }
+mo.tml-prime, math .mathscr { font-family: "Temml"; }
+.tml-left { text-align: left; }
+.tml-right { text-align: right; }
+.tml-overline { padding: 0.1em 0 0 0; border-top: 0.065em solid; }
+.tml-underline { padding: 0 0 0.1em 0; border-bottom: 0.065em solid; }
+menclose { position: relative; padding: 0.5ex 0; }
+@supports (not (-moz-appearance: none)) {
+  .tml-sml-pad { padding-left: 0.05em; }
+  .tml-med-pad { padding-left: 0.1em; }
+  .tml-lrg-pad { padding-left: 0.15em; }
+}
+@supports (-moz-appearance: none) { .tml-vec { transform: scale(0.75); } }
+@supports (-webkit-backdrop-filter: blur(1px)) {
+  .wbk-acc { transform: translate(0, 0.431em); }
+  .wbk-sml { transform: translate(0.07em, 0); }
+  .wbk-sml-acc { transform: translate(0.07em, 0.431em); }
+  .wbk-sml-vec { transform: scale(0.75) translate(0.07em, 0); }
+  .wbk-med { transform: translate(0.14em, 0); }
+  .wbk-med-acc { transform: translate(0.14em, 0.431em); }
+  .wbk-lrg { transform: translate(0.21em, 0); }
+  .wbk-lrg-acc { transform: translate(0.21em, 0.431em); }
+}
+@supports (not (-webkit-backdrop-filter: blur(1px))) and (not (-moz-appearance: none)) {
+  .chr-sml { transform: translate(0.07em, 0); }
+  .chr-sml-vec { transform: scale(0.75) translate(0.07em, 0); }
+  .chr-med { transform: translate(0.14em, 0); }
+  .chr-lrg { transform: translate(0.21em, 0); }
+}
+@supports (not (-webkit-backdrop-filter: blur(1px))) and (not (-moz-appearance: none)) {
+  .tml-crooked-2 { transform: scale(2, 1.1); }
+}
+mtable.tml-jot mtd { padding-top: 0.7ex; padding-bottom: 0.7ex; }
+mtable.tml-small mtd { padding-top: 0.35ex; padding-bottom: 0.35ex; }
+/* Stated-equation popup, Second Edition sections */
+.stated-formulas { font-size: 0.95rem; }
+.stated-formulas dt { white-space: normal; font-family: var(--font-sans); font-size: 0.9rem; }
+.stated-method { margin: 0 0 var(--space-3); padding-left: 1.4em; max-width: 62ch; display: grid; gap: 0.35rem; }
+.stated-decide { padding: var(--space-2) var(--space-3); background: var(--paper); border-left: 3px solid var(--sand-300); border-radius: var(--radius-sm); }
+.stated-modal .fcard__ref, .nn-modal .fcard__ref { font-size: 0.7em; }
+.stated-modal .stated-terms dt { white-space: normal; max-width: 16rem; }

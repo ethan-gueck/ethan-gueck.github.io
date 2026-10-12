@@ -158,6 +158,7 @@
   {"key": "alt+o alt+shift+1", "command": "type", "args": {"text": "!"}, "when": "editorTextFocus"},  // Factorial
   {"key": "alt+o alt+shift+\\", "command": "type", "args": {"text": "|"}, "when": "editorTextFocus"},  // Vertical line (absolute value)
   {"key": "alt+o \\", "command": "type", "args": {"text": "∣"}, "when": "editorTextFocus"},  // Divides / given (P(A ∣ B))
+  {"key": "alt+o shift+n", "command": "type", "args": {"text": "∤"}, "when": "editorTextFocus"},  // Does not divide
   {"key": "alt+o shift+\\", "command": "type", "args": {"text": "‖"}, "when": "editorTextFocus"},  // Double vertical line (norm ‖x‖)
   {"key": "alt+o [", "command": "type", "args": {"text": "⌊"}, "when": "editorTextFocus"},  // Left floor
   {"key": "alt+o ]", "command": "type", "args": {"text": "⌋"}, "when": "editorTextFocus"},  // Right floor
@@ -165,6 +166,15 @@
   {"key": "alt+o shift+]", "command": "type", "args": {"text": "⌉"}, "when": "editorTextFocus"},  // Right ceiling
   {"key": "alt+o l", "command": "type", "args": {"text": "…"}, "when": "editorTextFocus"},  // Ellipsis
   {"key": "alt+o shift+l", "command": "type", "args": {"text": "⋯"}, "when": "editorTextFocus"},  // Midline ellipsis (a₁ + ⋯ + aₙ)
+  {"key": "alt+o v", "command": "type", "args": {"text": "⋮"}, "when": "editorTextFocus"},  // Vertical ellipsis
+  {"key": "alt+o shift+v", "command": "type", "args": {"text": "⋱"}, "when": "editorTextFocus"},  // Diagonal ellipsis
+  {"key": "alt+o d", "command": "type", "args": {"text": "⋅"}, "when": "editorTextFocus"},  // Dot operator (a ⋅ b)
+  {"key": "alt+o s", "command": "type", "args": {"text": "∗"}, "when": "editorTextFocus"},  // Asterisk operator (convolution f ∗ g)
+  {"key": "alt+o shift+;", "command": "type", "args": {"text": "≔"}, "when": "editorTextFocus"},  // Colon equals (is defined as)
+  {"key": "alt+o shift+d", "command": "type", "args": {"text": "≜"}, "when": "editorTextFocus"},  // Equal by definition
+  {"key": "alt+o w", "command": "type", "args": {"text": "≲"}, "when": "editorTextFocus"},  // Less than or about
+  {"key": "alt+o shift+w", "command": "type", "args": {"text": "≳"}, "when": "editorTextFocus"},  // Greater than or about
+  {"key": "alt+o g", "command": "type", "args": {"text": "⋚"}, "when": "editorTextFocus"},  // Less than, equal to or greater than
   // Sets & logic
   {"key": "alt+u u", "command": "type", "args": {"text": "∪"}, "when": "editorTextFocus"},  // Union
   {"key": "alt+u n", "command": "type", "args": {"text": "∩"}, "when": "editorTextFocus"},  // Intersection
@@ -174,6 +184,8 @@
   {"key": "alt+u shift+s", "command": "type", "args": {"text": "⊆"}, "when": "editorTextFocus"},  // Subset or equal
   {"key": "alt+u p", "command": "type", "args": {"text": "⊃"}, "when": "editorTextFocus"},  // Proper superset
   {"key": "alt+u shift+p", "command": "type", "args": {"text": "⊇"}, "when": "editorTextFocus"},  // Superset or equal
+  {"key": "alt+u w", "command": "type", "args": {"text": "⊊"}, "when": "editorTextFocus"},  // Proper subset (not equal)
+  {"key": "alt+u shift+u", "command": "type", "args": {"text": "⋃"}, "when": "editorTextFocus"},  // Union over many sets (⋃ᵢ Aᵢ)
   {"key": "alt+u 0", "command": "type", "args": {"text": "∅"}, "when": "editorTextFocus"},  // Empty set
   {"key": "alt+u \\", "command": "type", "args": {"text": "∖"}, "when": "editorTextFocus"},  // Set minus
   {"key": "alt+u shift+\\", "command": "type", "args": {"text": "⧵"}, "when": "editorTextFocus"},  // Reverse solidus operator (set minus, A ⧵ B)
@@ -189,6 +201,8 @@
   {"key": "alt+u c", "command": "type", "args": {"text": "∘"}, "when": "editorTextFocus"},  // Composition (f ∘ g)
   {"key": "alt+u t", "command": "type", "args": {"text": "∴"}, "when": "editorTextFocus"},  // Therefore
   {"key": "alt+u b", "command": "type", "args": {"text": "∵"}, "when": "editorTextFocus"},  // Because
+  {"key": "alt+u d", "command": "type", "args": {"text": "⊢"}, "when": "editorTextFocus"},  // Proves (syntactic consequence)
+  {"key": "alt+u m", "command": "type", "args": {"text": "⊨"}, "when": "editorTextFocus"},  // Models (semantic consequence)
   {"key": "alt+u shift+n", "command": "type", "args": {"text": "ℕ"}, "when": "editorTextFocus"},  // Natural numbers
   {"key": "alt+u shift+z", "command": "type", "args": {"text": "ℤ"}, "when": "editorTextFocus"},  // Integers
   {"key": "alt+u shift+q", "command": "type", "args": {"text": "ℚ"}, "when": "editorTextFocus"},  // Rationals
@@ -207,6 +221,7 @@
   {"key": "alt+d s", "command": "type", "args": {"text": "∑"}, "when": "editorTextFocus"},  // Summation
   {"key": "alt+d p", "command": "type", "args": {"text": "∏"}, "when": "editorTextFocus"},  // Product
   {"key": "alt+d .", "command": "type", "args": {"text": "˙"}, "when": "editorTextFocus"},  // Dot above (time derivative ẋ)
+  {"key": "alt+d shift+.", "command": "type", "args": {"text": "¨"}, "when": "editorTextFocus"},  // Diaeresis (second derivative ẍ)
   {"key": "alt+d -", "command": "type", "args": {"text": "¯"}, "when": "editorTextFocus"},  // Macron (mean x̄)
   {"key": "alt+d 6", "command": "type", "args": {"text": "ˆ"}, "when": "editorTextFocus"},  // Circumflex (estimate ŷ)
   {"key": "alt+d t", "command": "type", "args": {"text": "⊤"}, "when": "editorTextFocus"},  // Transpose (Aᵀ, A⊤)
@@ -217,6 +232,11 @@
   {"key": "alt+d shift+l", "command": "type", "args": {"text": "ℒ"}, "when": "editorTextFocus"},  // Script L (Lagrangian, Laplace)
   {"key": "alt+d shift+e", "command": "type", "args": {"text": "ℰ"}, "when": "editorTextFocus"},  // Script E
   {"key": "alt+d h", "command": "type", "args": {"text": "ℏ"}, "when": "editorTextFocus"},  // h-bar (reduced Planck)
+  {"key": "alt+d e", "command": "type", "args": {"text": "𝔼"}, "when": "editorTextFocus"},  // Expectation (𝔼[X])
+  {"key": "alt+d 9", "command": "type", "args": {"text": "⟨"}, "when": "editorTextFocus"},  // Left angle bracket (inner product ⟨x, y⟩)
+  {"key": "alt+d 0", "command": "type", "args": {"text": "⟩"}, "when": "editorTextFocus"},  // Right angle bracket
+  {"key": "alt+d shift+i", "command": "type", "args": {"text": "ı"}, "when": "editorTextFocus"},  // Dotless i (î, a unit vector)
+  {"key": "alt+d shift+j", "command": "type", "args": {"text": "ȷ"}, "when": "editorTextFocus"},  // Dotless j (ĵ)
   {"key": "alt+d shift+o", "command": "type", "args": {"text": "Ω"}, "when": "editorTextFocus"},  // Ohm sign; prefer Greek Ω (U+03A9)
   {"key": "alt+d m", "command": "type", "args": {"text": "µ"}, "when": "editorTextFocus"},  // Micro sign; prefer Greek μ (U+03BC)
   {"key": "alt+d shift+a", "command": "type", "args": {"text": "Å"}, "when": "editorTextFocus"},  // Ångström
@@ -235,6 +255,10 @@
   {"key": "alt+/ =", "command": "type", "args": {"text": "⟺"}, "when": "editorTextFocus"},  // Long if and only if
   {"key": "alt+/ m", "command": "type", "args": {"text": "↦"}, "when": "editorTextFocus"},  // Maps to (x ↦ x²)
   {"key": "alt+/ l", "command": "type", "args": {"text": "⟶"}, "when": "editorTextFocus"},  // Long right arrow
+  {"key": "alt+/ -", "command": "type", "args": {"text": "⟷"}, "when": "editorTextFocus"},  // Long left-right arrow
+  {"key": "alt+/ k", "command": "type", "args": {"text": "↪"}, "when": "editorTextFocus"},  // Hooked arrow (injection, ↪)
+  {"key": "alt+/ a", "command": "type", "args": {"text": "↺"}, "when": "editorTextFocus"},  // Anticlockwise arrow
+  {"key": "alt+/ c", "command": "type", "args": {"text": "↻"}, "when": "editorTextFocus"},  // Clockwise arrow
   {"key": "alt+/ u", "command": "type", "args": {"text": "↗"}, "when": "editorTextFocus"},  // North-east arrow (increasing)
   {"key": "alt+/ d", "command": "type", "args": {"text": "↘"}, "when": "editorTextFocus"},  // South-east arrow (decreasing)
   // Geometry
@@ -244,6 +268,8 @@
   {"key": "alt+m s", "command": "type", "args": {"text": "□"}, "when": "editorTextFocus"},  // Square
   {"key": "alt+m c", "command": "type", "args": {"text": "○"}, "when": "editorTextFocus"},  // Circle
   {"key": "alt+m r", "command": "type", "args": {"text": "⌒"}, "when": "editorTextFocus"},  // Arc
+  {"key": "alt+m f", "command": "type", "args": {"text": "⌢"}, "when": "editorTextFocus"},  // Frown (arc ⌢AB)
+  {"key": "alt+m d", "command": "type", "args": {"text": "⌀"}, "when": "editorTextFocus"},  // Diameter
   {"key": "alt+m =", "command": "type", "args": {"text": "≅"}, "when": "editorTextFocus"},  // Congruent
   {"key": "alt+m `", "command": "type", "args": {"text": "∼"}, "when": "editorTextFocus"},  // Similar
   {"key": "alt+m p", "command": "type", "args": {"text": "⊥"}, "when": "editorTextFocus"},  // Perpendicular
@@ -263,7 +289,9 @@
   {"key": "alt+q p", "command": "type", "args": {"text": "¶"}, "when": "editorTextFocus"},  // Pilcrow (paragraph)
   {"key": "alt+q c", "command": "type", "args": {"text": "©"}, "when": "editorTextFocus"},  // Copyright
   {"key": "alt+q e", "command": "type", "args": {"text": "é"}, "when": "editorTextFocus"},  // e acute
+  {"key": "alt+q shift+e", "command": "type", "args": {"text": "è"}, "when": "editorTextFocus"},  // e grave
   {"key": "alt+q o", "command": "type", "args": {"text": "ô"}, "when": "editorTextFocus"},  // o circumflex
+  {"key": "alt+q q", "command": "type", "args": {"text": "■"}, "when": "editorTextFocus"},  // End of proof (∎, Q.E.D.)
   // Bold vector letters
   {"key": "alt+b shift+a", "command": "type", "args": {"text": "𝐀"}, "when": "editorTextFocus"},  // Bold A
   {"key": "alt+b a", "command": "type", "args": {"text": "𝐚"}, "when": "editorTextFocus"},  // Bold a

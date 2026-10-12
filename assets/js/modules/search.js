@@ -13,7 +13,7 @@
 
 var PAGES = [
   { title: 'IEEE Std 738 in brief', text: 'ieee 738 heat balance conductor temperature thermal rating ampacity method', href: '#portfolio/ieee738', here: true },
-  { title: 'Mathematics: A Comprehensive Review', text: 'math review pdf study edition flashcards print download', href: 'https://ethan-gueck.github.io/resources/math-review/' },
+  { title: 'Mathematics: A Comprehensive Review', text: 'math review pdf second edition flashcards print download', href: 'https://ethan-gueck.github.io/resources/math-review/' },
   { title: 'Design philosophy', text: 'design colour color palette typography fonts depth entropy contrast', href: 'design/' },
   { title: 'VS Code math symbol shortcuts (keybindings.json)', text: 'vs code vscode keyboard shortcuts download keybindings', href: 'assets/data/vscode-math-keybindings.json' },
 ];

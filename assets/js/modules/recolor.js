@@ -17,7 +17,11 @@ Site.imagePalettes = {
     face: '#243b53',   // the card face in dark mode (dark.css --face)
     ink: '#f0f4f8',
     // The drawings' top bar fades brand green into sand; as on the text cards, that becomes card blue into yellow.
-    colors: { '#0b3d2e': '#243b53', '#d8c3a5': '#e5a93c' },
+    colors: {
+      '#0b3d2e': '#243b53', '#d8c3a5': '#e5a93c',
+      // The Second Edition's figure accents (blue and cyan curves, pale blue shading) lighten for the dark face.
+      '#1d4ed8': '#8fb8ff', '#06b6d4': '#67e8f9', '#cdd8f6': '#34507a', '#dde4f9': '#2e4a6e',
+    },
   },
 };
 

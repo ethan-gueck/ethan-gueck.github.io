@@ -110,6 +110,7 @@
 .nn-modal__card p { margin: 0.3rem 0; }
 .nn-modal__card .fcard__name { font-family: var(--font-sans); color: var(--ink-green-800); }
 .nn-modal__note { font-style: italic; color: var(--ink-soft); }
+.nn-modal__fname { display: block; margin-bottom: 0.15rem; font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
 .nn-modal__facts { margin: var(--space-3) 0; font-size: 1rem; }
 .nn-modal__facts dt { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
 .nn-modal__facts dd { margin: 0.25rem 0 var(--space-3); display: flex; flex-wrap: wrap; gap: 0.4rem; }

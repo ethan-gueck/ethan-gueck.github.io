@@ -82,8 +82,12 @@ function buildModel(decks, trackDefs, requires, excluded) {
     track.nodes = [];
     track.decks.forEach(function (name) {
       byDeck[name].cards.forEach(function (card) {
-        var n = { id: card.id, card: card, title: cardTitle(card), track: track, requires: [], usedBy: [], url: '' };
-        nodes[card.id] = n;
+        // One neuron per concept: its Part 2, 3 … cards join the first. Key-topic cards stay flashcards only.
+        if (card.keytopic) return;
+        var id = card.concept || card.id;
+        if (nodes[id]) { nodes[id].cards.push(card); return; }
+        var n = { id: id, card: card, cards: [card], title: cardTitle(card), track: track, requires: [], usedBy: [], url: '' };
+        nodes[id] = n;
         track.nodes.push(n);
       });
     });
@@ -228,8 +232,12 @@ function fillPopup(dlg, n, nodes, onPick) {
   dlg.querySelector('[data-nn-track]').textContent = n.track.name;
   // Card backs are this site's own MathML/HTML (data/flashcards.js).
   var body = dlg.querySelector('[data-nn-body]');
-  body.innerHTML = (n.card.body || []).map(function (line) { return '<p>' + line + '</p>'; }).join('') +
-    (n.card.note ? '<p class="nn-modal__note">' + n.card.note + '</p>' : '');
+  // A concept's formulas from all its parts, each under its name.
+  body.innerHTML = n.cards.map(function (c) {
+    return (c.body || []).map(function (line, i) {
+      return '<p>' + (c.names ? '<span class="nn-modal__fname">' + c.names[i] + '</span>' : '') + line + '</p>';
+    }).join('');
+  }).join('') + (n.card.note ? '<p class="nn-modal__note">' + n.card.note + '</p>' : '');
   linkList(dlg.querySelector('[data-nn-requires]'), n.requires, nodes, onPick);
   linkList(dlg.querySelector('[data-nn-used]'), n.usedBy, nodes, onPick);
   var link = dlg.querySelector('[data-nn-launch]');

@@ -1,11 +1,14 @@
 /**
  * Flashcard decks (My Flashcards tab). Renders one section per deck with a single card viewer:
  * select the card (or press Space) to flip it, and use the arrows, keyboard arrows, or Shuffle to move
- * through the deck. Backs are HTML + MathML, so they stay sharp at any size.
- * When a card's equation side is showing, a ? button in its corner opens the
+ * through the deck. Cards are the Second Edition's print cards (data/flashcards.js): a concept card's
+ * front lists the numbered names of its formulas and its back the numbered formulas, key terms and
+ * memory aid, as HTML + MathML, so they stay sharp at any size.
+ * When a concept card's formula side is showing, a ? button in its corner opens the
  * stated-equation popup (modules/stated.js): terms, how it is read aloud, explanation, implementations.
  * "Find a card" jumps straight to any card by ID or name, and #flashcards/<ID> links open one
- * (the router announces them as "site:detail"); each deck's "Copy link" gives that link.
+ * (the router announces them as "site:detail"); a concept ID such as C1.4 opens its first part.
+ * Each deck's "Copy link" gives that link.
  * Site.flashcardIndex and Site.goToCard are shared with the site search (modules/search.js).
  */
 (function (Site) {
@@ -74,7 +77,7 @@ Site.initFlashcards = function initFlashcards(root, decks) {
     var pos = sec.querySelector('.deck__pos');
     var tools = sec.querySelector('.fcard__tools');
 
-    function hasEquation(c) { return c.body.some(function (l) { return l.indexOf('<math') >= 0; }) && !c.glyphs; }
+    function hasEquation(c) { return !!c.stated; }
     function setTools() {
       var c = deck.cards[order[idx]];
       tools.hidden = !(flipped && hasEquation(c));
@@ -98,7 +101,10 @@ Site.initFlashcards = function initFlashcards(root, decks) {
 
     function frontHTML(c) {
       return '<span class="fcard__bar"></span><span class="fcard__top"><span class="fcard__id"></span><span class="fcard__sec"></span></span>' +
-        '<span class="fcard__title"></span><span class="fcard__prompt"></span>';
+        '<span class="fcard__main"><span class="fcard__title"></span>' +
+          (c.part ? '<span class="fcard__part"></span>' : '') +
+          (c.names ? '<ol class="fcard__names"></ol>' : '') +
+        '</span><span class="fcard__prompt"></span>';
     }
 
     function render() {
@@ -114,17 +120,27 @@ Site.initFlashcards = function initFlashcards(root, decks) {
         front.innerHTML = frontHTML(c);
         front.querySelector('.fcard__id').textContent = c.id;
         front.querySelector('.fcard__sec').textContent = deck.name;
+        front.querySelector('.fcard__sec').textContent = c.keytopic ? 'Key topic' : deck.name;
+        // Titles, glyphs and formula names are generated HTML + MathML (trusted content).
         var t = front.querySelector('.fcard__title');
-        if (c.glyphs) { t.textContent = c.glyphs; t.classList.add('fcard__title--glyphs'); }
+        if (c.glyphs) { t.innerHTML = c.glyphs; t.classList.add('fcard__title--glyphs'); }
+        else if (c.titleHTML) { t.innerHTML = c.titleHTML; t.classList.add('fcard__title--question'); }
         else t.textContent = c.title;
-        front.querySelector('.fcard__prompt').textContent = c.prompt || 'State the formula or concept';
+        if (c.part) front.querySelector('.fcard__part').textContent = c.part;
+        if (c.names) {
+          front.querySelector('.fcard__names').innerHTML = c.names.map(function (n) { return '<li>' + n + '</li>'; }).join('');
+        }
+        front.querySelector('.fcard__prompt').textContent = c.prompt || (c.names ? 'State each numbered formula' : 'State the formula or concept');
       }
-      // Back: the guide's formulas and text, rebuilt as HTML + MathML (generated, trusted content).
-      back.innerHTML = '<span class="fcard__body">' + c.body.map(function (l) { return '<span class="fcard__line">' + l + '</span>'; }).join('') + '</span>' +
+      // Back: the book's formulas and text, rebuilt as HTML + MathML (generated, trusted content).
+      back.innerHTML = '<span class="fcard__body' + (c.names ? ' fcard__body--num' : '') + '">' +
+          c.body.map(function (l) { return '<span class="fcard__line">' + l + '</span>'; }).join('') + '</span>' +
+        (c.terms ? '<span class="fcard__terms"><span class="fcard__terms-label">Terms</span> ' + c.terms + '</span>' : '') +
         (c.note ? '<span class="fcard__note"></span>' : '') +
         '<span class="fcard__bar fcard__bar--bottom"></span>';
-      if (c.note) back.querySelector('.fcard__note').innerHTML = c.note;   // generated HTML + MathML
-      card.setAttribute('aria-label', 'Card ' + c.id + (c.title ? ', ' + c.title : '') + '. Select to flip.');
+      if (c.note) back.querySelector('.fcard__note').innerHTML = c.note;
+      // Picture and symbol cards ask for the name, so the label leaves it out.
+      card.setAttribute('aria-label', 'Card ' + c.id + (c.title && !c.glyphs && !c.front ? ', ' + c.title : '') + '. Select to flip.');
       pos.textContent = (idx + 1) + ' / ' + deck.cards.length;
       setTools();
       fit();
@@ -160,8 +176,25 @@ Site.initFlashcards = function initFlashcards(root, decks) {
       return l.querySelectorAll('.fcard__phrase').length > 1;
     }
 
+    // Shrink a front whose glyphs, question or formula names are taller or wider than the card.
+    function fitFront() {
+      var main = front.querySelector('.fcard__main');
+      if (!main || !main.clientWidth) return;
+      main.style.fontSize = '';
+      var glyphs = main.querySelector('.fcard__title--glyphs');
+      if (glyphs) {
+        glyphs.style.fontSize = '';
+        var w = glyphs.scrollWidth, avail = main.clientWidth * 0.94;
+        if (w > avail) glyphs.style.fontSize = (100 * avail / w).toFixed(1) + '%';
+      }
+      for (var k = 0; k < 8 && (main.scrollHeight > main.clientHeight + 1 || main.scrollWidth > main.clientWidth + 1); k++) {
+        main.style.fontSize = (100 - 8 * (k + 1)) + '%';
+      }
+    }
+
     // Fit every line inside the card's margins so nothing is clipped.
     function fit() {
+      fitFront();
       var body = back.querySelector('.fcard__body');
       if (!body || !body.clientWidth) return;
       var cs = getComputedStyle(body);
@@ -193,6 +226,9 @@ Site.initFlashcards = function initFlashcards(root, decks) {
         }
         l.style.fontSize = (100 * avail / w).toFixed(1) + '%';
       });
+      // Then, if the back is still taller than the card, shrink everything on it together.
+      body.style.fontSize = '';
+      for (var k = 1; k <= 6 && body.scrollHeight > body.clientHeight + 1; k++) body.style.fontSize = (5.2 * (1 - 0.07 * k)).toFixed(2) + 'cqw';
     }
     if ('ResizeObserver' in window) new ResizeObserver(fit).observe(card);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);   // widths change once web fonts load
@@ -234,7 +270,9 @@ Site.initFlashcards = function initFlashcards(root, decks) {
           card.focus({ preventScroll: true });
         },
       };
-      Site.flashcardIndex.push({ id: c.id, title: c.title || c.glyphs || '', deck: deck.name });
+      // A concept ID (C1.4) opens the concept's first part, C1.4 (1/3).
+      if (c.concept && !registry[c.concept.toLowerCase()]) registry[c.concept.toLowerCase()] = registry[c.id.toLowerCase()];
+      Site.flashcardIndex.push({ id: c.id, title: (c.keytopic ? c.keytopic + ': ' : '') + (c.title || ''), deck: deck.name });
     });
     renders.push(render);
     render();

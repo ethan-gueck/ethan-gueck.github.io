@@ -1,14 +1,15 @@
 /**
  * Stated-equation popup (#stated-equation), opened from a flashcard's ? button.
  *
- *   Terms            every symbol in the card's equations and what it means; terms that are
- *                    themselves functions (sin, Σ, f(x) …) are marked and explained.
- *   Stated-equations each equation written out the way it is said.
- *   Explanation      what the formula or algorithm does, and where it came from.
+ *   Terms            every symbol in the concept's formulas and what it means.
+ *   Stated-equations the formulas read aloud, as the book states them.
+ *   Explanation      the summary, each named formula and what it does, the method and decision
+ *                    point where the book has them, then origin and uses.
  *   Implementations  common library functions and tools that compute it (tab hidden when none).
  *
- * The wording lives in data/stated.js (Site.statedEquations, keyed by card id). It is
- * loaded the first time the popup opens, so the flashcards tab doesn't pay for it up front.
+ * The wording lives in data/stated.js (Site.statedEquations, keyed by concept ID, generated from the
+ * Second Edition as HTML + MathML). It is loaded the first time the popup opens, so the flashcards
+ * tab doesn't pay for it up front.
  */
 (function (Site) {
 'use strict';
@@ -34,6 +35,12 @@ function el(tag, cls, text) {
   var n = document.createElement(tag);
   if (cls) n.className = cls;
   if (text !== undefined) n.textContent = text;
+  return n;
+}
+// The data file's own generated HTML + MathML (trusted content).
+function rich(tag, cls, markup) {
+  var n = el(tag, cls);
+  n.innerHTML = markup;
   return n;
 }
 
@@ -65,29 +72,36 @@ Site.initStated = function initStated() {
     }
     var dl = el('dl', 'stated-terms');
     entry.terms.forEach(function (t) {
-      var dt = el('dt', '', t.term);
-      var dd = el('dd', '', t.meaning);
-      if (t.function) dd.prepend(el('span', 'is-function', 'function'), ' ');
-      dl.append(dt, dd);
+      dl.append(rich('dt', '', t.term), rich('dd', '', t.meaning));
     });
     terms.append(dl);
 
     var list = el('ol', 'stated-spoken');
     entry.spoken.forEach(function (s) {
       var li = el('li');
-      var math = el('span', 'stated-spoken__math');
-      math.innerHTML = card.body[s.line] || '';   // the card's own generated HTML + MathML
-      li.append(math, el('p', 'stated-spoken__text', '“' + s.text + '”'));
+      li.append(rich('p', 'stated-spoken__text', '“' + s.text + '”'));
       list.append(li);
     });
-    spoken.append(list);
+    if (entry.spoken.length) spoken.append(list);
+    else spoken.append(el('p', 'stated-empty', 'This concept has no stated equation.'));
 
     var about = panels.explanation;
-    if (entry.explanation) about.append(el('p', 'stated-explain', entry.explanation));
-    else about.append(el('p', 'stated-empty', 'The explanation for this card is still being written.'));
-    if (entry.origin) {
-      about.append(el('h3', 'stated-sub', 'Origin'), el('p', 'stated-explain', entry.origin));
+    if (entry.explanation) about.append(rich('p', 'stated-explain', entry.explanation));
+    if (entry.formulas && entry.formulas.length) {
+      var fl = el('dl', 'stated-terms stated-formulas');
+      entry.formulas.forEach(function (f) { fl.append(rich('dt', '', f.name), rich('dd', '', f.explain)); });
+      about.append(el('h3', 'stated-sub', 'Formulas'), fl);
     }
+    if (entry.method) {
+      var ol = el('ol', 'stated-method');
+      entry.method.forEach(function (m) { ol.append(rich('li', '', m)); });
+      about.append(el('h3', 'stated-sub', 'Method'), ol);
+    }
+    if (entry.decide) about.append(el('h3', 'stated-sub', 'Decision point'), rich('p', 'stated-explain stated-decide', entry.decide));
+    if (entry.origin) about.append(el('h3', 'stated-sub', 'Origin'), rich('p', 'stated-explain', entry.origin));
+    (entry.uses || []).forEach(function (u) {
+      about.append(el('h3', 'stated-sub', u.label), rich('p', 'stated-explain', u.text));
+    });
 
     if (entry.implementations && entry.implementations.length) {
       var impl = el('ul', 'stated-impl');
@@ -102,7 +116,7 @@ Site.initStated = function initStated() {
 
   /** Open the popup for `card` on the "terms" or "spoken" tab. */
   Site.openStated = function (card, deckName, mode) {
-    dlg.querySelector('[data-stated-code]').textContent = card.id;
+    dlg.querySelector('[data-stated-code]').textContent = card.concept || card.id;
     var name = /fcard__name">([\s\S]*?)<\/strong>/.exec(card.body[0] || '');
     dlg.querySelector('[data-stated-title]').textContent = card.title || (name ? name[1].replace(/<[^>]+>/g, '') : deckName);
     Object.keys(panels).forEach(function (k) { panels[k].replaceChildren(); });
@@ -110,7 +124,7 @@ Site.initStated = function initStated() {
     show(mode === 'spoken' ? 'spoken' : 'terms');
     if (!dlg.open) dlg.showModal();
     loadData()
-      .then(function (data) { fill(card, data[card.id]); })
+      .then(function (data) { fill(card, data[card.concept || card.id]); })
       .catch(function (err) {
         console.error('[stated]', err);
         panels.terms.replaceChildren(el('p', 'stated-empty', 'This explanation could not be loaded right now.'));
