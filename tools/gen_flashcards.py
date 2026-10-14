@@ -70,6 +70,8 @@ def build(src: Path, prev: dict):
         order.setdefault(c["key"], i)
     decks: "OrderedDict[str, dict]" = OrderedDict()
     stated, requires = {}, {}
+    extra = {}  # popup entries for cards without a stated equation, built from the book ("source": "book")
+    kt_cards: dict = {}
     kt_total = Counter(c["id"] for c in cards if c["kind"] == "ktcard")
 
     def deck(name, chapter, ref):
@@ -132,12 +134,23 @@ def build(src: Path, prev: dict):
         elif k == "ktcard":
             n, tot = c["n"], kt_total[c["id"]]
             front = to_html(c["front"], ctx)
+            entry = kt_cards.setdefault(c["id"], {
+                "key": c["key"], "source": "book", "terms": [], "spoken": [], "formulas": [], "formulas_label": "Questions",
+                "explanation": to_html(c["kt_intro"], ctx),
+                "uses": [{"label": "Key topic", "text": f'{c["id"]} {plain(c["kt_title"], ctx)}: a full-page deep dive in the book'}],
+            })
+            entry["formulas"].append({"name": front, "explain": "<br>".join(lines(to_html(c["back"], ctx)))})
             deck(c["cat"], c["chapter"], ref).append({
                 "id": f"{c['id']} ({n}/{tot})" if tot > 1 else c["id"], "concept": c["id"], "keytopic": plain(c["kt_title"], ctx),
                 "title": to_text(front), "titleHTML": front, "prompt": "Recall it", "body": lines(to_html(c["back"], ctx)), "note": "",
             })
         elif k == "sym":
             name = to_html(c["name"], ctx, br=" ")
+            extra[c["id"]] = {
+                "key": c["key"], "source": "book", "terms": [{"term": math(c["sym"]), "meaning": name}],
+                "spoken": [{"text": f"{to_text(name)}"}], "explanation": to_html(c["meaning"], ctx),
+                "uses": [{"label": "Example", "text": " ".join(lines(to_html(c["example"], ctx)))}],
+            }
             deck(c["cat"], c["chapter"], ref).append({
                 "id": c["id"], "title": to_text(name), "glyphs": math(c["sym"], True), "prompt": "Name it / give an example",
                 "body": [f'<strong class="fcard__name">{name}</strong>', *lines(to_html(c["meaning"], ctx)),
@@ -145,6 +158,13 @@ def build(src: Path, prev: dict):
                 "note": "",
             })
         elif k == "greek":
+            extra[c["id"]] = {
+                "key": c["key"], "source": "book",
+                "terms": [{"term": math(r"\mathrm{" + c["cap"] + "}"), "meaning": f'capital {c["name"]}'},
+                          {"term": to_html("$" + c["low"] + "$", ctx), "meaning": f'lowercase {c["name"]}'}],
+                "spoken": [{"text": f'{c["name"]}, pronounced “{to_text(to_html(c["pron"], ctx))}”'}],
+                "explanation": to_html(c["uses"], ctx),
+            }
             deck("Greek Alphabet", c["chapter"], ref).append({
                 "id": c["id"], "title": c["name"], "glyphs": math(r"\mathrm{" + c["cap"] + "}") + "\u2003" + to_html("$" + c["low"] + "$", ctx),
                 "prompt": "Name the letter",
@@ -153,6 +173,12 @@ def build(src: Path, prev: dict):
             })
         elif k == "gtile":
             name = to_html(c["name"], ctx, br=" ")
+            extra[c["id"]] = {
+                "key": c["key"], "source": "book", "terms": [], "spoken": [],
+                "formulas": [{"name": name, "explain": math(c["formula"], True)}], "formulas_label": "Formula",
+                "explanation": " ".join(lines(to_html(c["note"], ctx))) or f"The {to_text(name).lower()} curve, recognized by its shape.",
+                "uses": [{"label": "Graph gallery", "text": f'{c["cat"].replace(chr(92) + "&", "&")}: recognize the curve by its shape, then state its formula'}],
+            }
             deck(c["cat"], c["chapter"], True).append({
                 "id": c["id"], "title": to_text(name), "front": front_svg(c["id"]),
                 "body": [f'<strong class="fcard__name">{name}</strong>', math(c["formula"], True), *lines(to_html(c["note"], ctx))], "note": "",
@@ -160,6 +186,11 @@ def build(src: Path, prev: dict):
             prereq(c, c["note"], c["formula"])
         elif k == "symtile":
             name = to_html(c["name"], ctx, br=" ")
+            extra[c["id"]] = {
+                "key": c["key"], "source": "book", "terms": [], "spoken": [],
+                "explanation": " ".join(lines(to_html(c["back"], ctx))),
+                "uses": [{"label": "In a schematic", "text": to_html(c["caption"], ctx)}] if c["caption"].strip() else [],
+            }
             deck("EE Symbols", c["chapter"], False).append({
                 "id": c["id"], "title": to_text(name), "front": front_svg(c["id"]),
                 "body": [f'<strong class="fcard__name">{name}</strong>', *lines(to_html(c["back"], ctx))], "note": "",
@@ -167,17 +198,36 @@ def build(src: Path, prev: dict):
             prereq(c, c["back"], c["caption"])
         elif k == "gentry":
             name = to_html(c["name"], ctx, br=" ")
+            extra[c["id"]] = {
+                "key": c["key"], "source": "book", "terms": [], "spoken": [],
+                "explanation": " ".join(lines(to_html(c["def"], ctx))),
+                "uses": [{"label": "Glossary", "text": c["cat"].replace(chr(92) + "&", "&")}],
+            }
             deck(c["cat"], c["chapter"], True).append({
                 "id": c["id"], "title": to_text(name), "prompt": "Define it", "body": lines(to_html(c["def"], ctx)), "note": "",
             })
             prereq(c, c["def"])
-    # Gallery, schematic-symbol and glossary cards have no stated equation in the book; keep the
-    # entries written for them on this site (their IDs are the same in both editions).
+    # Every other card gets a popup too. Gallery, schematic-symbol and glossary cards keep the entries
+    # written for them on this site (their IDs are the same in both editions; "source" marks the ones
+    # generated here, which are rebuilt each run); the rest are built from the book: a key topic's
+    # introduction and questions, a symbol's meaning and example, a letter's pronunciation and uses,
+    # a curve's formula, a definition.
     for d in decks.values():
         for card in d["cards"]:
-            if "concept" not in card and card["id"] in prev and card["id"] not in stated:
-                stated[card["id"]] = prev[card["id"]]
+            cid = card.get("concept", card["id"])
+            if cid in stated:
                 card["stated"] = True
+                continue
+            hand = prev.get(card["id"])
+            if "concept" not in card and hand and hand.get("source") != "book":
+                stated[cid] = hand
+            elif cid in kt_cards:
+                stated[cid] = kt_cards[cid]
+            elif cid in extra:
+                stated[cid] = extra[cid]
+            else:
+                continue
+            card["stated"] = True
     return cards, registry, order, decks, stated, requires
 
 

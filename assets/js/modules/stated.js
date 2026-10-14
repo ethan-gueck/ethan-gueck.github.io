@@ -2,6 +2,9 @@
  * Stated-equation popup (#stated-equation), opened from a flashcard's ? button.
  *
  *   Terms            every symbol in the concept's formulas and what it means.
+ *                    Every card has a popup: concepts from their stated equations, and key topics,
+ *                    symbols, letters, curves and glossary terms from what the book says about them;
+ *                    a tab with nothing for a card is hidden.
  *   Stated-equations the formulas read aloud, as the book states them.
  *   Explanation      the summary, each named formula and what it does, the method and decision
  *                    point where the book has them, then origin and uses.
@@ -66,6 +69,11 @@ Site.initStated = function initStated() {
     var terms = panels.terms, spoken = panels.spoken;
     Object.keys(panels).forEach(function (k) { panels[k].replaceChildren(); });
     implTab.hidden = !(entry && entry.implementations && entry.implementations.length);
+    // A tab with nothing for this card (no symbols to define, nothing to read aloud) is hidden.
+    tabs.forEach(function (t) {
+      var key = t.dataset.statedTab;
+      if (key === 'terms' || key === 'spoken') t.hidden = !!entry && !(entry[key] && entry[key].length);
+    });
     if (!entry) {
       Object.keys(panels).forEach(function (k) { panels[k].append(el('p', 'stated-empty', 'This card is still being written up.')); });
       return;
@@ -90,7 +98,7 @@ Site.initStated = function initStated() {
     if (entry.formulas && entry.formulas.length) {
       var fl = el('dl', 'stated-terms stated-formulas');
       entry.formulas.forEach(function (f) { fl.append(rich('dt', '', f.name), rich('dd', '', f.explain)); });
-      about.append(el('h3', 'stated-sub', 'Formulas'), fl);
+      about.append(el('h3', 'stated-sub', entry.formulas_label || 'Formulas'), fl);
     }
     if (entry.method) {
       var ol = el('ol', 'stated-method');
@@ -118,13 +126,18 @@ Site.initStated = function initStated() {
   Site.openStated = function (card, deckName, mode) {
     dlg.querySelector('[data-stated-code]').textContent = card.concept || card.id;
     var name = /fcard__name">([\s\S]*?)<\/strong>/.exec(card.body[0] || '');
-    dlg.querySelector('[data-stated-title]').textContent = card.title || (name ? name[1].replace(/<[^>]+>/g, '') : deckName);
+    dlg.querySelector('[data-stated-title]').textContent = card.keytopic || card.title || (name ? name[1].replace(/<[^>]+>/g, '') : deckName);
     Object.keys(panels).forEach(function (k) { panels[k].replaceChildren(); });
     panels.terms.append(el('p', 'stated-empty', 'Loading…'));
     show(mode === 'spoken' ? 'spoken' : 'terms');
     if (!dlg.open) dlg.showModal();
     loadData()
-      .then(function (data) { fill(card, data[card.concept || card.id]); })
+      .then(function (data) {
+        fill(card, data[card.concept || card.id]);
+        // If the tab asked for is hidden for this card, open the first one that has something.
+        var asked = dlg.querySelector('[data-stated-tab="' + (mode === 'spoken' ? 'spoken' : 'terms') + '"]');
+        if (asked.hidden) show([].filter.call(tabs, function (t) { return !t.hidden; })[0].dataset.statedTab);
+      })
       .catch(function (err) {
         console.error('[stated]', err);
         panels.terms.replaceChildren(el('p', 'stated-empty', 'This explanation could not be loaded right now.'));

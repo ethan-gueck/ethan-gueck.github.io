@@ -201,13 +201,13 @@ def parse_book(src: Path):
                 ktnum += 1
                 kid = f"{ch['code']}.K{ktnum}"
                 registry[key] = kid
-                kt = {"key": key, "id": kid, "title": title, "n": 0}
+                kt = {"key": key, "id": kid, "title": title, "intro": intro, "n": 0}
             elif name == "end{keytopic}":
                 kt = None
             elif name == "ktcard":
                 (front, back), j = args(s, j, 2)
                 kt["n"] += 1
-                cards.append({"kind": "ktcard", "id": kt["id"], "key": kt["key"], "kt_title": kt["title"], "front": front, "back": back, "n": kt["n"], "chapter": ch["num"], "cat": cat})
+                cards.append({"kind": "ktcard", "id": kt["id"], "key": kt["key"], "kt_title": kt["title"], "kt_intro": kt["intro"], "front": front, "back": back, "n": kt["n"], "chapter": ch["num"], "cat": cat})
             elif name == "sym":
                 key, j = opt(s, j)
                 (sym, nm, meaning, ex), j = args(s, j, 4)
