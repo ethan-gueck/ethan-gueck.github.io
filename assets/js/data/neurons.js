@@ -30,11 +30,10 @@
     { name: 'Finance', site: 'finance', decks: ['Finance', 'Finance Terms'] },
     { name: 'Physics & Natural Phenomena', site: 'physics', decks: ['Physics & Natural Phenomena'] },
     { name: 'Electrical Engineering', site: 'electrical-engineering', decks: ['Electrical Engineering', 'EE Symbols', 'EE Terms'] },
-    { name: 'Acronyms', site: 'acronyms', decks: ['Acronyms'] },
   ];
 
   // Reference decks that stay flashcards only: no neurons and no track.
-  Site.neuronExcludedDecks = ['Key Terms', 'Greek Alphabet', 'Math Signs & Operations'];
+  Site.neuronExcludedDecks = ['Key Terms', 'Greek Alphabet', 'Math Signs & Operations', 'Acronyms'];
 
   // Short names for neurons whose card title is too long for the map (none since the Second Edition).
   Site.neuronTitles = {};
