@@ -35,6 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from flashcards import conv  # noqa: E402
 from flashcards.conv import Ctx, math, split_steps, split_terms, to_html, to_text  # noqa: E402
+from flashcards.speech import speak  # noqa: E402
 from flashcards.texparse import parse_book  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -115,7 +116,9 @@ def build(src: Path, prev: dict):
             entry = {
                 "key": c["key"],
                 "terms": [{"term": to_html(a, ctx), "meaning": to_html(b, ctx)} for a, b in split_terms(c.get("terms", ""))],
-                "spoken": [{"text": to_html(c["stated"], ctx)}] if c.get("stated") else [],
+                # Each named formula with how it is read aloud, then the book's stated equation for the whole concept.
+                "spoken": [{"name": to_html(f["name"], ctx, br=" "), "math": math(f["formula"], True), "text": speak(f["formula"])} for f in c["fitems"]]
+                + ([{"name": "Read together", "text": to_html(c["stated"], ctx)}] if c.get("stated") else []),
                 "formulas": [{"name": to_html(f["name"], ctx, br=" "), "explain": to_html(f["explain"], ctx)} for f in c["fitems"]],
                 "explanation": to_html(c.get("summary", ""), ctx),
             }
@@ -148,7 +151,7 @@ def build(src: Path, prev: dict):
             name = to_html(c["name"], ctx, br=" ")
             extra[c["id"]] = {
                 "key": c["key"], "source": "book", "terms": [{"term": math(c["sym"]), "meaning": name}],
-                "spoken": [{"text": f"{to_text(name)}"}], "explanation": to_html(c["meaning"], ctx),
+                "spoken": [{"name": name, "math": math(c["sym"], True), "text": to_text(name)}], "explanation": to_html(c["meaning"], ctx),
                 "uses": [{"label": "Example", "text": " ".join(lines(to_html(c["example"], ctx)))}],
             }
             deck(c["cat"], c["chapter"], ref).append({
@@ -162,7 +165,8 @@ def build(src: Path, prev: dict):
                 "key": c["key"], "source": "book",
                 "terms": [{"term": math(r"\mathrm{" + c["cap"] + "}"), "meaning": f'capital {c["name"]}'},
                           {"term": to_html("$" + c["low"] + "$", ctx), "meaning": f'lowercase {c["name"]}'}],
-                "spoken": [{"text": f'{c["name"]}, pronounced “{to_text(to_html(c["pron"], ctx))}”'}],
+                "spoken": [{"name": c["name"], "math": math(r"\mathrm{" + c["cap"] + "}") + "\u2003" + to_html("$" + c["low"] + "$", ctx),
+                            "text": f'{c["name"]}, pronounced {to_text(to_html(c["pron"], ctx))}'}],
                 "explanation": to_html(c["uses"], ctx),
             }
             deck("Greek Alphabet", c["chapter"], ref).append({
@@ -174,7 +178,8 @@ def build(src: Path, prev: dict):
         elif k == "gtile":
             name = to_html(c["name"], ctx, br=" ")
             extra[c["id"]] = {
-                "key": c["key"], "source": "book", "terms": [], "spoken": [],
+                "key": c["key"], "source": "book", "terms": [],
+                "spoken": [{"name": name, "math": math(c["formula"], True), "text": speak(c["formula"])}],
                 "formulas": [{"name": name, "explain": math(c["formula"], True)}], "formulas_label": "Formula",
                 "explanation": " ".join(lines(to_html(c["note"], ctx))) or f"The {to_text(name).lower()} curve, recognized by its shape.",
                 "uses": [{"label": "Graph gallery", "text": f'{c["cat"].replace(chr(92) + "&", "&")}: recognize the curve by its shape, then state its formula'}],
@@ -220,6 +225,14 @@ def build(src: Path, prev: dict):
                 continue
             hand = prev.get(card["id"])
             if "concept" not in card and hand and hand.get("source") != "book":
+                # Older entries read one formula aloud without saying which: put the card's name (and,
+                # for a gallery curve, its formula from the book) above the reading, as on the concepts.
+                book = (extra.get(cid) or {}).get("spoken") or [{}]
+                for i, s_ in enumerate(hand.get("spoken", [])):
+                    if i == 0 and "name" not in s_:
+                        s_["name"] = book[0].get("name") or card.get("title", "")
+                        if book[0].get("math") and "math" not in s_:
+                            s_["math"] = book[0]["math"]
                 stated[cid] = hand
             elif cid in kt_cards:
                 stated[cid] = kt_cards[cid]

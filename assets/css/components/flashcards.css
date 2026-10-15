@@ -242,3 +242,4 @@ mtable.tml-small mtd { padding-top: 0.35ex; padding-bottom: 0.35ex; }
 .deck__divider { margin-top: var(--space-4); }
 @media (prefers-reduced-motion: reduce) { .deck__chevron { transition: none; } }
 @media (max-width: 560px) { .deck__head { gap: var(--space-2); padding-inline: var(--space-2); } .deck__head .deck__count { font-size: 0.78rem; } }
+.stated-spoken__name { margin: 0 0 var(--space-1); font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }

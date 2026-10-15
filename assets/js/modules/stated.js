@@ -5,7 +5,8 @@
  *                    Every card has a popup: concepts from their stated equations, and key topics,
  *                    symbols, letters, curves and glossary terms from what the book says about them;
  *                    a tab with nothing for a card is hidden.
- *   Stated-equations the formulas read aloud, as the book states them.
+ *   Stated-equations every formula by name, the formula, and how it is read aloud; then the book's
+ *                    stated equation for the whole concept.
  *   Explanation      the summary, each named formula and what it does, the method and decision
  *                    point where the book has them, then origin and uses.
  *   Implementations  common library functions and tools that compute it (tab hidden when none).
@@ -85,8 +86,13 @@ Site.initStated = function initStated() {
     terms.append(dl);
 
     var list = el('ol', 'stated-spoken');
+    // Each formula by name, the formula itself, and how it is read aloud. Older entries point at a
+    // line of the card's back instead of carrying their own formula.
     entry.spoken.forEach(function (s) {
       var li = el('li');
+      if (s.name) li.append(rich('p', 'stated-spoken__name', s.name));
+      var formula = s.math || (s.line !== undefined ? card.body[s.line] : '');
+      if (formula) li.append(rich('span', 'stated-spoken__math', formula));
       li.append(rich('p', 'stated-spoken__text', '“' + s.text + '”'));
       list.append(li);
     });
