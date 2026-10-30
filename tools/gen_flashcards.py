@@ -102,7 +102,7 @@ def build(src: Path, prev: dict):
             for j in range(1, parts + 1):
                 items = [f for f in c["fitems"] if f["chunk"] == j]
                 card = {
-                    "id": f"{c['id']} ({j}/{parts})" if parts > 1 else c["id"], "concept": c["id"], "title": title,
+                    "id": f"{c['id']} ({j}/{parts})" if parts > 1 else c["id"], "concept": c["id"], "key": c["key"], "title": title,
                     "names": [to_html(f["name"], ctx, br=" ") for f in items],
                     "body": [math(f["formula"], True) for f in items],
                 }

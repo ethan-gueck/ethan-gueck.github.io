@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Practice review</title>
+  <!-- Not published (tools/ is excluded from the Pages build). Serve the repo root and open
+       http://localhost:8765/tools/practice/review.html to read every concept, level and solution. -->
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/components/solver.css">
+  <link rel="stylesheet" href="../../assets/css/components/practice.css">
+  <style>
+    body { max-width: 980px; margin: 0 auto; padding: 1.5rem; background: var(--canvas); }
+    header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; padding: 0.8rem 0; background: var(--canvas); border-bottom: 1px solid var(--rule); }
+    header h1 { margin: 0 1rem 0 0; font-size: 1.3rem; }
+    .rv-concept { margin: 2rem 0 0.5rem; padding-top: 0.6rem; border-top: 2px solid var(--sand-300); }
+    .rv-grid { display: grid; gap: 1rem; }
+    .rv-p { padding: 1rem 1.2rem; border: 1px solid var(--rule); border-radius: var(--radius-md); background: var(--paper); }
+    .rv-p h3 { margin: 0 0 0.4rem; font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+    .rv-ans { margin-top: 0.6rem; padding: 0.4rem 0.8rem; border-left: 4px solid #2e7d4f; background: var(--canvas); font-family: var(--font-serif); }
+    .rv-opts { margin: 0.4rem 0; font-family: var(--font-serif); }
+    .rv-opts li.is-right { font-weight: 700; color: #2e7d4f; }
+    .rv-graph { max-width: 460px; }
+    .rv-count { font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Practice review</h1>
+    <label>Domain <select id="domain"></select></label>
+    <label>Seed <input id="seed" type="number" value="1" min="1" style="width:5rem"></label>
+    <button class="pr__btn" id="next" type="button">Next seed</button>
+    <span class="rv-count" id="count"></span>
+  </header>
+  <main id="out"></main>
+  <script src="../../assets/js/practice/core.js"></script>
+  <script src="../../assets/js/modules/practice.js"></script>
+  <script>
+    const DOMAINS = ["algebra1", "algebra2", "geometry", "trigonometry", "calculus1", "calculus2", "linear-algebra", "calculus3",
+      "vector-calculus", "physics", "statistics", "optimization", "machine-learning", "electrical", "finance", "functions"];
+    const LEVELS = ["Easy", "Medium", "Hard"];
+    const sel = document.getElementById("domain"), seedBox = document.getElementById("seed"), out = document.getElementById("out");
+    sel.innerHTML = DOMAINS.map((d) => `<option>${d}</option>`).join("");
+    const params = new URLSearchParams(location.search);
+    if (params.get("domain")) sel.value = params.get("domain");
+    const loaded = {};
+    const load = (d) => loaded[d] || (loaded[d] = new Promise((res, rej) => { const s = document.createElement("script"); s.src = `../../assets/js/practice/${d}.js`; s.onload = res; s.onerror = rej; document.head.append(s); }));
+    async function render() {
+      const d = sel.value, seed = Number(seedBox.value) || 1;
+      try { await load(d); } catch (e) { out.innerHTML = `<p>No generators for ${d} yet.</p>`; return; }
+      const keys = Object.values(Practice.registry).filter((g) => g.domain === d).map((g) => g.key);
+      document.getElementById("count").textContent = `${keys.length} concepts × 3 levels`;
+      out.innerHTML = keys.map((k) => `<section class="rv-concept"><h2>${k}: ${Practice.registry[k].title}</h2><div class="rv-grid">${[1, 2, 3].map((lv) => {
+        let p;
+        try { p = Practice.generate(k, lv, seed); } catch (e) { return `<div class="rv-p"><h3>${LEVELS[lv - 1]}</h3><p>Error: ${e.message}</p></div>`; }
+        const opts = p.answer.kind === "choice" ? `<ol class="rv-opts" type="A">${p.answer.options.map((o, i) => `<li class="${i === p.answer.index ? "is-right" : ""}">${o}</li>`).join("")}</ol>` : "";
+        return `<div class="rv-p"><h3>${LEVELS[lv - 1]} · seed ${seed}</h3><div class="pr__prompt">${p.prompt}</div><div class="rv-graph" data-g="${k}|${lv}"></div>${opts}
+          <ol class="pr__steps">${p.steps.map((s) => `<li>${s}</li>`).join("")}</ol><div class="rv-ans">Answer: ${p.answerText}${p.answerInput ? ` <span class="rv-count">(typed: ${p.answerInput.replace(/</g, "&lt;")})</span>` : ""}</div></div>`;
+      }).join("")}</div></section>`).join("");
+      out.querySelectorAll("[data-g]").forEach((box) => {
+        const [k, lv] = box.dataset.g.split("|");
+        const p = Practice.generate(k, Number(lv), seed);
+        if (p.graph) box.append(Site.practiceGraph(p.graph));
+      });
+      history.replaceState(null, "", `?domain=${d}&seed=${seed}`);
+    }
+    sel.addEventListener("change", render);
+    seedBox.addEventListener("change", render);
+    document.getElementById("next").addEventListener("click", () => { seedBox.value = Number(seedBox.value) + 1; render(); });
+    if (params.get("seed")) seedBox.value = params.get("seed");
+    render();
+  </script>
+</body>
+</html>

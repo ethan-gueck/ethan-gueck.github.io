@@ -131,6 +131,13 @@ Site.initStated = function initStated() {
   /** Open the popup for `card` on the "terms" or "spoken" tab. */
   Site.openStated = function (card, deckName, mode) {
     dlg.querySelector('[data-stated-code]').textContent = card.concept || card.id;
+    // A practice problem for this concept, when one exists (modules/practice.js)
+    var practice = dlg.querySelector('[data-stated-practice]');
+    var link = Site.practiceLink ? Site.practiceLink(card) : null;
+    if (practice) {
+      practice.hidden = !link;
+      if (link) { practice.href = link; practice.onclick = function () { dlg.close(); }; }
+    }
     var name = /fcard__name">([\s\S]*?)<\/strong>/.exec(card.body[0] || '');
     dlg.querySelector('[data-stated-title]').textContent = card.keytopic || card.title || (name ? name[1].replace(/<[^>]+>/g, '') : deckName);
     Object.keys(panels).forEach(function (k) { panels[k].replaceChildren(); });

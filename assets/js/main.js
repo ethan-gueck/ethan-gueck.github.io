@@ -16,6 +16,7 @@ safely('books', function () { Site.initBookList(Site.books); });
 safely('outcomes', function () { Site.initOutcomeCards(); });
 safely('stated', function () { Site.initStated(); });
 safely('references', function () { Site.initReferences(document.getElementById('panel-margins'), Site.symbolGroups); });
+safely('practice', function () { Site.initPractice(); });
 safely('articles', function () { Site.initArticles(document.querySelector('#panel-margins [data-articles]')); });
 safely('flashcards', function () { Site.initFlashcards(document.getElementById('panel-flashcards'), Site.flashcards); });
 safely('search', function () { Site.initSearch(); });

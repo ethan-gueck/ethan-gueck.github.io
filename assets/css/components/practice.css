@@ -1,0 +1,123 @@
+/* Practice problems (The Margins → In-page references) and their calculator. modules/practice.js */
+.ref-card__art--practice { font-family: var(--font-serif); font-size: 2.4rem; font-style: italic; }
+.ref-card__q { display: inline-grid; place-items: center; width: 1.3em; height: 1.3em; margin-left: 0.15em; border: 2px dashed currentColor; border-radius: 6px; font-style: normal; }
+
+.pr__bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-2) var(--space-3); margin: var(--space-3) 0; font-family: var(--font-sans); }
+.pr__pick { display: grid; gap: 0.25rem; font-size: var(--fs-sm); color: var(--ink-soft); }
+.pr__pick select { min-width: 11rem; max-width: 100%; padding: 0.45rem 0.6rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); font: inherit; font-size: 0.95rem; }
+.pr__pick--wide select { min-width: 16rem; }
+.pr__levels legend { font-size: var(--fs-sm); }
+
+.pr__btn {
+  padding: 0.5rem 1rem; border: 1px solid var(--ink-green-800); border-radius: 999px; background: var(--paper); color: var(--ink-green-800);
+  font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
+}
+.pr__btn:hover:not(:disabled) { background: rgba(var(--tint-rgb), 0.25); }
+.pr__btn:disabled { opacity: 0.45; cursor: default; }
+.pr__btn--primary { background: var(--ink-green-800); color: #FFFFFF; }
+.pr__btn--primary:hover:not(:disabled) { background: var(--green-800); }
+.pr__btn--quiet { border-color: var(--rule); color: var(--ink-soft); }
+.pr__btn:focus-visible { outline: none; box-shadow: var(--focus); }
+
+.pr__card { padding: var(--space-4); border: 1px solid var(--rule); border-top: 3px solid var(--sand-300); border-radius: var(--radius-md); background: var(--paper); }
+.pr__meta { margin: 0 0 var(--space-2); font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+.pr__id { font-weight: 700; color: var(--ink-green-800); }
+.pr__level { margin-left: 0.4em; padding: 0.05rem 0.5rem; border-radius: 999px; background: rgba(var(--sand-rgb), 0.35); font-weight: 600; color: var(--ink-green-800); }
+.pr__flash { margin-left: 0.6em; }
+.pr__prompt { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.6; }
+.pr__graph { margin: var(--space-3) 0; max-width: 520px; }
+
+.pr__answer { margin-top: var(--space-3); }
+.pr__input {
+  width: min(28rem, 100%); padding: 0.6rem 0.8rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--canvas);
+  color: var(--ink); font-family: var(--font-serif); font-size: 1.15rem;
+}
+.pr__input:focus { outline: none; box-shadow: var(--focus); }
+.pr__preview { min-height: 1.3em; margin: 0.3rem 0; font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+.pr__keypad { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.pr__keypad button {
+  min-width: 2.6rem; padding: 0.35rem 0.6rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--canvas);
+  color: var(--ink); font-family: var(--font-serif); font-size: 1rem; cursor: pointer;
+}
+.pr__keypad button:hover { border-color: var(--ink-green-700); }
+.pr__keypad .pr__calc { font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
+.pr__choices { display: grid; gap: var(--space-1); margin: 0; padding: 0; border: 0; }
+.pr__choice { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.8rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font-serif); font-size: 1.05rem; }
+.pr__choice:has(input:checked) { border-color: var(--ink-green-800); box-shadow: inset 0 0 0 1px var(--ink-green-800); }
+
+.pr__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-3); }
+.pr__tally { margin-left: auto; font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+.pr__status { min-height: 1.2em; margin: var(--space-1) 0 0; font-family: var(--font-sans); font-size: var(--fs-sm); color: #b3261e; }
+.pr__feedback { margin-top: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); border-left: 4px solid var(--rule); background: var(--canvas); font-family: var(--font-serif); }
+.pr__feedback.is-right { border-left-color: #2e7d4f; }
+.pr__feedback.is-wrong { border-left-color: #b3261e; }
+.pr__feedback.is-shown { border-left-color: var(--sand-500); }
+.pr__steps { margin: var(--space-2) 0 0; padding-left: 1.6em; display: grid; gap: var(--space-2); font-family: var(--font-serif); line-height: 1.6; }
+.pr__steps--hints li::marker { color: var(--sand-500); font-weight: 700; }
+.pr__note { margin-top: var(--space-2); font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+
+/* Math markup from practice/core.js (M.frac, M.sqrt, M.eq, M.table) */
+.pm { display: block; margin: var(--space-2) 0; font-size: 1.15em; }
+.pf { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 0.1em; }
+.pf__n { padding: 0 0.2em 0.08em; border-bottom: 1px solid currentColor; }
+.pf__d { padding: 0.08em 0.2em 0; }
+.prt { white-space: nowrap; }
+.prt__in { border-top: 1px solid currentColor; padding: 0 0.1em; }
+.prt__i { font-size: 0.65em; margin-right: -0.25em; vertical-align: 0.9em; }
+.pt { border-collapse: collapse; margin: var(--space-2) 0; font-family: var(--font-sans); font-size: 0.95rem; }
+.pt th, .pt td { padding: 0.3rem 0.7rem; border: 1px solid var(--rule); text-align: center; }
+.pt th { background: rgba(var(--sand-rgb), 0.25); }
+
+/* Graphs */
+.pg { display: block; width: 100%; height: auto; background: var(--canvas); border: 1px solid var(--rule); border-radius: var(--radius-sm); }
+.pg__grid line { stroke: var(--rule); stroke-width: 1; }
+.pg__axes line { stroke: var(--ink-soft); stroke-width: 1.4; }
+.pg__ticks text, .pg__label { fill: var(--ink-soft); font-family: var(--font-sans); font-size: 12px; }
+.pg__label { fill: var(--ink); font-size: 13px; font-weight: 600; }
+.pg__fn { fill: none; stroke-width: 2.5; stroke-linejoin: round; }
+.pg__seg, .pg__circle { fill: none; stroke-width: 2.2; }
+.pg__poly { stroke-width: 2; fill-opacity: 0.15; }
+.pg__poly.pg--nofill { fill: none; }
+.pg__pt { stroke: var(--paper); stroke-width: 1.5; }
+.pg--dash { stroke-dasharray: 6 5; }
+.pg--primary { stroke: var(--ink-green-700); fill: var(--ink-green-700); }
+.pg--secondary { stroke: #c0711b; fill: #c0711b; }
+.pg--highlight { stroke: #b3261e; fill: #b3261e; }
+.pg--muted { stroke: var(--ink-soft); fill: var(--ink-soft); }
+.pg__fn.pg--primary, .pg__fn.pg--secondary, .pg__fn.pg--highlight, .pg__fn.pg--muted, .pg__seg, .pg__circle { fill: none; }
+.pg__arrow { stroke: none; }
+[data-theme="dark"] .pg--primary { stroke: #8fd3b8; fill: #8fd3b8; }
+[data-theme="dark"] .pg--secondary { stroke: #f0b35a; fill: #f0b35a; }
+[data-theme="dark"] .pg--highlight { stroke: #ff8a80; fill: #ff8a80; }
+[data-theme="dark"] .pg__fn, [data-theme="dark"] .pg__seg, [data-theme="dark"] .pg__circle { fill: none; }
+
+/* Calculator */
+.calc-modal { width: min(420px, calc(100vw - 2rem)); }
+.calc__screen { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--canvas); color: var(--ink); font-family: var(--font-serif); font-size: 1.2rem; }
+.calc__screen:focus { outline: none; box-shadow: var(--focus); }
+.calc__out { min-height: 1.4em; margin: 0.4rem 0; font-family: var(--font-serif); font-size: 1.15rem; text-align: right; color: var(--ink-green-800); }
+.calc__deg { display: block; margin-bottom: var(--space-2); font-family: var(--font-sans); font-size: var(--fs-sm); color: var(--ink-soft); }
+.calc__keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.35rem; }
+.calc__keys button { padding: 0.55rem 0; border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); font-family: var(--font-sans); font-size: 0.95rem; cursor: pointer; }
+.calc__keys button:hover { border-color: var(--ink-green-700); }
+.calc__key--wide { grid-column: span 2; }
+.calc__key--eq { background: var(--ink-green-800) !important; color: #FFFFFF !important; }
+.calc__key--use { grid-column: span 1; font-size: 0.75rem !important; font-weight: 600; color: var(--ink-green-800) !important; }
+
+@media (max-width: 560px) {
+  .pr__pick select, .pr__pick--wide select { min-width: 0; width: 100%; }
+  .pr__pick { flex: 1 1 100%; }
+  .pr__card { padding: var(--space-3); }
+}
+
+/* Flashcard popup: a link to a practice problem for the card */
+.stated-modal__practice { display: block; padding: var(--space-2) var(--space-4); border-bottom: 1px solid var(--rule); background: rgba(var(--tint-rgb), 0.18); font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 600; color: var(--ink-green-800); }
+.stated-modal__practice[hidden] { display: none; }
+
+/* Elements styled with display: … must still hide */
+.pr [hidden] { display: none !important; }
+/* Dark mode: the primary buttons take the theme's accent, as the site's other primary buttons do */
+[data-theme="dark"] .pr__btn--primary, [data-theme="dark"] .calc__key--eq { background: var(--sand-300) !important; border-color: var(--sand-300); color: #102a43 !important; }
+[data-theme="dark"] .pr__btn--primary:hover:not(:disabled) { background: #f0bd5e !important; }
+/* Graph labels sit on lines (a hypotenuse, an axis): a halo in the graph's background keeps them legible */
+.pg text { paint-order: stroke; stroke: var(--canvas); stroke-width: 3px; stroke-linejoin: round; }

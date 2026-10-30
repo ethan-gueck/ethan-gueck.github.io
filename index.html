@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="assets/css/components/solver.css">
   <link rel="stylesheet" href="assets/css/components/arcade.css">
   <link rel="stylesheet" href="assets/css/components/flashcards.css">
+  <link rel="stylesheet" href="assets/css/components/practice.css">
   <link rel="stylesheet" href="assets/css/components/nn.css">
   <link rel="stylesheet" href="assets/css/components/library.css">
   <link rel="stylesheet" href="assets/css/components/search.css">
@@ -69,6 +70,8 @@
   <script src="assets/js/modules/recolor.js" defer></script>
   <script src="assets/js/modules/flashcards.js" defer></script>
   <script src="assets/js/modules/stated.js" defer></script>
+  <script src="assets/js/practice/index.js" defer></script>
+  <script src="assets/js/modules/practice.js" defer></script>
   <script src="assets/js/modules/nn.js" defer></script>
   <script src="assets/js/modules/outcomes.js" defer></script>
   <script src="assets/js/modules/references.js" defer></script>
@@ -808,6 +811,16 @@
               </span>
             </button>
           </li>
+          <li>
+            <button class="ref-card" type="button" data-ref-toggle="ref-practice" aria-expanded="false" aria-controls="ref-practice">
+              <span class="ref-card__art ref-card__art--practice" aria-hidden="true"><span>x = <span class="ref-card__q">?</span></span></span>
+              <span class="ref-card__body">
+                <span class="ref-card__kind"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>In page</span>
+                <span class="ref-card__title">Practice problems: every domain, three levels</span>
+                <span class="ref-card__text">A fresh problem each time, numeric, word and graph problems, with a keypad and calculator, hints one step at a time, and the worked solution, by hand, when an answer is wrong.</span>
+              </span>
+            </button>
+          </li>
         </ul>
 
         <div class="ref-view" id="ref-keys" hidden>
@@ -843,6 +856,56 @@
           </div>
           <nav class="keys__jump" aria-label="Symbol groups" data-keys-jump></nav>
           <div data-keys></div>
+        </div>
+
+        <!-- Practice problems (modules/practice.js; generators in assets/js/practice/, loaded on demand) -->
+        <div class="ref-view pr" id="ref-practice" hidden>
+          <div class="ref-view__head">
+            <h3 class="ref-view__title">Practice problems</h3>
+            <button class="ref-view__close" type="button" data-ref-close>Close</button>
+          </div>
+          <div class="pr__bar">
+            <label class="pr__pick"><span>Domain</span><select data-pr-domain aria-label="Domain"></select></label>
+            <label class="pr__pick pr__pick--wide"><span>Concept</span><select data-pr-concept aria-label="Concept"></select></label>
+            <fieldset class="segmented pr__levels">
+              <legend>Level</legend>
+              <label><input type="radio" name="pr-level" value="1"><span>Easy</span></label>
+              <label><input type="radio" name="pr-level" value="2"><span>Medium</span></label>
+              <label><input type="radio" name="pr-level" value="3"><span>Hard</span></label>
+            </fieldset>
+            <button class="pr__btn pr__btn--primary" type="button" data-pr-next>New problem</button>
+          </div>
+          <article class="pr__card" data-pr-card hidden>
+            <p class="pr__meta"><span data-pr-meta></span> <a class="pr__flash" data-pr-link href="#flashcards">Open the flashcard</a></p>
+            <div class="pr__prompt" data-pr-prompt></div>
+            <figure class="pr__graph" data-pr-graph hidden></figure>
+            <div class="pr__answer">
+              <div class="pr__form" data-pr-form>
+                <label class="sr-only" for="pr-input">Your answer</label>
+                <input class="pr__input" id="pr-input" type="text" autocomplete="off" spellcheck="false" data-pr-input>
+                <p class="pr__preview" aria-live="polite" data-pr-preview></p>
+                <div class="pr__keypad" data-pr-keypad aria-label="Math keys">
+                  <button type="button" data-key="√(">√</button><button type="button" data-key="^">xⁿ</button><button type="button" data-key="^2">x²</button>
+                  <button type="button" data-key="/">a/b</button><button type="button" data-key="π">π</button><button type="button" data-key="(">(</button>
+                  <button type="button" data-key=")">)</button><button type="button" data-key="x">x</button><button type="button" data-key="−">−</button>
+                  <button type="button" data-key=", ">,</button><button type="button" data-key="|">| |</button>
+                </div>
+              </div>
+              <fieldset class="pr__choices" data-pr-choices hidden><legend class="sr-only">Choose one</legend></fieldset>
+            </div>
+            <div class="pr__actions">
+              <button class="pr__btn pr__btn--primary" type="button" data-pr-check>Check</button>
+              <button class="pr__btn" type="button" data-pr-hint>Hint</button>
+              <button class="pr__btn pr__btn--quiet" type="button" data-pr-reveal>Show the solution</button>
+              <button class="pr__btn pr__btn--quiet" type="button" data-pr-calc>Calculator</button>
+              <span class="pr__tally" data-pr-tally></span>
+            </div>
+            <p class="pr__status" role="status" data-pr-status></p>
+            <div class="pr__feedback" data-pr-feedback hidden></div>
+            <ol class="pr__steps pr__steps--hints" data-pr-hints hidden></ol>
+            <ol class="pr__steps" data-pr-solution hidden></ol>
+          </article>
+          <p class="pr__note">Problems are generated fresh each time, and every kind has been checked by a separate program against an independent calculation, thousands of times per level.</p>
         </div>
 
         <h2 id="r-new-tab"><span class="sec-num">2</span>New tab references</h2>
@@ -1055,6 +1118,32 @@
     </div>
   </dialog>
 
+  <!-- Practice calculator (modules/practice.js) -->
+  <dialog class="modal calc-modal" id="practice-calculator" aria-labelledby="practice-calculator-title">
+    <div class="modal__head">
+      <h2 class="modal__title" id="practice-calculator-title">Calculator</h2>
+      <button class="modal__close" type="button" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body calc">
+      <label class="sr-only" for="calc-screen">Expression</label>
+      <input class="calc__screen" id="calc-screen" type="text" autocomplete="off" spellcheck="false" data-calc-screen placeholder="e.g. 3*sqrt(2)/4">
+      <p class="calc__out" aria-live="polite" data-calc-out></p>
+      <label class="calc__deg"><input type="checkbox" data-calc-deg checked> Angles in degrees</label>
+      <div class="calc__keys">
+        <button type="button" data-c="sin(">sin</button><button type="button" data-c="cos(">cos</button><button type="button" data-c="tan(">tan</button><button type="button" data-c="ln(">ln</button><button type="button" data-c="log(">log</button>
+        <button type="button" data-c="asin(">sin⁻¹</button><button type="button" data-c="acos(">cos⁻¹</button><button type="button" data-c="atan(">tan⁻¹</button><button type="button" data-c="e^(">eˣ</button><button type="button" data-c="sqrt(">√</button>
+        <button type="button" data-c="7">7</button><button type="button" data-c="8">8</button><button type="button" data-c="9">9</button><button type="button" data-c="/">÷</button><button type="button" data-c="^">xʸ</button>
+        <button type="button" data-c="4">4</button><button type="button" data-c="5">5</button><button type="button" data-c="6">6</button><button type="button" data-c="*">×</button><button type="button" data-c="(">(</button>
+        <button type="button" data-c="1">1</button><button type="button" data-c="2">2</button><button type="button" data-c="3">3</button><button type="button" data-c="-">−</button><button type="button" data-c=")">)</button>
+        <button type="button" data-c="0">0</button><button type="button" data-c=".">.</button><button type="button" data-c="π">π</button><button type="button" data-c="+">+</button><button type="button" data-c="!">n!</button>
+        <button class="calc__key--wide" type="button" data-c="clear">Clear</button><button type="button" data-c="back" aria-label="Delete">⌫</button>
+        <button class="calc__key--eq" type="button" data-c="eval">=</button><button class="calc__key--use" type="button" data-c="use">Use as answer</button>
+      </div>
+    </div>
+  </dialog>
+
   <!-- Stated equation (opened from a flashcard's ? button; wording in data/stated.js) -->
   <dialog class="modal stated-modal" id="stated-equation" aria-labelledby="stated-equation-title">
     <div class="modal__head">
@@ -1063,6 +1152,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
+    <a class="stated-modal__practice" data-stated-practice href="#margins" hidden>Try a practice problem on this <span aria-hidden="true">→</span></a>
     <div class="stated-modal__tabs" role="tablist" aria-label="Stated equation">
       <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="terms" aria-selected="true">Terms</button>
       <button class="stated-modal__tab" type="button" role="tab" data-stated-tab="spoken" aria-selected="false">Stated-equations</button>
