@@ -4,25 +4,25 @@
  * Rows carry the back through data-back-title, data-back-items ("|"-separated), and data-back-source.
  * A flipped card turns back to its front after four seconds, but never while the pointer is over it. The table stays in the markup as the
  * source and as a no-JavaScript fallback.
- * Cards grow to fit their text; when any card outgrows the base height, columns widen (fewer per row, never below two) until it fits.
+ * The grid defaults to three columns. Cards grow to fit their text; when any card outgrows the base height, the grid drops a column
+ * (never below two) so the text has more width.
  */
 (function (Site) {
 'use strict';
 
 var FLIP_BACK_MS = 4000;
 
-var MIN_COL_PX = 170, COL_STEP_PX = 10, MIN_COLS = 2;
+var DEFAULT_COLS = 3, MIN_COLS = 2;
 
 function fitCards(list) {
   var first = list.querySelector('.outcome');
   if (!first) return;
-  var min = MIN_COL_PX;
-  list.style.setProperty('--outcome-min', min + 'px');
+  var cols = DEFAULT_COLS;
+  list.style.setProperty('--outcome-cols', cols);
   var base = parseFloat(getComputedStyle(first).minHeight);
-  function cols() { return getComputedStyle(list).gridTemplateColumns.split(' ').length; }
-  while (first.offsetHeight > base + 1 && cols() > MIN_COLS) {
-    min += COL_STEP_PX;
-    list.style.setProperty('--outcome-min', min + 'px');
+  while (first.offsetHeight > base + 1 && cols > MIN_COLS) {
+    cols -= 1;
+    list.style.setProperty('--outcome-cols', cols);
   }
 }
 
