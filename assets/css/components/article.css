@@ -272,12 +272,12 @@
 
 /* Selected outcomes: flip cards, highlight on the front, details on the back */
 .outcome-intro { font-size: 1rem; color: var(--ink-soft); }
-.outcome-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: var(--space-3); list-style: none; padding: 0; margin: var(--space-3) 0 var(--space-4); }
-.outcome { width: 100%; height: 12.75rem; padding: 0; border: 0; background: none; perspective: 900px; cursor: pointer; text-align: center; }
-.outcome__inner { position: relative; display: block; height: 100%; transition: transform 0.45s ease; transform-style: preserve-3d; }
+.outcome-cards { --outcome-min: 170px; display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--outcome-min), 1fr)); grid-auto-rows: 1fr; gap: var(--space-3); list-style: none; padding: 0; margin: var(--space-3) 0 var(--space-4); }
+.outcome { width: 100%; height: 100%; min-height: 12.75rem; padding: 0; border: 0; background: none; perspective: 900px; cursor: pointer; text-align: center; }
+.outcome__inner { position: relative; display: grid; height: 100%; transition: transform 0.45s ease; transform-style: preserve-3d; }
 .outcome.is-flipped .outcome__inner { transform: rotateY(180deg); }
 .outcome__face {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
+  grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.35rem;
   padding: 0.8rem; border-radius: var(--radius-md); backface-visibility: hidden; -webkit-backface-visibility: hidden;
   box-shadow: 0 6px 16px rgba(var(--shade-rgb), 0.12);
 }
@@ -299,7 +299,7 @@
 .outcome:focus-visible .outcome__face { box-shadow: var(--focus); }
 @media (max-width: 560px) {
   .outcome-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
-  .outcome { height: 14.75rem; }
+  .outcome { min-height: 14.75rem; }
   .outcome__item { font-size: 0.7rem; }
   .outcome__value { font-size: 1.4rem; }
   .outcome__value--long { font-size: 1.1rem; }
