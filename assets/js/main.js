@@ -10,6 +10,7 @@ function safely(name, fn) {
 }
 
 safely('theme', function () { Site.initTheme(); });
+safely('introVideo', function () { Site.initIntroVideo(); });
 safely('contact', function () { Site.initContact(Site.config); });
 safely('modals', function () { Site.initModals(); });
 safely('books', function () { Site.initBookList(Site.books); });

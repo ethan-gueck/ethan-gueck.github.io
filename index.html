@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="assets/css/components/article.css">
   <link rel="stylesheet" href="assets/css/components/gallery.css">
   <link rel="stylesheet" href="assets/css/components/lightbox.css">
+  <link rel="stylesheet" href="assets/css/components/intro-video.css">
   <link rel="stylesheet" href="assets/css/components/modal.css">
   <link rel="stylesheet" href="assets/css/components/ampacity.css">
   <link rel="stylesheet" href="assets/css/components/solver.css">
@@ -58,6 +59,7 @@
   <script src="assets/js/modules/toc.js" defer></script>
   <script src="assets/js/modules/gallery.js" defer></script>
   <script src="assets/js/modules/lightbox.js" defer></script>
+  <script src="assets/js/modules/intro-video.js" defer></script>
   <script src="assets/js/modules/ieee738.js" defer></script>
   <script src="assets/js/modules/cobyla.js" defer></script>
   <script src="assets/js/modules/ampacity.js" defer></script>
@@ -101,7 +103,10 @@
       <p class="masthead__affiliation">Data Scientist, Data Society <span class="masthead__sep">|</span> Richmond, Virginia</p>
       </div>
       <figure class="masthead__portrait">
-        <img src="assets/img/profile/headshot.webp" alt="Portrait of Ethan Gueck" width="720" height="720">
+        <button class="masthead__portrait-btn" type="button" data-intro-open aria-haspopup="dialog" aria-label="Play Ethan's introduction video" title="Play introduction video">
+          <img src="assets/img/profile/headshot.webp" alt="Portrait of Ethan Gueck" width="720" height="720">
+          <span class="masthead__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+        </button>
       </figure>
     </div>
 
@@ -146,6 +151,21 @@
 
       <!-- ---------- SUMMARY ---------- -->
       <section class="panel article" id="panel-summary" role="tabpanel" aria-labelledby="tab-summary" data-panel="summary">
+        <section class="intro-video" aria-labelledby="intro-video-title" data-intro-pane>
+          <div class="intro-video__head">
+            <h2 class="intro-video__title" id="intro-video-title">Introduction video</h2>
+            <div class="intro-video__variants" role="group" aria-label="Video style" data-intro-variants>
+              <button type="button" data-variant="light_green" aria-pressed="true">Green</button>
+              <button type="button" data-variant="light_white" aria-pressed="false">White</button>
+            </div>
+          </div>
+          <video class="intro-video__player" controls playsinline preload="metadata" poster="assets/video/poster_light_green.jpg"
+                 data-intro-video aria-label="Introduction to Ethan Gueck">
+            <source src="assets/video/intro_light_green.mp4" type="video/mp4">
+            Your browser can't play this video.
+          </video>
+        </section>
+
         <div class="abstract">
           <h2 class="abstract__label">Introduction</h2>
           <p>
@@ -1191,6 +1211,18 @@
       <p class="search-modal__status" data-search-status aria-live="polite"></p>
       <ul class="search-modal__results" data-search-results></ul>
     </div>
+  </dialog>
+
+  <!-- Introduction video popout (modules/intro-video.js) -->
+  <dialog class="lightbox intro-dialog" id="intro-dialog" aria-label="Introduction video">
+    <button class="lightbox__close" type="button" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="intro-video__variants intro-dialog__variants" role="group" aria-label="Video style" data-intro-variants>
+      <button type="button" data-variant="light_green" aria-pressed="true">Green</button>
+      <button type="button" data-variant="light_white" aria-pressed="false">White</button>
+    </div>
+    <video class="intro-dialog__video" controls playsinline preload="none" data-intro-video aria-label="Introduction to Ethan Gueck"></video>
   </dialog>
 
   <!-- Lightbox (shared) -->
