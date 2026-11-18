@@ -15,16 +15,14 @@
 .intro-video__variants button[aria-pressed="true"] { background: var(--green-800); color: #fff; }
 .intro-video__variants button:focus-visible { outline: 2px solid var(--green-800); outline-offset: -2px; }
 
-/* Headshot becomes a button with a play badge. */
-.masthead__portrait-btn { position: relative; display: block; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%; }
-.masthead__portrait-btn:focus-visible { outline: 3px solid var(--sand-300); outline-offset: 4px; }
-.masthead__play {
-  position: absolute; right: 4%; bottom: 4%; width: 22%; aspect-ratio: 1; border-radius: 50%;
-  display: grid; place-items: center; background: var(--sand-300); color: var(--green-900);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35); transition: transform .15s;
+/* Headshot is a button that expands on hover/focus. */
+.masthead__portrait-btn {
+  position: relative; display: block; padding: 0; border: 0; background: none; cursor: pointer; border-radius: 50%;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
-.masthead__play svg { width: 55%; fill: currentColor; margin-left: 8%; }
-.masthead__portrait-btn:hover .masthead__play { transform: scale(1.12); }
+.masthead__portrait-btn:hover, .masthead__portrait-btn:focus-visible { transform: scale(1.08); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.masthead__portrait-btn:focus-visible { outline: 3px solid var(--sand-300); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .masthead__portrait-btn { transition: none; } }
 
 /* Popout */
 .intro-dialog { max-width: min(96vw, 1100px); }
