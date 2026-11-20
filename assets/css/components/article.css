@@ -305,3 +305,8 @@
   .outcome__value--long { font-size: 1.1rem; }
 }
 @media (prefers-reduced-motion: reduce) { .outcome__inner { transition: none; } }
+
+/* Figures side by side, widths weighted by aspect ratio so heights match */
+.figure__row { display: flex; gap: var(--space-2); align-items: flex-start; }
+.figure__row .figure__zoom { width: auto; min-width: 0; }
+@media (max-width: 560px) { .figure__row { flex-direction: column; } .figure__row .figure__zoom { flex: none !important; width: 100%; } }
