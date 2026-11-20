@@ -723,7 +723,9 @@
           <figcaption><span class="caption-label">Figure S1.</span> COBYLA iterating conductor temperature until the amperage residual, the current the IEEE 738 heat balance supports at that temperature minus the recorded current, is minimized. The objective space is nonlinear because of the penalization and constraints. RMSE is reported in amps. Convection: F = forced (wind-driven), N = natural (no wind). Solid dots are accepted steps, hollow dots are rejected, and the green band is the trust region. Resistance is recalculated at every candidate temperature.</figcaption>
         </figure>
 
-        <h3 class="subsec">Steps to converge</h3>
+        <details class="calcs-fold">
+          <summary>Steps to converge</summary>
+          <div class="calcs-fold__body">
         <ol class="steps">
           <li class="steps__item">
             <p class="steps__title">Make the initial guess</p>
@@ -772,6 +774,8 @@
             <p class="steps__math"><i>T</i>* = <i>T</i>(<i>x</i><sub>b</sub>), &nbsp; RMSE = |<i>r</i>(<i>x</i><sub>b</sub>)| (A)</p>
           </li>
         </ol>
+          </div>
+        </details>
 
         <h2 id="f-arcade"><span class="sec-num">S2</span>Arcade: Conduit Carl</h2>
         <p>
