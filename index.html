@@ -419,15 +419,6 @@
             <li><strong>Privacy by design:</strong> loopback-only server, remote endpoints rejected, and history stored in the local desktop profile.</li>
           </ul>
 
-          <h4>Architecture</h4>
-          <ul class="prose-list">
-            <li><strong>Desktop shell:</strong> a native Windows app (<code>Coffy.exe</code>, packaged with PyInstaller) hosting an embedded WebView2 renderer through pywebview.</li>
-            <li><strong>Local server:</strong> a dependency-light Python HTTP server bound to <code>127.0.0.1</code>. It serves the single-page front end and exposes JSON endpoints for chat, prompt enhancement, layer planning, image generation and variation, PDF extraction, context compression, and agent orchestration.</li>
-            <li><strong>Front end:</strong> vanilla JavaScript with IndexedDB for chats and images, pinning, and a retention limit.</li>
-            <li><strong>Model services:</strong> Ollama (port 11434) for language and vision models, and ComfyUI with the GGUF nodes (port 8188, offline mode) for image generation. A VRAM-aware runtime places prompt encoding on the CPU and decodes images in tiles.</li>
-            <li><strong>VS Code extension:</strong> a separate extension with its own chat view and Ollama client, so it works without the desktop app.</li>
-          </ul>
-
           <figure class="figure">
             <div class="figure__row">
               <button class="figure__zoom" type="button" data-lightbox style="flex: 1280 1 0"
