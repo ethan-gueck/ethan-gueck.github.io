@@ -399,6 +399,69 @@
           </p>
         </article>
 
+        <article class="project">
+          <h3>4.4 Coffy AI: a private, local AI workspace</h3>
+          <p class="project__meta">Independent project, 2026. Python, JavaScript, Ollama, ComfyUI, WebView2, VS Code extension API.</p>
+          <p>
+            Coffy is a self-hosted chat, vision, image-generation, and coding workspace that runs entirely on one Windows
+            laptop (8 GB GPU). Prompts, conversations, and images go only to local services. There are no cloud inference
+            calls, telemetry, or external assets.
+          </p>
+
+          <h4>Features</h4>
+          <ul class="prose-list">
+            <li><strong>Chat and vision:</strong> local LLMs and vision-language models (IBM Granite, Nous Hermes 3), image attachments, local text-PDF extraction, and syntax-highlighted code windows.</li>
+            <li><strong>Image studio:</strong> FLUX.1-schnell (quantized to fit 8 GB of VRAM) through ComfyUI, with default, manual-layer, and <strong>agentic layering</strong> modes in which a vision model drafts editable background, midground, foreground, and quadrant prompts.</li>
+            <li><strong>Animation studio:</strong> image-conditioned scene generation from a reference image, assembled on an editable timeline and rendered to a short WebM clip in the browser.</li>
+            <li><strong>Agent team:</strong> a sequential planning, analysis, and review team whose orchestrator watches CPU, RAM, and GPU/VRAM and limits agent count to free memory.</li>
+            <li><strong>Context budget:</strong> a 4K to 32K token budget with a usage wheel, and an opt-in local summary of older messages near 80%.</li>
+            <li><strong>VS Code extension:</strong> a Copilot-style chat view with file and selection context, <strong>Ask</strong> and <strong>Agent</strong> modes, diff-then-apply edits with backups, and no cloud account.</li>
+            <li><strong>Privacy by design:</strong> loopback-only server, remote endpoints rejected, and history stored in the local desktop profile.</li>
+          </ul>
+
+          <h4>Architecture</h4>
+          <ul class="prose-list">
+            <li><strong>Desktop shell:</strong> a native Windows app (<code>Coffy.exe</code>, packaged with PyInstaller) hosting an embedded WebView2 renderer through pywebview.</li>
+            <li><strong>Local server:</strong> a dependency-light Python HTTP server bound to <code>127.0.0.1</code>. It serves the single-page front end and exposes JSON endpoints for chat, prompt enhancement, layer planning, image generation and variation, PDF extraction, context compression, and agent orchestration.</li>
+            <li><strong>Front end:</strong> vanilla JavaScript with IndexedDB for chats and images, pinning, and a retention limit.</li>
+            <li><strong>Model services:</strong> Ollama (port 11434) for language and vision models, and ComfyUI with the GGUF nodes (port 8188, offline mode) for image generation. A VRAM-aware runtime places prompt encoding on the CPU and decodes images in tiles.</li>
+            <li><strong>VS Code extension:</strong> a separate extension with its own chat view and Ollama client, so it works without the desktop app.</li>
+          </ul>
+
+          <figure class="figure">
+            <button class="figure__zoom" type="button" data-lightbox
+              data-src="assets/img/projects/coffy-chat.webp"
+              data-title="Coffy desktop app"
+              data-caption="The chat workspace with local model status, token budget, and live CPU, RAM, and GPU readout.">
+              <img src="assets/img/projects/coffy-chat.webp" width="1280" height="820" loading="lazy"
+                alt="The Coffy desktop app in light mode. A sidebar lists Chat, Image studio, Animation studio, and Agent team. The main pane shows a greeting, three starter prompts, and a message box with a local model selector and token meter.">
+            </button>
+            <figcaption><span class="caption-label">Figure 2.</span> The Coffy desktop app, showing the chat workspace with the local model, token budget, and live CPU, RAM, and GPU usage. Select to enlarge.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <button class="figure__zoom" type="button" data-lightbox
+              data-src="assets/img/projects/coffy-image.webp"
+              data-title="Image generated locally"
+              data-caption="FLUX.1-schnell output produced through ComfyUI on an 8 GB laptop GPU.">
+              <img src="assets/img/projects/coffy-image.webp" width="768" height="768" loading="lazy"
+                alt="An illustration of a white coffee cup on a pale table beside a window and a potted plant, generated locally by FLUX.1-schnell.">
+            </button>
+            <figcaption><span class="caption-label">Figure 3.</span> An image generated entirely on the laptop with FLUX.1-schnell through ComfyUI. Select to enlarge.</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <button class="figure__zoom" type="button" data-lightbox
+              data-src="assets/img/projects/coffy-vscode.webp"
+              data-title="Coffy VS Code extension"
+              data-caption="The chat view with chat history, Ask and Agent modes, and a local model picker.">
+              <img src="assets/img/projects/coffy-vscode.webp" width="420" height="820" loading="lazy"
+                alt="The Coffy chat view in VS Code's dark theme, showing chat history, an answer, Ask and Agent mode buttons, and a local model selector.">
+            </button>
+            <figcaption><span class="caption-label">Figure 4.</span> The Coffy VS Code extension with chat history, Ask and Agent modes, and a local model picker. Select to enlarge.</figcaption>
+          </figure>
+        </article>
+
         <h2 id="t-stack"><span class="sec-num">5</span>Technical stack</h2>
         <p>The languages, platforms, and methods Ethan works with, and where each one has been applied.</p>
         <div class="table-wrap">
