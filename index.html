@@ -157,11 +157,21 @@
               <button type="button" data-variant="light_white" aria-pressed="false">White</button>
             </div>
           </div>
-          <video class="intro-video__player" controls playsinline preload="metadata" poster="assets/video/poster_light_green.jpg"
-                 data-intro-video aria-label="Introduction to Ethan Gueck">
-            <source src="assets/video/intro_light_green.mp4" type="video/mp4">
-            Your browser can't play this video.
-          </video>
+          <div class="intro-video__frame">
+            <video class="intro-video__player" playsinline preload="metadata" poster="assets/video/poster_light_green.jpg"
+                   data-intro-video aria-label="Introduction to Ethan Gueck">
+              <source src="assets/video/intro_light_green.mp4" type="video/mp4">
+              Your browser can't play this video.
+            </video>
+            <div class="intro-video__cover" data-intro-cover>
+              <img class="intro-video__headshot" src="assets/img/profile/headshot.webp" alt="" width="720" height="720">
+              <p class="intro-video__name">Ethan Gueck</p>
+              <button class="intro-video__play" type="button" data-intro-play>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+                Play now
+              </button>
+            </div>
+          </div>
         </section>
 
         <div class="abstract">

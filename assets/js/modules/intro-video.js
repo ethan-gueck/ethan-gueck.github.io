@@ -1,7 +1,7 @@
 /**
  * Introduction video. Two surfaces share one set of files (assets/video/):
- *  - a pane at the top of Summary that autoplays (muted, as browsers require) when it is centred in view
- *    and pauses when it leaves; the standard <video controls> are available.
+ *  - a pane at the top of Summary showing a cover (headshot, name, Play now); pressing Play now plays
+ *    with sound and reveals the standard <video controls>. The cover returns when the video ends.
  *  - a popout opened from the headshot.
  * Dark mode plays intro_dark; light mode plays intro_light_green by default, with a Green/White toggle
  * (remembered in localStorage "pp-intro-variant").
@@ -64,32 +64,29 @@ Site.initIntroVideo = function initIntroVideo() {
   document.addEventListener('site:theme', sync);
   window.addEventListener('storage', function (e) { if (e.key === KEY || e.key === 'pp-theme') sync(); });
 
-  // Pane: autoplay when centred, pause when it leaves. A viewer's own pause is respected until it leaves and returns.
+  // Pane: nothing plays until the viewer presses Play now.
   var paneVideo = pane && pane.querySelector('video');
-  if (paneVideo) {
-    paneVideo.muted = true; // autoplay is only allowed muted; viewers unmute with the controls
-    var userPaused = false, autoPaused = false;
-    paneVideo.addEventListener('pause', function () { if (!autoPaused && !paneVideo.ended) userPaused = true; });
-    if ('IntersectionObserver' in window) {
-      // A band around the vertical centre of the viewport: "in the centre" means overlapping it.
-      new IntersectionObserver(function (entries) {
-        var en = entries[entries.length - 1];
-        var visible = paneVideo.offsetParent !== null;
-        if (en.isIntersecting && visible && !(dialog && dialog.open)) {
-          if (!userPaused && paneVideo.paused && !paneVideo.ended) paneVideo.play().catch(function () {});
-        } else {
-          userPaused = false;
-          if (!paneVideo.paused) { autoPaused = true; paneVideo.pause(); autoPaused = false; }
-        }
-      }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 }).observe(paneVideo);
-    }
+  var cover = pane && pane.querySelector('[data-intro-cover]');
+  if (paneVideo && cover) {
+    pane.querySelector('[data-intro-play]').addEventListener('click', function () {
+      cover.hidden = true;
+      paneVideo.controls = true;
+      paneVideo.muted = false;
+      paneVideo.play().catch(function () {});
+      paneVideo.focus();
+    });
+    paneVideo.addEventListener('ended', function () {
+      paneVideo.controls = false;
+      paneVideo.currentTime = 0;
+      cover.hidden = false;
+    });
   }
 
   // Popout from the headshot.
   if (dialog && openBtn) {
     var popVideo = dialog.querySelector('video');
     openBtn.addEventListener('click', function () {
-      if (paneVideo) { autoPaused = true; paneVideo.pause(); autoPaused = false; }
+      if (paneVideo) paneVideo.pause();
       dialog.showModal();
       sync();
       popVideo.play().catch(function () {});
