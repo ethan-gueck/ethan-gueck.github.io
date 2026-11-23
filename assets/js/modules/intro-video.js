@@ -1,7 +1,7 @@
 /**
  * Introduction video. Two surfaces share one set of files (assets/video/):
- *  - a pane at the top of Summary showing a cover (headshot, name, Play now); pressing Play now plays
- *    with sound and reveals the standard <video controls>. The cover returns when the video ends.
+ *  - a pane at the top of Summary showing a cover (headshot, name, a Play now prompt); clicking anywhere on
+ *    it plays with sound and reveals the standard <video controls>. The cover returns when the video ends.
  *  - a popout opened from the headshot.
  * Dark mode plays intro_dark; light mode plays intro_light_green by default, with a Green/White toggle
  * (remembered in localStorage "pp-intro-variant").
@@ -64,16 +64,20 @@ Site.initIntroVideo = function initIntroVideo() {
   document.addEventListener('site:theme', sync);
   window.addEventListener('storage', function (e) { if (e.key === KEY || e.key === 'pp-theme') sync(); });
 
-  // Pane: nothing plays until the viewer presses Play now.
+  // Pane: nothing plays until the viewer clicks the cover.
   var paneVideo = pane && pane.querySelector('video');
   var cover = pane && pane.querySelector('[data-intro-cover]');
   if (paneVideo && cover) {
-    pane.querySelector('[data-intro-play]').addEventListener('click', function () {
+    var start = function () {
       cover.hidden = true;
       paneVideo.controls = true;
       paneVideo.muted = false;
       paneVideo.play().catch(function () {});
       paneVideo.focus();
+    };
+    cover.addEventListener('click', start);
+    cover.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); }
     });
     paneVideo.addEventListener('ended', function () {
       paneVideo.controls = false;
